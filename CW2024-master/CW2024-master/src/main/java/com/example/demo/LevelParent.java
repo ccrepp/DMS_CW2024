@@ -74,6 +74,7 @@ public abstract class LevelParent extends Observable {
 	}
 
 	public void goToNextLevel(String levelName) {
+		endGame();
 		setChanged();
 		notifyObservers(levelName);
 	}
@@ -170,8 +171,7 @@ public abstract class LevelParent extends Observable {
 		handleCollisions(enemyProjectiles, friendlyUnits);
 	}
 
-	private void handleCollisions(List<ActiveActorDestructible> actors1,
-			List<ActiveActorDestructible> actors2) {
+	private void handleCollisions(List<ActiveActorDestructible> actors1, List<ActiveActorDestructible> actors2) {
 		for (ActiveActorDestructible actor : actors2) {
 			for (ActiveActorDestructible otherActor : actors1) {
 				if (actor.getBoundsInParent().intersects(otherActor.getBoundsInParent())) {
@@ -248,4 +248,22 @@ public abstract class LevelParent extends Observable {
 		currentNumberOfEnemies = enemyUnits.size();
 	}
 
+	private void endGame(){
+		// game loop stoppage
+		timeline.stop();
+		timeline.getKeyFrames().clear();
+
+		// event handler removal
+		background.setOnKeyPressed(null);
+		background.setOnKeyReleased(null);
+
+		// actors cleared from scene
+		root.getChildren().clear();
+
+		// reset state variables
+		friendlyUnits.clear();
+		enemyUnits.clear();
+		userProjectiles.clear();
+		enemyProjectiles.clear();
+	}
 }
