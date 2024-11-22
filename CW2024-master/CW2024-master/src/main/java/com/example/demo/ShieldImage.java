@@ -9,10 +9,20 @@ public class ShieldImage extends ImageView {
 	private static final int SHIELD_SIZE = 200;
 	
 	public ShieldImage(double xPosition, double yPosition) {
+
+		try{
+			System.out.println("ShieldImage: Loading ShieldImage");
+			this.setImage(new Image(getClass().getResource("/com/example/demo/images/shield.png").toExternalForm()));
+			System.out.println("ShieldImage: ShieldImage LOADED");
+		} catch (Exception e){
+			System.out.println("ShieldImage: ShieldImage Loading FAILED" + e.getMessage());
+			throw e;
+		}
+
 		this.setLayoutX(xPosition);
 		this.setLayoutY(yPosition);
 		//this.setImage(new Image(IMAGE_NAME));
-		this.setImage(new Image(getClass().getResource("/com/example/demo/images/shield.jpg").toExternalForm()));
+
 		this.setVisible(false);
 		this.setFitHeight(SHIELD_SIZE);
 		this.setFitWidth(SHIELD_SIZE);

@@ -10,9 +10,20 @@ public class UserPlane extends FighterPlane {
 	private static final int IMAGE_HEIGHT = 150;
 	private static final int VERTICAL_VELOCITY = 8;
 	private static final int PROJECTILE_X_POSITION = 110;
+	private static final int PROJECTILE_X_POSITION_OFFSET = 80;
 	private static final int PROJECTILE_Y_POSITION_OFFSET = 20;
 	private int velocityMultiplier;
 	private int numberOfKills;
+
+	private boolean movingUp = false;
+	private boolean movingDown = false;
+	private boolean movingLeft = false;
+	private boolean movingRight = false;
+
+	private static final double X_LEFT_BOUND = 0.0;
+	private static final double X_RIGHT_BOUND = 500;
+	private int horizontalVelocityMultiplier = 0;
+	private static final int HORIZONTAL_VELOCITY = 8;
 
 	public UserPlane(int initialHealth) {
 		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, initialHealth);
@@ -29,6 +40,9 @@ public class UserPlane extends FighterPlane {
 				this.setTranslateY(initialTranslateY);
 			}
 		}
+		if (isMovingHorizontally()) {
+			this.moveHorizontally(HORIZONTAL_VELOCITY * horizontalVelocityMultiplier);
+		}
 	}
 	
 	@Override
@@ -38,23 +52,61 @@ public class UserPlane extends FighterPlane {
 	
 	@Override
 	public ActiveActorDestructible fireProjectile() {
-		return new UserProjectile(PROJECTILE_X_POSITION, getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET));
+		double projectile_X_Position = getProjectileXPosition(PROJECTILE_X_POSITION_OFFSET);
+		double projectile_Y_Position = getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET);
+		return new UserProjectile(projectile_X_Position, projectile_Y_Position);
 	}
 
 	private boolean isMoving() {
 		return velocityMultiplier != 0;
 	}
 
+	private boolean isMovingHorizontally() {
+		return horizontalVelocityMultiplier != 0;
+	}
+
+	public void moveHorizontally (double deltaX) {
+		double newTranslateX = getTranslateX() + deltaX;
+
+		if (newTranslateX + getLayoutX() >= X_LEFT_BOUND && newTranslateX + getLayoutX() <= X_RIGHT_BOUND) {
+			setTranslateX(newTranslateX);
+		}
+	}
+
 	public void moveUp() {
+		movingUp = true;
+		movingDown = false;
 		velocityMultiplier = -1;
 	}
 
 	public void moveDown() {
+		movingUp = false;
+		movingDown = true;
 		velocityMultiplier = 1;
 	}
 
-	public void stop() {
+	public void moveLeft() {
+		movingLeft = true;
+		movingRight = false;
+		horizontalVelocityMultiplier = -1;
+	}
+
+	public void moveRight() {
+		movingLeft = false;
+		movingRight = true;
+		horizontalVelocityMultiplier = 1;
+	}
+
+	public void stopVertically() {
+		movingUp = false;
+		movingDown = false;
 		velocityMultiplier = 0;
+	}
+
+	public void stopHorizontal() {
+		movingLeft = false;
+		movingRight = false;
+		horizontalVelocityMultiplier = 0;
 	}
 
 	public int getNumberOfKills() {

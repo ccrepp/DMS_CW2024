@@ -9,12 +9,25 @@ public class LevelTwo extends LevelParent {
 
 	public LevelTwo(double screenHeight, double screenWidth) {
 		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, PLAYER_INITIAL_HEALTH);
+		System.out.println("LevelTwo: Base Constructor COMPLETE");
 		boss = new Boss();
+		System.out.println("LevelTwo: Boss CREATED");
 	}
 
 	@Override
 	protected void initializeFriendlyUnits() {
+		System.out.println("LevelTwo: Adding UserPlane to Root");
 		getRoot().getChildren().add(getUser());
+		System.out.println("LevelTwo: UserPlane CREATED");
+
+		System.out.println("LevelTwo: Adding Boss Shield to Root");
+		try{
+			getRoot().getChildren().add(boss.getShieldImage());
+			System.out.println("LevelTwo: Boss Shield CREATED");
+		} catch(Exception e){
+			System.out.println("LevelTwo: FAILED to Add Boss Shield : " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	@Override
