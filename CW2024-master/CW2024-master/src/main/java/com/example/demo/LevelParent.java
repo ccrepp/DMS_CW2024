@@ -34,16 +34,19 @@ public abstract class LevelParent extends Observable {
 	private LevelView levelView;
 
 	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth) {
+		System.out.println("LevelParent: Constructor START");
 		this.root = new Group();
 		this.scene = new Scene(root, screenWidth, screenHeight);
 		this.timeline = new Timeline();
 		this.user = new UserPlane(playerInitialHealth);
+		System.out.println("LevelParent: UserPlane CREATED");
 		this.friendlyUnits = new ArrayList<>();
 		this.enemyUnits = new ArrayList<>();
 		this.userProjectiles = new ArrayList<>();
 		this.enemyProjectiles = new ArrayList<>();
 
 		this.background = new ImageView(new Image(getClass().getResource(backgroundImageName).toExternalForm()));
+		System.out.println("LevelParent: Background Image CREATED");
 		this.screenHeight = screenHeight;
 		this.screenWidth = screenWidth;
 		this.enemyMaximumYPosition = screenHeight - SCREEN_HEIGHT_ADJUSTMENT;
@@ -75,6 +78,7 @@ public abstract class LevelParent extends Observable {
 	}
 
 	public void goToNextLevel(String levelName) {
+		System.out.println("GOING TO : " + levelName);
 		endGame();
 		setChanged();
 		notifyObservers(levelName);
