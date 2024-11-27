@@ -11,6 +11,8 @@ import javafx.scene.image.*;
 import javafx.scene.input.*;
 import javafx.util.Duration;
 
+import java.util.function.Supplier;
+
 public abstract class LevelParent extends Observable {
 
 	private static final double SCREEN_HEIGHT_ADJUSTMENT = 150;
@@ -33,13 +35,15 @@ public abstract class LevelParent extends Observable {
 	private int currentNumberOfEnemies;
 	private LevelView levelView;
 
-	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, int playerInitialHealth) {
+	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, Supplier<UserPlane> userSupplier) {
 		System.out.println("LevelParent: Constructor START");
 		this.root = new Group();
 		this.scene = new Scene(root, screenWidth, screenHeight);
 		this.timeline = new Timeline();
-		this.user = new UserPlane(playerInitialHealth);
-		System.out.println("LevelParent: UserPlane CREATED");
+
+		this.user = userSupplier.get();
+		System.out.println("LevelParent: UserPlane CREATED" + user);
+
 		this.friendlyUnits = new ArrayList<>();
 		this.enemyUnits = new ArrayList<>();
 		this.userProjectiles = new ArrayList<>();
@@ -69,6 +73,11 @@ public abstract class LevelParent extends Observable {
 		initializeBackground();
 		initializeFriendlyUnits();
 		levelView.showHeartDisplay();
+
+		System.out.println("Scene Graph Contents POST-INITIALIZATION: ");
+		getRoot().getChildren().forEach(node -> {
+			System.out.println(node.getClass().getSimpleName() + " : " + node);
+		});
 		return scene;
 	}
 
