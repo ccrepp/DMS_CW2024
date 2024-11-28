@@ -10,7 +10,11 @@ public class LevelSW extends LevelParent {
     private static final int PLAYER_INITIAL_HEALTH = 5;
 
     public LevelSW(double screenHeight, double screenWidth) {
-        super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, () -> new XWing(PLAYER_INITIAL_HEALTH));
+        super(
+                BACKGROUND_IMAGE_NAME,
+                screenHeight,
+                screenWidth,
+                () -> new XWing(PLAYER_INITIAL_HEALTH));
     }
 
     @Override

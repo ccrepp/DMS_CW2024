@@ -10,7 +10,11 @@ public class LevelOne extends LevelParent {
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 
 	public LevelOne(double screenHeight, double screenWidth) {
-		super(BACKGROUND_IMAGE_NAME, screenHeight, screenWidth, () -> new UserPlane("userplane.png", 150, 50.0, screenHeight/2,PLAYER_INITIAL_HEALTH));
+		super(
+				BACKGROUND_IMAGE_NAME,
+				screenHeight,
+				screenWidth,
+				() -> new UserPlane("userplane.png", 150, 50.0, screenHeight/2,PLAYER_INITIAL_HEALTH));
 	}
 
 	@Override
@@ -24,6 +28,8 @@ public class LevelOne extends LevelParent {
 
 	@Override
 	protected void initializeFriendlyUnits() {
+		System.out.println("Initialising UserPlane for LevelOne");
+		System.out.println("getUser(): " + getUser());
 		getRoot().getChildren().add(getUser());
 	}
 

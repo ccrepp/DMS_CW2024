@@ -38,8 +38,11 @@ public abstract class LevelParent extends Observable {
 	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, Supplier<UserPlane> userSupplier) {
 		System.out.println("LevelParent: Constructor START");
 		this.root = new Group();
+		System.out.println("LevelParent: Root CREATED");
 		this.scene = new Scene(root, screenWidth, screenHeight);
+		System.out.println("LevelParent: Scene CREATED");
 		this.timeline = new Timeline();
+		System.out.println("LevelParent: Timeline CREATED");
 
 		this.user = userSupplier.get();
 		System.out.println("LevelParent: UserPlane CREATED" + user);
@@ -49,6 +52,7 @@ public abstract class LevelParent extends Observable {
 		this.userProjectiles = new ArrayList<>();
 		this.enemyProjectiles = new ArrayList<>();
 
+		//.toExternalForm()
 		this.background = new ImageView(new Image(getClass().getResource(backgroundImageName).toExternalForm()));
 		System.out.println("LevelParent: Background Image CREATED");
 		this.screenHeight = screenHeight;
