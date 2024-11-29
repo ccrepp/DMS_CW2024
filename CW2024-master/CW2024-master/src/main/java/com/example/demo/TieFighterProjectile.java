@@ -2,7 +2,7 @@ package com.example.demo;
 
 public class TieFighterProjectile extends Projectile {
 
-    private static final String IMAGE_NAME = "/com/example/demo/images/redlaser1.png";
+    private static final String IMAGE_NAME = "/com/example/demo/images/greenlaser1.png";
     private static final int IMAGE_HEIGHT = 25;
     private static final int HORIZONTAL_VELOCITY = -10;
 
