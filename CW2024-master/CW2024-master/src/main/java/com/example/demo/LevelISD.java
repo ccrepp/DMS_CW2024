@@ -13,7 +13,7 @@ public class LevelISD extends LevelParent {
                 BACKGROUND_IMAGE_NAME,
                 screenHeight,
                 screenWidth,
-                () -> new XWing(PLAYER_INITIAL_HEALTH));
+                () -> new XWing("/com/example/demo/images/xwing.png", 150, 50.0, screenHeight/2,PLAYER_INITIAL_HEALTH));
         System.out.println("LevelISD: Base Constructor COMPLETE");
         isd = new ISD();
         System.out.println("LevelISD: Boss CREATED");

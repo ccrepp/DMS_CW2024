@@ -45,7 +45,7 @@ public abstract class LevelParent extends Observable {
 		System.out.println("LevelParent: Timeline CREATED");
 
 		this.user = userSupplier.get();
-		System.out.println("LevelParent: UserPlane CREATED" + user);
+		System.out.println("LevelParent: UserPlane CREATED - " + user.getClass().getSimpleName());
 
 		this.friendlyUnits = new ArrayList<>();
 		this.enemyUnits = new ArrayList<>();

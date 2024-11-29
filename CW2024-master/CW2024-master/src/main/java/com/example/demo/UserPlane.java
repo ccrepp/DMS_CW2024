@@ -26,7 +26,7 @@ public class UserPlane extends FighterPlane {
 	private static final int HORIZONTAL_VELOCITY = 8;
 
 	public UserPlane(String imageName, int imageHeight, double initialXPos, double initialYPos, int initialHealth) {
-		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, initialHealth);
+		super(imageName, imageHeight, initialXPos, initialYPos, initialHealth);
 		velocityMultiplier = 0;
 	}
 	

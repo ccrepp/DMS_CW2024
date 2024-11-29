@@ -56,7 +56,7 @@ public class Boss extends FighterPlane {
 
 		shieldImage.setLayoutY(currentX + IMAGE_HEIGHT / 4.0);
 		shieldImage.setLayoutX(currentY - IMAGE_HEIGHT / 2.0);
-		System.out.println("SHIELD POSITION UPDATED");
+		//System.out.println("SHIELD POSITION UPDATED");
 	}
 	
 	@Override
@@ -134,7 +134,7 @@ public class Boss extends FighterPlane {
 	}
 
 	private boolean shieldExhausted() {
-		System.out.println("SHIELD EXHAUSTED");
+		//System.out.println("SHIELD EXHAUSTED");
 		return framesWithShieldActivated == MAX_FRAMES_WITH_SHIELD;
 	}
 
