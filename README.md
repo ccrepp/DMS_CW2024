@@ -90,3 +90,7 @@ _TieFighterProjectile_
 ### 9.1 - Merged First Branch (debug-and-fixes) on 23/11/2024
 - made fixes to game's issues
 - made additional movement supports
+
+### 9.2 - Merged Second Branch (addition-sw) on 30/11/2024
+- added NEW Star Wars themed levels and resources (images)
+- made amendments to pre-existing classes to fit changes
