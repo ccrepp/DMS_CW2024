@@ -13,7 +13,7 @@ import javafx.util.Duration;
 
 import java.util.function.Supplier;
 
-public abstract class LevelParent extends Observable {
+public abstract class LevelParent extends Observable implements Level{
 
 	private static final double SCREEN_HEIGHT_ADJUSTMENT = 150;
 	private static final int MILLISECOND_DELAY = 50;
@@ -97,9 +97,26 @@ public abstract class LevelParent extends Observable {
 		levelView.showHeartDisplay();
 	}
 
+	@Override
 	public void startGame() {
 		background.requestFocus();
 		timeline.play();
+	}
+
+	@Override
+	public void endGame(){
+		timeline.stop();
+		timeline.getKeyFrames().clear();
+
+		background.setOnKeyPressed(null);
+		background.setOnKeyReleased(null);
+
+		root.getChildren().clear();
+
+		friendlyUnits.clear();
+		enemyUnits.clear();
+		userProjectiles.clear();
+		enemyProjectiles.clear();
 	}
 
 	public void goToNextLevel(String levelName) {
@@ -115,16 +132,33 @@ public abstract class LevelParent extends Observable {
 	}
 
 	private void updateScene() {
+		manageSpawn();
+		manageActors();
+		manageCollisions();
+		manageUpdates();
+
+		checkIfGameOver();
+	}
+
+	private void manageSpawn() {
 		spawnEnemyUnits();
-		updateActors();
 		generateEnemyFire();
+	}
+
+	private void manageActors() {
+		updateActors();
 		updateNumberOfEnemies();
 		handleEnemyPenetration();
-		handleAllCollisions();
 		removeAllDestroyedActors();
+	}
+
+	private void manageCollisions() {
+		handleAllCollisions();
+	}
+
+	private void manageUpdates() {
 		updateKillCount();
 		updateLevelView();
-		checkIfGameOver();
 	}
 
 	private void initializeTimeline() {
@@ -306,20 +340,5 @@ public abstract class LevelParent extends Observable {
 
 	private void updateNumberOfEnemies() {
 		currentNumberOfEnemies = enemyUnits.size();
-	}
-
-	private void endGame(){
-		timeline.stop();
-		timeline.getKeyFrames().clear();
-
-		background.setOnKeyPressed(null);
-		background.setOnKeyReleased(null);
-
-		root.getChildren().clear();
-
-		friendlyUnits.clear();
-		enemyUnits.clear();
-		userProjectiles.clear();
-		enemyProjectiles.clear();
 	}
 }

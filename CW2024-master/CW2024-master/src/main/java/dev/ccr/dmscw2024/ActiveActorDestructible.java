@@ -1,6 +1,6 @@
 package dev.ccr.dmscw2024;
 
-public abstract class ActiveActorDestructible extends ActiveActor implements Destructible {
+public abstract class ActiveActorDestructible extends ActiveActor implements Destructible, Collidable {
 
 	private boolean isDestroyed;
 
@@ -8,6 +8,8 @@ public abstract class ActiveActorDestructible extends ActiveActor implements Des
 		super(imageName, imageHeight, initialXPos, initialYPos);
 		isDestroyed = false;
 	}
+
+	// Destructible Methods
 
 	@Override
 	public abstract void updatePosition();
@@ -29,5 +31,22 @@ public abstract class ActiveActorDestructible extends ActiveActor implements Des
 	public boolean isDestroyed() {
 		return isDestroyed;
 	}
-	
+
+	// Collidable Methods
+
+
+	@Override
+	public boolean checkCollision(Collidable other) {
+		if (other instanceof ActiveActorDestructible) {
+			return this.getBoundsInParent().intersects(
+					((ActiveActorDestructible) other).getBoundsInParent()
+			);
+		}
+		return false;
+	}
+
+	@Override
+	public void onCollision(Collidable other) {
+		this.takeDamage();
+	}
 }
