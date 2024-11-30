@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Boss extends FighterPlane {
 
-	private static final String IMAGE_NAME = "bossplane.png";
+	private static final String IMAGE_NAME = "/com/example/demo/images/bossplane.png";
 	private static final double INITIAL_X_POSITION = 1000.0;
 	private static final double INITIAL_Y_POSITION = 400;
 	private static final double PROJECTILE_Y_POSITION_OFFSET = 75.0;
@@ -56,7 +56,7 @@ public class Boss extends FighterPlane {
 
 		shieldImage.setLayoutY(currentX + IMAGE_HEIGHT / 4.0);
 		shieldImage.setLayoutX(currentY - IMAGE_HEIGHT / 2.0);
-		System.out.println("SHIELD POSITION UPDATED");
+		//System.out.println("SHIELD POSITION UPDATED");
 	}
 	
 	@Override
@@ -134,7 +134,7 @@ public class Boss extends FighterPlane {
 	}
 
 	private boolean shieldExhausted() {
-		System.out.println("SHIELD EXHAUSTED");
+		//System.out.println("SHIELD EXHAUSTED");
 		return framesWithShieldActivated == MAX_FRAMES_WITH_SHIELD;
 	}
 

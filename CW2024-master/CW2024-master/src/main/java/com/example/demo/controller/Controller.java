@@ -32,18 +32,26 @@ public class Controller implements Observer {
 
 	private void goToLevel(String className)  {
 		try{
-			System.out.println("Loading level: " + className);
+			System.out.println("Controller: Loading level: " + className);
 
 			Class<?> myClass = Class.forName(className);
 			Constructor<?> constructor = myClass.getConstructor(double.class, double.class);
 
-			System.out.println("Constructor found: " + constructor);
+			System.out.println("Controller: Constructor found: " + constructor);
+
+			System.out.println("Controller: Constructing... " + constructor);
 
 			LevelParent myLevel = (LevelParent) constructor.newInstance(stage.getHeight(), stage.getWidth());
+
+			System.out.println("Controller: Constructing continues... ");
+
 			myLevel.addObserver(this);
+
+			System.out.println("Controller: more constructing ");
+
 			Scene scene = myLevel.initializeScene();
 
-			System.out.println("Scene initialised.");
+			System.out.println("Controller: Scene initialised.");
 
 			stage.setScene(scene);
 			myLevel.startGame();

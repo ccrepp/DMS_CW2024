@@ -2,7 +2,7 @@ package com.example.demo;
 
 public class UserPlane extends FighterPlane {
 
-	private static final String IMAGE_NAME = "userplane.png";
+	private static final String IMAGE_NAME = "/com/example/demo/images/userplane.png";
 	private static final double Y_UPPER_BOUND = -40;
 	private static final double Y_LOWER_BOUND = 600.0;
 	private static final double INITIAL_X_POSITION = 5.0;
@@ -25,8 +25,8 @@ public class UserPlane extends FighterPlane {
 	private int horizontalVelocityMultiplier = 0;
 	private static final int HORIZONTAL_VELOCITY = 8;
 
-	public UserPlane(int initialHealth) {
-		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, INITIAL_Y_POSITION, initialHealth);
+	public UserPlane(String imageName, int imageHeight, double initialXPos, double initialYPos, int initialHealth) {
+		super(imageName, imageHeight, initialXPos, initialYPos, initialHealth);
 		velocityMultiplier = 0;
 	}
 	

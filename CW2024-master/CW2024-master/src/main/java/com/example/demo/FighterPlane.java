@@ -1,12 +1,20 @@
 package com.example.demo;
 
+import javafx.scene.image.Image;
+
 public abstract class FighterPlane extends ActiveActorDestructible {
 
 	private int health;
 
 	public FighterPlane(String imageName, int imageHeight, double initialXPos, double initialYPos, int health) {
 		super(imageName, imageHeight, initialXPos, initialYPos);
+		this.setImage(new Image(getClass().getResource(imageName).toExternalForm()));
+		this.setFitHeight(imageHeight);
+		this.setPreserveRatio(true);
+		this.setLayoutX(initialXPos);
+		this.setLayoutY(initialYPos);
 		this.health = health;
+		System.out.println("FighterPlane: Image LOADED - " + imageName);
 	}
 
 	public abstract ActiveActorDestructible fireProjectile();
