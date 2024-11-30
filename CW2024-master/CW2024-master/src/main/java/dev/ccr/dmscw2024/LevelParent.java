@@ -74,15 +74,27 @@ public abstract class LevelParent extends Observable {
 	protected abstract LevelView instantiateLevelView();
 
 	public Scene initializeScene() {
-		initializeBackground();
-		initializeFriendlyUnits();
-		levelView.showHeartDisplay();
+		setUpBackground();
+		setUpFriendlyUnits();
+		setUpHeartDisplay();
 
 		System.out.println("Scene Graph Contents POST-INITIALIZATION: ");
 		getRoot().getChildren().forEach(node -> {
 			System.out.println(node.getClass().getSimpleName() + " : " + node);
 		});
 		return scene;
+	}
+
+	private void setUpBackground() {
+		initializeBackground();
+	}
+
+	private void setUpFriendlyUnits(){
+		initializeFriendlyUnits();
+	}
+
+	private void setUpHeartDisplay(){
+		levelView.showHeartDisplay();
 	}
 
 	public void startGame() {
@@ -93,6 +105,10 @@ public abstract class LevelParent extends Observable {
 	public void goToNextLevel(String levelName) {
 		System.out.println("GOING TO : " + levelName);
 		endGame();
+		notifyLevelTransition(levelName);
+	}
+
+	private void notifyLevelTransition(String levelName) {
 		System.out.println("Notifying Observers...");
 		setChanged();
 		notifyObservers(levelName);
@@ -104,9 +120,7 @@ public abstract class LevelParent extends Observable {
 		generateEnemyFire();
 		updateNumberOfEnemies();
 		handleEnemyPenetration();
-		handleUserProjectileCollisions();
-		handleEnemyProjectileCollisions();
-		handlePlaneCollisions();
+		handleAllCollisions();
 		removeAllDestroyedActors();
 		updateKillCount();
 		updateLevelView();
@@ -120,33 +134,46 @@ public abstract class LevelParent extends Observable {
 	}
 
 	private void initializeBackground() {
-		background.setFocusTraversable(true);
-		background.setFitHeight(screenHeight);
-		background.setFitWidth(screenWidth);
-		background.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent e) {
-				KeyCode kc = e.getCode();
-				if (kc == KeyCode.UP || kc == KeyCode.W) user.moveUp();
-				if (kc == KeyCode.DOWN || kc == KeyCode.S) user.moveDown();
-				if (kc == KeyCode.LEFT || kc == KeyCode.A) user.moveLeft();
-				if (kc == KeyCode.RIGHT || kc == KeyCode.D) user.moveRight();
-				if (kc == KeyCode.SPACE) fireProjectile();
-			}
-		});
-		background.setOnKeyReleased(new EventHandler<KeyEvent>() {
-			public void handle(KeyEvent e) {
-				KeyCode kc = e.getCode();
-				if (kc == KeyCode.UP || kc == KeyCode.W || kc == KeyCode.DOWN || kc == KeyCode.S) user.stopVertically();
-				if (kc == KeyCode.LEFT || kc == KeyCode.A || kc == KeyCode.RIGHT || kc == KeyCode.D) user.stopHorizontal();
-			}
-		});
+		setUpBackgroundImage();
+		setUpKeyHandlers();
 		root.getChildren().add(background);
 	}
 
+	private void setUpBackgroundImage() {
+		background.setFocusTraversable(true);
+		background.setFitHeight(screenHeight);
+		background.setFitWidth(screenWidth);
+	}
+
+	private void setUpKeyHandlers() {
+		background.setOnKeyPressed(this::handleKeyPress);
+		background.setOnKeyReleased(this::handleKeyRelease);
+	}
+
+	private void handleKeyPress(KeyEvent e) {
+		KeyCode kc = e.getCode();
+		if (kc == KeyCode.UP || kc == KeyCode.W) user.moveUp();
+		if (kc == KeyCode.DOWN || kc == KeyCode.S) user.moveDown();
+		if (kc == KeyCode.LEFT || kc == KeyCode.A) user.moveLeft();
+		if (kc == KeyCode.RIGHT || kc == KeyCode.D) user.moveRight();
+		if (kc == KeyCode.SPACE) fireProjectile();
+	}
+
+	private void handleKeyRelease(KeyEvent e) {
+		KeyCode kc = e.getCode();
+		if (kc == KeyCode.UP || kc == KeyCode.W || kc == KeyCode.DOWN || kc == KeyCode.S) user.stopVertically();
+		if (kc == KeyCode.LEFT || kc == KeyCode.A || kc == KeyCode.RIGHT || kc == KeyCode.D) user.stopHorizontal();
+	}
+
 	private void fireProjectile() {
-		ActiveActorDestructible projectile = user.fireProjectile();
-		root.getChildren().add(projectile);
-		userProjectiles.add(projectile);
+		addProjectile(user.fireProjectile(),userProjectiles);
+	}
+
+	private void addProjectile(ActiveActorDestructible projectile, List<ActiveActorDestructible> projectileList) {
+		if (projectile != null) {
+			root.getChildren().add(projectile);
+			projectileList.add(projectile);
+		}
 	}
 
 	private void generateEnemyFire() {
@@ -161,10 +188,13 @@ public abstract class LevelParent extends Observable {
 	}
 
 	private void updateActors() {
-		friendlyUnits.forEach(plane -> plane.updateActor());
-		enemyUnits.forEach(enemy -> enemy.updateActor());
-		userProjectiles.forEach(projectile -> projectile.updateActor());
-		enemyProjectiles.forEach(projectile -> projectile.updateActor());
+		List<List<ActiveActorDestructible>> allActors
+				= List.of(
+						friendlyUnits,
+						enemyUnits,
+						userProjectiles,
+						enemyProjectiles);
+		allActors.forEach(list->list.forEach(ActiveActorDestructible::updateActor));
 	}
 
 	private void removeAllDestroyedActors() {
@@ -175,33 +205,15 @@ public abstract class LevelParent extends Observable {
 	}
 
 	private void removeDestroyedActors(List<ActiveActorDestructible> actors) {
-		List<ActiveActorDestructible> destroyedActors = actors.stream().filter(actor -> actor.isDestroyed())
-				.collect(Collectors.toList());
+		List<ActiveActorDestructible> destroyedActors = actors.stream().filter(actor -> actor.isDestroyed()).collect(Collectors.toList());
 		root.getChildren().removeAll(destroyedActors);
 		actors.removeAll(destroyedActors);
 	}
 
-	private void handlePlaneCollisions() {
-		handleCollisions(friendlyUnits, enemyUnits);
-	}
-
-	private void handleUserProjectileCollisions() {
-		handleCollisions(userProjectiles, enemyUnits);
-	}
-
-	private void handleEnemyProjectileCollisions() {
-		handleCollisions(enemyProjectiles, friendlyUnits);
-	}
-
-	private void handleCollisions(List<ActiveActorDestructible> actors1, List<ActiveActorDestructible> actors2) {
-		for (ActiveActorDestructible actor : actors2) {
-			for (ActiveActorDestructible otherActor : actors1) {
-				if (actor.getBoundsInParent().intersects(otherActor.getBoundsInParent())) {
-					actor.takeDamage();
-					otherActor.takeDamage();
-				}
-			}
-		}
+	private void handleAllCollisions() {
+		Collisions.handleCollisions(friendlyUnits, enemyUnits);
+		Collisions.handleCollisions(userProjectiles, enemyUnits);
+		Collisions.handleCollisions(enemyProjectiles, friendlyUnits);
 	}
 
 	private void handleEnemyPenetration() {
