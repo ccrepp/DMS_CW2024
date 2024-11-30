@@ -13,12 +13,13 @@ public class LevelISD extends LevelParent {
                 BACKGROUND_IMAGE_NAME,
                 screenHeight,
                 screenWidth,
-                () -> new XWing(
+                () -> createCustomXWing(
                         "/com/example/demo/images/xwing.png",
-                        75,
+                        50,
                         50.0,
-                        screenHeight/2,
-                        PLAYER_INITIAL_HEALTH)
+                        screenHeight / 2,
+                        5
+                )
         );
         System.out.println("LevelISD: Base Constructor COMPLETE");
         isd = new ISD();

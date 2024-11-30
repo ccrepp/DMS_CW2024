@@ -12,12 +12,13 @@ public class LevelTwo extends LevelParent {
 				BACKGROUND_IMAGE_NAME,
 				screenHeight,
 				screenWidth,
-				() -> new UserPlane(
-						"/com/example/demo/images/userplane.png",
-						150,
+				() -> createCustomUserPlane(
+						"com/example/demo/images/userplane.png",
+						50,
 						50.0,
-						screenHeight/2,
-						PLAYER_INITIAL_HEALTH)
+						screenHeight / 2,
+						5
+				)
 		);
 		System.out.println("LevelTwo: Base Constructor COMPLETE");
 		boss = new Boss();

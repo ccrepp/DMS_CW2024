@@ -241,6 +241,32 @@ public abstract class LevelParent extends Observable {
 		return user;
 	}
 
+	public static UserPlane createDefaultUserPlane(double screenHeight) {
+		return new UserPlane(
+				"/com/example/demo/images/userplane.png",
+				150,
+				50.0,
+				screenHeight/2,
+				5);
+	}
+
+	public static UserPlane createCustomUserPlane(String imageName, int imageHeight, double initialX, double initialY, int health) {
+		return new UserPlane(imageName, imageHeight, initialX, initialY, health);
+	}
+
+	public static XWing createDefaultXWing(double screenHeight) {
+		return new XWing(
+				"/com/example/demo/images/xwing.png",
+				75,
+				50.0,
+				screenHeight/2,
+				5);
+	}
+
+	public static XWing createCustomXWing(String imageName, int imageHeight, double initialX, double initialY, int health) {
+		return new XWing(imageName, imageHeight, initialX, initialY, health);
+	}
+
 	protected Group getRoot() {
 		return root;
 	}
