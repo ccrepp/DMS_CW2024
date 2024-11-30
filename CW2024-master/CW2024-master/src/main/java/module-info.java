@@ -3,6 +3,6 @@ module com.example.demo {
     requires javafx.fxml;
 
 
-    opens com.example.demo to javafx.fxml;
-    exports com.example.demo.controller;
+    opens dev.ccr.dmscw2024 to javafx.fxml;
+    exports dev.ccr.dmscw2024.controller;
 }
