@@ -10,11 +10,11 @@ public class ISD extends FighterPlane{
     private static final double INITIAL_X_POSITION = 900.0;
     private static final double INITIAL_Y_POSITION = 300;
     private static final double PROJECTILE_Y_POSITION_OFFSET = 75.0;
-    private static final double ISD_FIRE_RATE = .06;
-    private static final double ISD_SHIELD_PROBABILITY = 0.015;
+    private static final double ISD_FIRE_RATE = .02;
+    private static final double ISD_SHIELD_PROBABILITY = 0.005;
     private static final int IMAGE_HEIGHT = 275;
     private static final int VERTICAL_VELOCITY = 8;
-    private static final int HEALTH = 10;
+    private static final int HEALTH = 15;
     private static final int MOVE_FREQUENCY_PER_CYCLE = 3;
     private static final int ZERO = 0;
     private static final int MAX_FRAMES_WITH_SAME_MOVE = 20;
@@ -56,7 +56,7 @@ public class ISD extends FighterPlane{
             setTranslateY(initialTranslateY);
         }
 
-        isdShield.setLayoutX(getLayoutX() + getTranslateX() + (IMAGE_HEIGHT / 2.0) - (isdShield.getFitWidth() / 2.0) - 30);
+        isdShield.setLayoutX(getLayoutX() + getTranslateX() + (IMAGE_HEIGHT / 2.0) - (isdShield.getFitWidth() / 2.0) - 300);
         isdShield.setLayoutY(getLayoutY() + getTranslateY() + (IMAGE_HEIGHT / 2.0) - (isdShield.getFitHeight() / 2.0));
         //System.out.println("SHIELD POSITION UPDATED");
     }

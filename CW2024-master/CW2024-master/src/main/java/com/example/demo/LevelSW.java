@@ -14,7 +14,12 @@ public class LevelSW extends LevelParent {
                 BACKGROUND_IMAGE_NAME,
                 screenHeight,
                 screenWidth,
-                () -> new XWing("/com/example/demo/images/xwing.png", 150, 50.0, screenHeight/2,PLAYER_INITIAL_HEALTH));
+                () -> new XWing(
+                        "/com/example/demo/images/xwing.png",
+                        75,
+                        50.0,
+                        screenHeight/2,
+                        PLAYER_INITIAL_HEALTH));
     }
 
     @Override

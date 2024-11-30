@@ -32,7 +32,7 @@ public class Controller implements Observer {
 
 	private void goToLevel(String className)  {
 		try{
-			System.out.println("Contoller: Loading level: " + className);
+			System.out.println("Controller: Loading level: " + className);
 
 			Class<?> myClass = Class.forName(className);
 			Constructor<?> constructor = myClass.getConstructor(double.class, double.class);

@@ -93,6 +93,7 @@ public abstract class LevelParent extends Observable {
 	public void goToNextLevel(String levelName) {
 		System.out.println("GOING TO : " + levelName);
 		endGame();
+		System.out.println("Notifying Observers...");
 		setChanged();
 		notifyObservers(levelName);
 	}
