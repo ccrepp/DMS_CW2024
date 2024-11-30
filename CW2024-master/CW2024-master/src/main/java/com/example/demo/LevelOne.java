@@ -14,7 +14,12 @@ public class LevelOne extends LevelParent {
 				BACKGROUND_IMAGE_NAME,
 				screenHeight,
 				screenWidth,
-				() -> new UserPlane("/com/example/demo/images/userplane.png", 150, 50.0, screenHeight/2,PLAYER_INITIAL_HEALTH));
+				() -> new UserPlane(
+						"/com/example/demo/images/userplane.png",
+						150,
+						50.0,
+						screenHeight/2,
+						PLAYER_INITIAL_HEALTH));
 	}
 
 	@Override
