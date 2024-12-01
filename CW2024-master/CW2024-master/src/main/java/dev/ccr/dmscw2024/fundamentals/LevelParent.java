@@ -1,10 +1,13 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.fundamentals;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
+import dev.ccr.dmscw2024.levels.Level;
+import dev.ccr.dmscw2024.levels.LevelView;
+import dev.ccr.dmscw2024.user.UserPlane;
+import dev.ccr.dmscw2024.user.XWing;
 import javafx.animation.*;
-import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.*;
@@ -13,7 +16,7 @@ import javafx.util.Duration;
 
 import java.util.function.Supplier;
 
-public abstract class LevelParent extends Observable implements Level{
+public abstract class LevelParent extends Observable implements Level {
 
 	private static final double SCREEN_HEIGHT_ADJUSTMENT = 150;
 	private static final int MILLISECOND_DELAY = 50;
@@ -203,7 +206,7 @@ public abstract class LevelParent extends Observable implements Level{
 		addProjectile(user.fireProjectile(),userProjectiles);
 	}
 
-	private void addProjectile(ActiveActorDestructible projectile, List<ActiveActorDestructible> projectileList) {
+	public void addProjectile(ActiveActorDestructible projectile, List<ActiveActorDestructible> projectileList) {
 		if (projectile != null) {
 			root.getChildren().add(projectile);
 			projectileList.add(projectile);
@@ -328,6 +331,10 @@ public abstract class LevelParent extends Observable implements Level{
 
 	protected double getEnemyMaximumYPosition() {
 		return enemyMaximumYPosition;
+	}
+
+	public List<ActiveActorDestructible> getEnemyProjectiles() {
+		return enemyProjectiles;
 	}
 
 	protected double getScreenWidth() {

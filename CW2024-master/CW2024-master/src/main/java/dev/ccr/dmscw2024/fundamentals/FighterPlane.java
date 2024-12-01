@@ -1,4 +1,4 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.fundamentals;
 
 import javafx.scene.image.Image;
 
@@ -6,6 +6,14 @@ public abstract class FighterPlane extends ActiveActorDestructible {
 
 	private int health;
 
+	/**
+	 * Fighter Plane covers all planes displayed within the game
+	 * @param imageName Image Name
+	 * @param imageHeight Image Height
+	 * @param initialXPos Initial x-axis position
+	 * @param initialYPos Initial y-axis position
+	 * @param health Health
+	 */
 	public FighterPlane(String imageName, int imageHeight, double initialXPos, double initialYPos, int health) {
 		super(imageName, imageHeight, initialXPos, initialYPos);
 		this.setImage(new Image(getClass().getResource(imageName).toExternalForm()));
@@ -14,7 +22,6 @@ public abstract class FighterPlane extends ActiveActorDestructible {
 		this.setLayoutX(initialXPos);
 		this.setLayoutY(initialYPos);
 		this.health = health;
-		System.out.println("FighterPlane: Image LOADED - " + imageName);
 	}
 
 	public abstract ActiveActorDestructible fireProjectile();

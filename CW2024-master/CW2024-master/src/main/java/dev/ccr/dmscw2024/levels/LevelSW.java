@@ -1,9 +1,12 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.levels;
+
+import dev.ccr.dmscw2024.enemies.TieFighter;
+import dev.ccr.dmscw2024.fundamentals.LevelParent;
 
 public class LevelSW extends LevelParent {
 
     private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/backgroundsw.jpg";
-    private static final String NEXT_LEVEL = "dev.ccr.dmscw2024.LevelISD";
+    private static final String NEXT_LEVEL = "dev.ccr.dmscw2024.levels.LevelISD";
     private static final int TOTAL_ENEMIES = 5;
     private static final int KILLS_TO_ADVANCE = 10;
     private static final double ENEMY_SPAWN_PROBABILITY = .20;

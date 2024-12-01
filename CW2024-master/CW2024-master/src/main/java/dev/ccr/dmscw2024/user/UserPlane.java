@@ -1,4 +1,7 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.user;
+
+import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
+import dev.ccr.dmscw2024.fundamentals.FighterPlane;
 
 public class UserPlane extends FighterPlane {
 
@@ -29,7 +32,10 @@ public class UserPlane extends FighterPlane {
 		super(imageName, imageHeight, initialXPos, initialYPos, initialHealth);
 		velocityMultiplier = 0;
 	}
-	
+
+	/**
+	 * position updating method
+	 */
 	@Override
 	public void updatePosition() {
 		if (isMoving()) {
@@ -44,7 +50,10 @@ public class UserPlane extends FighterPlane {
 			this.moveHorizontally(HORIZONTAL_VELOCITY * horizontalVelocityMultiplier);
 		}
 	}
-	
+
+	/**
+	 * user-controlled plane updating method
+	 */
 	@Override
 	public void updateActor() {
 		updatePosition();
@@ -65,6 +74,11 @@ public class UserPlane extends FighterPlane {
 		return horizontalVelocityMultiplier != 0;
 	}
 
+	/**
+	 * allows for horizontal movement along x-axis
+	 * @param deltaX x-axis positioning variable
+	 *
+	 */
 	public void moveHorizontally (double deltaX) {
 		double newTranslateX = getTranslateX() + deltaX;
 

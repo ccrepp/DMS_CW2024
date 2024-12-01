@@ -8,11 +8,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-import dev.ccr.dmscw2024.LevelParent;
+import dev.ccr.dmscw2024.fundamentals.LevelParent;
 
 public class Controller implements Observer {
 
-	private static final String LEVEL_ONE_CLASS_NAME = "dev.ccr.dmscw2024.LevelOne";
+	private static final String LEVEL_ONE_CLASS_NAME = "dev.ccr.dmscw2024.levels.LevelOne";
 	private final Stage stage;
 
 	public Controller(Stage stage) {

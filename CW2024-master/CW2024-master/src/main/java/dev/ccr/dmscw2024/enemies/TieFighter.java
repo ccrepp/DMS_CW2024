@@ -1,6 +1,9 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.enemies;
 
-public class TieFighter extends FighterPlane{
+import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
+import dev.ccr.dmscw2024.fundamentals.FighterPlane;
+
+public class TieFighter extends FighterPlane {
 
     private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/tiefighter.png";
     private static final int IMAGE_HEIGHT = 150;

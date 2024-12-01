@@ -1,5 +1,9 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.levels;
 
+import dev.ccr.dmscw2024.specials.GameOverImage;
+import dev.ccr.dmscw2024.specials.HeartDisplay;
+import dev.ccr.dmscw2024.specials.shield.ShieldImage;
+import dev.ccr.dmscw2024.specials.WinImage;
 import javafx.scene.Group;
 
 public class LevelView {

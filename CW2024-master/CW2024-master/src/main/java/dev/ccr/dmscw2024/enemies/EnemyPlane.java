@@ -1,4 +1,7 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.enemies;
+
+import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
+import dev.ccr.dmscw2024.fundamentals.FighterPlane;
 
 public class EnemyPlane extends FighterPlane {
 

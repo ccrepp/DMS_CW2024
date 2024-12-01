@@ -1,4 +1,8 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.levels;
+
+import dev.ccr.dmscw2024.bosses.Boss;
+import dev.ccr.dmscw2024.fundamentals.LevelParent;
+import dev.ccr.dmscw2024.specials.shield.ShieldImage;
 
 public class LevelTwo extends LevelParent {
 
@@ -33,7 +37,7 @@ public class LevelTwo extends LevelParent {
 
 		System.out.println("LevelTwo: Adding Boss Shield to Root");
 		try{
-			getRoot().getChildren().add(boss.getShieldImage());
+			getRoot().getChildren().add((ShieldImage) boss.getShieldImage());
 			System.out.println("LevelTwo: Boss Shield CREATED");
 		} catch(Exception e){
 			System.out.println("LevelTwo: FAILED to Add Boss Shield : " + e.getMessage());

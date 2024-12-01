@@ -1,6 +1,8 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.user;
 
-public class XWing extends UserPlane{
+import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
+
+public class XWing extends UserPlane {
 
     private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/xwing.png";
     private static final int IMAGE_HEIGHT = 50;

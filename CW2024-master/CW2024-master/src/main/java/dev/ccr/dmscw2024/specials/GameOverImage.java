@@ -1,4 +1,4 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.specials;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;

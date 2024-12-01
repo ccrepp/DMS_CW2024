@@ -1,4 +1,6 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.enemies;
+
+import dev.ccr.dmscw2024.fundamentals.Projectile;
 
 public class EnemyProjectile extends Projectile {
 	

@@ -1,9 +1,13 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.levels;
+
+import dev.ccr.dmscw2024.bosses.ISD;
+import dev.ccr.dmscw2024.fundamentals.LevelParent;
+import dev.ccr.dmscw2024.specials.shield.ISDShield;
 
 public class LevelISD extends LevelParent {
 
     private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/backgroundsw.jpg";
-    private static final String NEXT_LEVEL = "dev.ccr.dmscw2024.LevelTwo";
+    private static final String NEXT_LEVEL = "dev.ccr.dmscw2024.levels.LevelTwo";
     private static final int PLAYER_INITIAL_HEALTH = 5;
     private final ISD isd;
     private LevelViewLevelTwo levelView;
@@ -22,7 +26,7 @@ public class LevelISD extends LevelParent {
                 )
         );
         System.out.println("LevelISD: Base Constructor COMPLETE");
-        isd = new ISD();
+        isd = new ISD(this);
         System.out.println("LevelISD: Boss CREATED");
     }
 
@@ -33,7 +37,7 @@ public class LevelISD extends LevelParent {
         System.out.println("LevelISD: UserPlane CREATED");
 
         System.out.println("LevelISD: Adding ISD Shield to Root");
-        getRoot().getChildren().add(isd.getISDShield());
+        getRoot().getChildren().add((ISDShield) isd.getISDShield());
         System.out.println("LevelISD: ISD Shield CREATED");
 
 //        System.out.println("LevelISD: Adding ISD to Root");

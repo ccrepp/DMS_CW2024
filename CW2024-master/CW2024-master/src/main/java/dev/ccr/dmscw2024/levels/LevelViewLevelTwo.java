@@ -1,5 +1,7 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.levels;
 
+import dev.ccr.dmscw2024.bosses.Boss;
+import dev.ccr.dmscw2024.specials.shield.ShieldImage;
 import javafx.scene.Group;
 
 public class LevelViewLevelTwo extends LevelView {
@@ -21,7 +23,7 @@ public class LevelViewLevelTwo extends LevelView {
 	}
 
 	private void addImagesToRoot() {
-		root.getChildren().addAll(boss.getShieldImage());
+		root.getChildren().addAll((ShieldImage) boss.getShieldImage());
 	}
 
 	public void showShield() {

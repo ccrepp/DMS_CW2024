@@ -1,4 +1,6 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.user;
+
+import dev.ccr.dmscw2024.fundamentals.Projectile;
 
 public class XWingProjectile extends Projectile {
 
