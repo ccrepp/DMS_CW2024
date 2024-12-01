@@ -1,4 +1,6 @@
-package dev.ccr.dmscw2024;
+package dev.ccr.dmscw2024.bosses;
+
+import dev.ccr.dmscw2024.fundamentals.Projectile;
 
 public class BossProjectile extends Projectile {
 	
@@ -7,7 +9,7 @@ public class BossProjectile extends Projectile {
 	private static final int HORIZONTAL_VELOCITY = -15;
 	private static final int INITIAL_X_POSITION = 950;
 
-	public BossProjectile(double initialYPos) {
+	public BossProjectile(double initialYPos, double projectileYPos) {
 		super(IMAGE_NAME, IMAGE_HEIGHT, INITIAL_X_POSITION, initialYPos);
 	}
 

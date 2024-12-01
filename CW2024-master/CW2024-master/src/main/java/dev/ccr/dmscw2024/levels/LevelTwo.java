@@ -9,7 +9,7 @@ public class LevelTwo extends LevelParent {
 	private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/background2.jpg";
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 	private final Boss boss;
-	private LevelViewLevelTwo levelView;
+	private LevelView levelView;
 
 	public LevelTwo(double screenHeight, double screenWidth) {
 		super(
@@ -37,7 +37,7 @@ public class LevelTwo extends LevelParent {
 
 		System.out.println("LevelTwo: Adding Boss Shield to Root");
 		try{
-			getRoot().getChildren().add((ShieldImage) boss.getShieldImage());
+			getRoot().getChildren().add((ShieldImage) boss.getShield());
 			System.out.println("LevelTwo: Boss Shield CREATED");
 		} catch(Exception e){
 			System.out.println("LevelTwo: FAILED to Add Boss Shield : " + e.getMessage());
@@ -64,7 +64,7 @@ public class LevelTwo extends LevelParent {
 
 	@Override
 	protected LevelView instantiateLevelView() {
-		levelView = new LevelViewLevelTwo(getRoot(), PLAYER_INITIAL_HEALTH);
+		levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
 		return levelView;
 	}
 
