@@ -10,7 +10,7 @@ public class LevelISD extends LevelParent {
     private static final String NEXT_LEVEL = "dev.ccr.dmscw2024.levels.LevelTwo";
     private static final int PLAYER_INITIAL_HEALTH = 5;
     private final ISD isd;
-    private LevelViewLevelTwo levelView;
+    private LevelView levelView;
 
     public LevelISD(double screenHeight, double screenWidth) {
         super(
@@ -26,7 +26,7 @@ public class LevelISD extends LevelParent {
                 )
         );
         System.out.println("LevelISD: Base Constructor COMPLETE");
-        isd = new ISD(this);
+        isd = new ISD();
         System.out.println("LevelISD: Boss CREATED");
     }
 
@@ -37,13 +37,8 @@ public class LevelISD extends LevelParent {
         System.out.println("LevelISD: UserPlane CREATED");
 
         System.out.println("LevelISD: Adding ISD Shield to Root");
-        getRoot().getChildren().add((ISDShield) isd.getISDShield());
+        getRoot().getChildren().add((ISDShield) isd.getShield());
         System.out.println("LevelISD: ISD Shield CREATED");
-
-//        System.out.println("LevelISD: Adding ISD to Root");
-//        getRoot().getChildren().add(isd);
-//        System.out.println("LevelISD: ISD CREATED");
-
 
     }
 
@@ -67,7 +62,7 @@ public class LevelISD extends LevelParent {
 
     @Override
     protected LevelView instantiateLevelView() {
-        levelView = new LevelViewLevelTwo(getRoot(), PLAYER_INITIAL_HEALTH);
+        levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
         return levelView;
     }
 }
