@@ -37,6 +37,7 @@ public abstract class LevelParent extends Observable implements Level {
 	private final ImageView background;
 	
 	private final ProjectileManager projectileManager;
+	private final KeyHandler keyHandler;
 
 	// Actor Variables
 	private final List<ActiveActorDestructible> friendlyUnits;
@@ -75,6 +76,7 @@ public abstract class LevelParent extends Observable implements Level {
 		this.currentNumberOfEnemies = 0;
 		
 		this.projectileManager = new ProjectileManager(root);
+		this.keyHandler = new KeyHandler(this);
 
 		initializeTimeline();
 		friendlyUnits.add(user);
@@ -103,35 +105,17 @@ public abstract class LevelParent extends Observable implements Level {
 	}
 
 	private void initializeBackground() {
-		setUpBackgroundImage();
-		setUpKeyHandlers();
+		setUpBackgroundStuff();
 		root.getChildren().add(background);
 	}
 
-	private void setUpBackgroundImage() {
+	private void setUpBackgroundStuff() {
 		background.setFocusTraversable(true);
 		background.setFitHeight(screenHeight);
 		background.setFitWidth(screenWidth);
-	}
 
-	private void setUpKeyHandlers() {
-		background.setOnKeyPressed(this::handleKeyPress);
-		background.setOnKeyReleased(this::handleKeyRelease);
-	}
-
-	private void handleKeyPress(KeyEvent e) {
-		KeyCode kc = e.getCode();
-		if (kc == KeyCode.UP || kc == KeyCode.W) user.moveUp();
-		if (kc == KeyCode.DOWN || kc == KeyCode.S) user.moveDown();
-		if (kc == KeyCode.LEFT || kc == KeyCode.A) user.moveLeft();
-		if (kc == KeyCode.RIGHT || kc == KeyCode.D) user.moveRight();
-		if (kc == KeyCode.SPACE) fireProjectile();
-	}
-
-	private void handleKeyRelease(KeyEvent e) {
-		KeyCode kc = e.getCode();
-		if (kc == KeyCode.UP || kc == KeyCode.W || kc == KeyCode.DOWN || kc == KeyCode.S) user.stopVertically();
-		if (kc == KeyCode.LEFT || kc == KeyCode.A || kc == KeyCode.RIGHT || kc == KeyCode.D) user.stopHorizontal();
+		background.setOnKeyPressed(keyHandler::handleKeyPress);
+		background.setOnKeyReleased(keyHandler::handleKeyRelease);
 	}
 
 	private void setUpFriendlyUnits(){
@@ -188,14 +172,12 @@ public abstract class LevelParent extends Observable implements Level {
 
 	// Projectile Management
 
-	private void fireProjectile() {
-//		addProjectile(user.fireProjectile(),userProjectiles);
+	public void fireProjectile() {
 		ActiveActorDestructible projectile = user.fireProjectile();
 		projectileManager.addProjectile(projectile, userProjectiles);
 	}
 
 	private void generateEnemyFire() {
-//		enemyUnits.forEach(enemy -> spawnEnemyProjectile(((FighterPlane) enemy).fireProjectile()));
 		for (ActiveActorDestructible enemy:enemyUnits) {
 			if (enemy instanceof FighterPlane fighterPlane) {
 				ActiveActorDestructible projectile = fighterPlane.fireProjectile();
