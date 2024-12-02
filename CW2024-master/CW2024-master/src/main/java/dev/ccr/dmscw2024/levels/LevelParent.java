@@ -1,10 +1,11 @@
-package dev.ccr.dmscw2024.fundamentals;
+package dev.ccr.dmscw2024.levels;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-import dev.ccr.dmscw2024.levels.LevelView;
+import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 import dev.ccr.dmscw2024.planes.FighterPlane;
+import dev.ccr.dmscw2024.planes.PlaneFactory;
 import dev.ccr.dmscw2024.planes.user.UserPlane;
 import dev.ccr.dmscw2024.planes.user.XWing;
 import javafx.animation.*;
@@ -55,7 +56,6 @@ public abstract class LevelParent extends Observable implements Level {
 		this.userProjectiles = new ArrayList<>();
 		this.enemyProjectiles = new ArrayList<>();
 
-		//.toExternalForm()
 		this.background = new ImageView(new Image(getClass().getResource(backgroundImageName).toExternalForm()));
 		System.out.println("LevelParent: Background Image CREATED");
 		this.screenHeight = screenHeight;
@@ -288,32 +288,6 @@ public abstract class LevelParent extends Observable implements Level {
 
 	protected UserPlane getUser() {
 		return user;
-	}
-
-	public static UserPlane createDefaultUserPlane(double screenHeight) {
-		return new UserPlane(
-				"/dev/ccr/dmscw2024/images/userplane.png",
-				150,
-				50.0,
-				screenHeight/2,
-				5);
-	}
-
-	public static UserPlane createCustomUserPlane(String imageName, int imageHeight, double initialX, double initialY, int health) {
-		return new UserPlane(imageName, imageHeight, initialX, initialY, health);
-	}
-
-	public static XWing createDefaultXWing(double screenHeight) {
-		return new XWing(
-				"/dev/ccr/dmscw2024/images/xwing.png",
-				75,
-				50.0,
-				screenHeight/2,
-				5);
-	}
-
-	public static XWing createCustomXWing(String imageName, int imageHeight, double initialX, double initialY, int health) {
-		return new XWing(imageName, imageHeight, initialX, initialY, health);
 	}
 
 	protected Group getRoot() {

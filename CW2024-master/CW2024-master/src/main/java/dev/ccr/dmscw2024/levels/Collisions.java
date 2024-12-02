@@ -1,4 +1,6 @@
-package dev.ccr.dmscw2024.fundamentals;
+package dev.ccr.dmscw2024.levels;
+
+import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 
 import java.util.List;
 

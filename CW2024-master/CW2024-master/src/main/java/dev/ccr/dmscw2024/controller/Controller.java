@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
-import dev.ccr.dmscw2024.fundamentals.LevelParent;
+import dev.ccr.dmscw2024.levels.LevelParent;
 
 public class Controller implements Observer {
 

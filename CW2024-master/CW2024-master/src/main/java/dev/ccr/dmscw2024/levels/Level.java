@@ -1,4 +1,4 @@
-package dev.ccr.dmscw2024.fundamentals;
+package dev.ccr.dmscw2024.levels;
 
 import javafx.scene.Scene;
 

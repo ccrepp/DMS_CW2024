@@ -1,7 +1,7 @@
 package dev.ccr.dmscw2024.levels;
 
+import dev.ccr.dmscw2024.planes.PlaneFactory;
 import dev.ccr.dmscw2024.planes.bosses.ISD;
-import dev.ccr.dmscw2024.fundamentals.LevelParent;
 import dev.ccr.dmscw2024.specials.shield.ISDShield;
 
 public class LevelISD extends LevelParent {
@@ -17,7 +17,7 @@ public class LevelISD extends LevelParent {
                 BACKGROUND_IMAGE_NAME,
                 screenHeight,
                 screenWidth,
-                () -> createCustomXWing(
+                () -> PlaneFactory.createCustomXWing(
                         "/dev/ccr/dmscw2024/images/xwing.png",
                         50,
                         50.0,

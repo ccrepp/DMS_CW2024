@@ -1,5 +1,7 @@
 package dev.ccr.dmscw2024.fundamentals;
 
+import dev.ccr.dmscw2024.levels.Collidable;
+
 public abstract class ActiveActorDestructible extends ActiveActor implements Destructible, Collidable {
 
 	private boolean isDestroyed;

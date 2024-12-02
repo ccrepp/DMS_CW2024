@@ -1,7 +1,7 @@
 package dev.ccr.dmscw2024.levels;
 
+import dev.ccr.dmscw2024.planes.PlaneFactory;
 import dev.ccr.dmscw2024.planes.enemies.TieFighter;
-import dev.ccr.dmscw2024.fundamentals.LevelParent;
 
 public class LevelSW extends LevelParent {
 
@@ -17,7 +17,7 @@ public class LevelSW extends LevelParent {
                 BACKGROUND_IMAGE_NAME,
                 screenHeight,
                 screenWidth,
-                () -> createDefaultXWing(screenHeight)
+                () -> PlaneFactory.createDefaultXWing(screenHeight)
         );
     }
 

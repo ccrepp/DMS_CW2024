@@ -1,7 +1,7 @@
 package dev.ccr.dmscw2024.levels;
 
+import dev.ccr.dmscw2024.planes.PlaneFactory;
 import dev.ccr.dmscw2024.planes.bosses.Boss;
-import dev.ccr.dmscw2024.fundamentals.LevelParent;
 import dev.ccr.dmscw2024.specials.shield.ShieldImage;
 
 public class LevelTwo extends LevelParent {
@@ -16,7 +16,7 @@ public class LevelTwo extends LevelParent {
 				BACKGROUND_IMAGE_NAME,
 				screenHeight,
 				screenWidth,
-				() -> createCustomUserPlane(
+				() -> PlaneFactory.createCustomUserPlane(
                         "/dev/ccr/dmscw2024/images/userplane.png",
 						150,
 						50.0,

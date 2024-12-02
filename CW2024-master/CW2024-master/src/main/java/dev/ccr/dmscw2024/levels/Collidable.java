@@ -1,4 +1,4 @@
-package dev.ccr.dmscw2024.fundamentals;
+package dev.ccr.dmscw2024.levels;
 
 public interface Collidable {
     boolean checkCollision(Collidable other);
