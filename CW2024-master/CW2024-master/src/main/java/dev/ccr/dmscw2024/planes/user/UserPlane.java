@@ -1,6 +1,7 @@
-package dev.ccr.dmscw2024.user;
+package dev.ccr.dmscw2024.planes.user;
 
 import dev.ccr.dmscw2024.fundamentals.*;
+import dev.ccr.dmscw2024.planes.FighterPlane;
 import dev.ccr.dmscw2024.projectile.ProjectileFactory;
 
 public class UserPlane extends FighterPlane implements Movable {
@@ -63,7 +64,6 @@ public class UserPlane extends FighterPlane implements Movable {
 	public ActiveActorDestructible fireProjectile() {
 		double projectile_X_Position = getProjectileXPosition(PROJECTILE_X_POSITION_OFFSET);
 		double projectile_Y_Position = getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET);
-//		return new UserProjectile(projectile_X_Position, projectile_Y_Position);
         return ProjectileFactory.createProjectile("User", projectile_X_Position, projectile_Y_Position);
 	}
 

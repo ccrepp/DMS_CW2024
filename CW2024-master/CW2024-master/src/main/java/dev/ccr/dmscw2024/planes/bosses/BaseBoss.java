@@ -1,11 +1,10 @@
-package dev.ccr.dmscw2024.fundamentals;
+package dev.ccr.dmscw2024.planes.bosses;
 
 
+import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
+import dev.ccr.dmscw2024.planes.FighterPlane;
 import dev.ccr.dmscw2024.specials.shield.Shield;
-import dev.ccr.dmscw2024.specials.shield.ShieldImage;
-import dev.ccr.dmscw2024.specials.shield.ISDShield;
 
-import javafx.scene.Group;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;

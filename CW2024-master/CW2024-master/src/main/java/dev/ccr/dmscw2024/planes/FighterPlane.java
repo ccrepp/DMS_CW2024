@@ -1,5 +1,6 @@
-package dev.ccr.dmscw2024.fundamentals;
+package dev.ccr.dmscw2024.planes;
 
+import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 import javafx.scene.image.Image;
 
 public abstract class FighterPlane extends ActiveActorDestructible {

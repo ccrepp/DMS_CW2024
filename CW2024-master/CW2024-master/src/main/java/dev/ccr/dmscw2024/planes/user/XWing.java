@@ -1,4 +1,4 @@
-package dev.ccr.dmscw2024.user;
+package dev.ccr.dmscw2024.planes.user;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 import dev.ccr.dmscw2024.projectile.ProjectileFactory;

@@ -11,6 +11,11 @@ public class ProjectileFactory {
                 return new ProjectileProduction("/dev/ccr/dmscw2024/images/bluelaser.png", 15, initialXPos, initialYPos, 15);
             case "TieFighter" :
                 return new ProjectileProduction("/dev/ccr/dmscw2024/images/greenlaser.png", 25, initialXPos, initialYPos, -10);
+            case "Boss" :
+                return new ProjectileProduction("/dev/ccr/dmscw2024/images/fireball.png", 75, initialXPos, initialYPos, -15);
+            case "ISD" :
+                return new ProjectileProduction("/dev/ccr/dmscw2024/images/redlaser.png", 50, initialXPos, initialYPos, -15);
+
             default :
                 throw new IllegalArgumentException("Unsupported Projectile type: " + type);
         }
