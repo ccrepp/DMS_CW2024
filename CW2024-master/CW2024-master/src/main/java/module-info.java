@@ -12,4 +12,5 @@ module com.example.demo {
     opens dev.ccr.dmscw2024.fundamentals to javafx.fxml;
     opens dev.ccr.dmscw2024.specials to javafx.fxml;
     opens dev.ccr.dmscw2024.specials.shield to javafx.fxml;
+    opens dev.ccr.dmscw2024.projectile to javafx.fxml;
 }

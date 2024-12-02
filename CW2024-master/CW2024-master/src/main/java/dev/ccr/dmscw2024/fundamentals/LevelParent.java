@@ -3,7 +3,6 @@ package dev.ccr.dmscw2024.fundamentals;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import dev.ccr.dmscw2024.levels.Level;
 import dev.ccr.dmscw2024.levels.LevelView;
 import dev.ccr.dmscw2024.user.UserPlane;
 import dev.ccr.dmscw2024.user.XWing;

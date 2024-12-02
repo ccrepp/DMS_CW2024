@@ -1,6 +1,7 @@
 package dev.ccr.dmscw2024.user;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
+import dev.ccr.dmscw2024.projectile.ProjectileFactory;
 
 public class XWing extends UserPlane {
 
@@ -22,7 +23,9 @@ public class XWing extends UserPlane {
 
     @Override
     public ActiveActorDestructible fireProjectile() {
-        return new XWingProjectile(getProjectileXPosition(80), getProjectileYPosition(20));
+        double projectile_X_Position = getProjectileXPosition(PROJECTILE_X_POSITION_OFFSET);
+        double projectile_Y_Position = getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET);
+        return ProjectileFactory.createProjectile("XWing", projectile_X_Position, projectile_Y_Position);
     }
 
 }

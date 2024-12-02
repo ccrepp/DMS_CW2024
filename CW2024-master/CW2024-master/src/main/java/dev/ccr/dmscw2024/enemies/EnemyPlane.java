@@ -2,6 +2,7 @@ package dev.ccr.dmscw2024.enemies;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 import dev.ccr.dmscw2024.fundamentals.FighterPlane;
+import dev.ccr.dmscw2024.projectile.ProjectileFactory;
 
 public class EnemyPlane extends FighterPlane {
 
@@ -27,7 +28,9 @@ public class EnemyPlane extends FighterPlane {
 		if (Math.random() < FIRE_RATE) {
 			double projectileXPosition = getProjectileXPosition(PROJECTILE_X_POSITION_OFFSET);
 			double projectileYPosition = getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET);
-			return new EnemyProjectile(projectileXPosition, projectileYPosition);
+//			return new EnemyProjectile(projectileXPosition, projectileYPosition);
+			return ProjectileFactory.createProjectile("Enemy", projectileXPosition, projectileYPosition);
+
 		}
 		return null;
 	}
