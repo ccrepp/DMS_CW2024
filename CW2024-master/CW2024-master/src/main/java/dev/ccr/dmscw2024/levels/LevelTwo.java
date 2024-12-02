@@ -1,6 +1,6 @@
 package dev.ccr.dmscw2024.levels;
 
-import dev.ccr.dmscw2024.bosses.Boss;
+import dev.ccr.dmscw2024.planes.bosses.Boss;
 import dev.ccr.dmscw2024.fundamentals.LevelParent;
 import dev.ccr.dmscw2024.specials.shield.ShieldImage;
 

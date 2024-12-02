@@ -1,8 +1,8 @@
-package dev.ccr.dmscw2024.bosses;
+package dev.ccr.dmscw2024.planes.bosses;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
+import dev.ccr.dmscw2024.projectile.ProjectileFactory;
 import dev.ccr.dmscw2024.specials.shield.ISDShield;
-import dev.ccr.dmscw2024.fundamentals.BaseBoss;
 
 public class ISD extends BaseBoss {
 
@@ -10,7 +10,7 @@ public class ISD extends BaseBoss {
     private static final double INITIAL_X_POSITION = 900.0;
     private static final double INITIAL_Y_POSITION = 300;
     private static final double PROJECTILE_Y_POSITION_OFFSET = 75.0;
-    private static final double ISD_FIRE_RATE = .01;
+    private static final double ISD_FIRE_RATE = 0.05;
     private static final double ISD_SHIELD_PROBABILITY = 0.005;
     private static final int IMAGE_HEIGHT = 275;
     private static final int VERTICAL_VELOCITY = 8;
@@ -78,8 +78,8 @@ public class ISD extends BaseBoss {
     @Override
     protected ActiveActorDestructible createProjectile() {
         double projectileXPos = getLayoutX() + getTranslateX() + (getFitWidth() / 2.0);
-        double projectileYPos = getLayoutY() + getTranslateY() + getFitHeight();
-        return new ISDProjectile(projectileXPos, projectileYPos);
+        double projectileYPos = getLayoutY() + getTranslateY() + (getFitHeight() / 4.0);
+        return ProjectileFactory.createProjectile("ISD", projectileXPos, projectileYPos);
     }
 
     /* Shield Logic */

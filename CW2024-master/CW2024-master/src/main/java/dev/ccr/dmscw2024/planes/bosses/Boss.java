@@ -1,8 +1,8 @@
-package dev.ccr.dmscw2024.bosses;
+package dev.ccr.dmscw2024.planes.bosses;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
+import dev.ccr.dmscw2024.projectile.ProjectileFactory;
 import dev.ccr.dmscw2024.specials.shield.ShieldImage;
-import dev.ccr.dmscw2024.fundamentals.BaseBoss;
 
 public class Boss extends BaseBoss {
 
@@ -10,7 +10,7 @@ public class Boss extends BaseBoss {
 	private static final double INITIAL_X_POSITION = 1000.0;
 	private static final double INITIAL_Y_POSITION = 400;
 	private static final double PROJECTILE_Y_POSITION_OFFSET = 75.0;
-	private static final double BOSS_FIRE_RATE = .04;
+	private static final double BOSS_FIRE_RATE = 0.05;
 	private static final double BOSS_SHIELD_PROBABILITY = 0.015;
 	private static final int IMAGE_HEIGHT = 300;
 	private static final int VERTICAL_VELOCITY = 8;
@@ -79,8 +79,8 @@ public class Boss extends BaseBoss {
 	@Override
 	protected ActiveActorDestructible createProjectile() {
 		double projectileXPos = getLayoutX() + getTranslateX() + (getFitWidth() / 2.0);
-		double projectileYPos = getLayoutY() + getTranslateY() + getFitHeight();
-		return new BossProjectile(projectileXPos, projectileYPos);
+		double projectileYPos = getLayoutY() + getTranslateY() + (getFitHeight() / 2.0);
+		return ProjectileFactory.createProjectile("Boss", projectileXPos, projectileYPos);
 	}
 
 	/* Shield Logic */

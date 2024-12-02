@@ -4,8 +4,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import dev.ccr.dmscw2024.levels.LevelView;
-import dev.ccr.dmscw2024.user.UserPlane;
-import dev.ccr.dmscw2024.user.XWing;
+import dev.ccr.dmscw2024.planes.FighterPlane;
+import dev.ccr.dmscw2024.planes.user.UserPlane;
+import dev.ccr.dmscw2024.planes.user.XWing;
 import javafx.animation.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;

@@ -1,7 +1,7 @@
 package dev.ccr.dmscw2024.levels;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
-import dev.ccr.dmscw2024.enemies.EnemyPlane;
+import dev.ccr.dmscw2024.planes.enemies.EnemyPlane;
 import dev.ccr.dmscw2024.fundamentals.LevelParent;
 
 public class LevelOne extends LevelParent {
