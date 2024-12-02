@@ -1,9 +1,9 @@
 package dev.ccr.dmscw2024.user;
 
-import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
-import dev.ccr.dmscw2024.fundamentals.FighterPlane;
+import dev.ccr.dmscw2024.fundamentals.*;
+import dev.ccr.dmscw2024.projectile.ProjectileFactory;
 
-public class UserPlane extends FighterPlane {
+public class UserPlane extends FighterPlane implements Movable {
 
 	private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/userplane.png";
 	private static final double Y_UPPER_BOUND = -40;
@@ -63,7 +63,8 @@ public class UserPlane extends FighterPlane {
 	public ActiveActorDestructible fireProjectile() {
 		double projectile_X_Position = getProjectileXPosition(PROJECTILE_X_POSITION_OFFSET);
 		double projectile_Y_Position = getProjectileYPosition(PROJECTILE_Y_POSITION_OFFSET);
-		return new UserProjectile(projectile_X_Position, projectile_Y_Position);
+//		return new UserProjectile(projectile_X_Position, projectile_Y_Position);
+        return ProjectileFactory.createProjectile("User", projectile_X_Position, projectile_Y_Position);
 	}
 
 	private boolean isMoving() {

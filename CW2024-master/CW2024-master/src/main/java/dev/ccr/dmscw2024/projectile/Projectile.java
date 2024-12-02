@@ -1,4 +1,6 @@
-package dev.ccr.dmscw2024.fundamentals;
+package dev.ccr.dmscw2024.projectile;
+
+import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 
 public abstract class Projectile extends ActiveActorDestructible {
 

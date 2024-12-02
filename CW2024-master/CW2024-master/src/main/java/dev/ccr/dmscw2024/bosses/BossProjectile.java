@@ -1,6 +1,6 @@
 package dev.ccr.dmscw2024.bosses;
 
-import dev.ccr.dmscw2024.fundamentals.Projectile;
+import dev.ccr.dmscw2024.projectile.Projectile;
 
 public class BossProjectile extends Projectile {
 	
