@@ -4,22 +4,20 @@ import dev.ccr.dmscw2024.projectile.Projectile;
 
 public class ProjectileFactory {
     public static Projectile createProjectile (String type, double initialXPos, double initialYPos){
-        switch (type) {
-            case "User" :
-                return new ProjectileProduction("/dev/ccr/dmscw2024/images/userfire.png", 125, initialXPos, initialYPos, 10);
-            case "Enemy" :
-                return new ProjectileProduction("/dev/ccr/dmscw2024/images/enemyfire.png", 50, initialXPos, initialYPos, -5);
-            case "XWing" :
-                return new ProjectileProduction("/dev/ccr/dmscw2024/images/bluelaser.png", 15, initialXPos, initialYPos, 10);
-            case "TieFighter" :
-                return new ProjectileProduction("/dev/ccr/dmscw2024/images/greenlaser.png", 25, initialXPos, initialYPos, -5);
-            case "Boss" :
-                return new ProjectileProduction("/dev/ccr/dmscw2024/images/fireball.png", 75, initialXPos, initialYPos, -3);
-            case "ISD" :
-                return new ProjectileProduction("/dev/ccr/dmscw2024/images/redlaser.png", 50, initialXPos, initialYPos, -3);
-
-            default :
-                throw new IllegalArgumentException("Unsupported Projectile type: " + type);
-        }
+        return switch (type) {
+            case "User" ->
+                    new ProjectileProduction("/dev/ccr/dmscw2024/images/userfire.png", 125, initialXPos, initialYPos, 15);
+            case "Enemy" ->
+                    new ProjectileProduction("/dev/ccr/dmscw2024/images/enemyfire.png", 50, initialXPos, initialYPos, -10);
+            case "XWing" ->
+                    new ProjectileProduction("/dev/ccr/dmscw2024/images/bluelaser.png", 15, initialXPos, initialYPos, 15);
+            case "TieFighter" ->
+                    new ProjectileProduction("/dev/ccr/dmscw2024/images/greenlaser.png", 25, initialXPos, initialYPos, -10);
+            case "Boss" ->
+                    new ProjectileProduction("/dev/ccr/dmscw2024/images/fireball.png", 75, initialXPos, initialYPos, -7);
+            case "ISD" ->
+                    new ProjectileProduction("/dev/ccr/dmscw2024/images/redlaser.png", 50, initialXPos, initialYPos, -5);
+            default -> throw new IllegalArgumentException("Unsupported Projectile type: " + type);
+        };
     }
 }

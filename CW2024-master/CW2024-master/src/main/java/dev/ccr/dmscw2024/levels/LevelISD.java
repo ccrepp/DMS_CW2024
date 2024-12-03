@@ -31,9 +31,10 @@ public class LevelISD extends LevelParent {
     }
 
     @Override
-    protected void initialiseFriendlyUnits() {
+    public void initialiseFriendlyUnits() {
         System.out.println("LevelISD: Adding UserPlane to Root");
-        getRoot().getChildren().add(getUser());
+//        getRoot().getChildren().add(getUser());
+        addFriendlyUnit(getUser());
         System.out.println("LevelISD: UserPlane CREATED");
 
         System.out.println("LevelISD: Adding ISD Shield to Root");
@@ -54,14 +55,14 @@ public class LevelISD extends LevelParent {
     }
 
     @Override
-    protected void spawnEnemyUnits() {
+    public void spawnEnemyUnits() {
         if (getCurrentNumberOfEnemies() == 0) {
             addEnemyUnits(isd);
         }
     }
 
     @Override
-    protected LevelView instantiateLevelView() {
+    public LevelView instantiateLevelView() {
         levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
         return levelView;
     }

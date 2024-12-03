@@ -30,9 +30,10 @@ public class LevelTwo extends LevelParent {
 	}
 
 	@Override
-	protected void initialiseFriendlyUnits() {
+    public void initialiseFriendlyUnits() {
 		System.out.println("LevelTwo: Adding UserPlane to Root");
-		getRoot().getChildren().add(getUser());
+//		getRoot().getChildren().add(getUser());
+		addFriendlyUnit(getUser());
 		System.out.println("LevelTwo: UserPlane CREATED");
 
 		System.out.println("LevelTwo: Adding Boss Shield to Root");
@@ -56,14 +57,14 @@ public class LevelTwo extends LevelParent {
 	}
 
 	@Override
-	protected void spawnEnemyUnits() {
+	public void spawnEnemyUnits() {
 		if (getCurrentNumberOfEnemies() == 0) {
 			addEnemyUnits(boss);
 		}
 	}
 
 	@Override
-	protected LevelView instantiateLevelView() {
+	public LevelView instantiateLevelView() {
 		levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
 		return levelView;
 	}

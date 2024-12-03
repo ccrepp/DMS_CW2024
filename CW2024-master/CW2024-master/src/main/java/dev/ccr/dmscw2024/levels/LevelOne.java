@@ -1,14 +1,10 @@
 package dev.ccr.dmscw2024.levels;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
-import dev.ccr.dmscw2024.utility.ActorManager;
-import dev.ccr.dmscw2024.utility.KeyHandler;
-import dev.ccr.dmscw2024.utility.LevelInitialiser;
 import dev.ccr.dmscw2024.utility.PlaneFactory;
 import dev.ccr.dmscw2024.planes.enemies.EnemyPlane;
-import javafx.scene.Group;
 
-public abstract class LevelOne extends LevelParent {
+public class LevelOne extends LevelParent {
 	
 	private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/background1.jpg";
 	private static final String NEXT_LEVEL = "dev.ccr.dmscw2024.levels.LevelSW";
@@ -27,18 +23,26 @@ public abstract class LevelOne extends LevelParent {
 	}
 
 	@Override
-	protected LevelView instantiateLevelView() {
+	public LevelView instantiateLevelView() {
 		return new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
 	}
 
 	@Override
-	protected void initialiseFriendlyUnits() {
+	public void initialiseFriendlyUnits() {
 		System.out.println("Initialising UserPlane for LevelOne");
-		getRoot().getChildren().add(getUser());
+//		getRoot().getChildren().add(getUser());
+
+//		ActiveActorDestructible userPlane = createUserPlane();
+		addFriendlyUnit(getUser());
+
+    }
+
+	private ActiveActorDestructible createUserPlane() {
+		return PlaneFactory.createDefaultUserPlane(getScreenHeight());
 	}
 
 	@Override
-	protected void spawnEnemyUnits() {
+	public void spawnEnemyUnits() {
 		int currentNumberOfEnemies = getCurrentNumberOfEnemies();
 		for (int i = 0; i < TOTAL_ENEMIES - currentNumberOfEnemies; i++) {
 			if (Math.random() < ENEMY_SPAWN_PROBABILITY) {
@@ -52,10 +56,18 @@ public abstract class LevelOne extends LevelParent {
 	@Override
     public void checkIfGameOver() {
 		if (userIsDestroyed()) {
+			System.out.println("LevelOne: BEAT BY LEVEL - User is dead");
 			loseGame();
 		}
-		else if (userHasReachedKillTarget())
+		else if (userHasReachedKillTarget()) {
+			System.out.println("LevelOne: LEVEL BEAT - User has reached kill target");
 			goToNextLevel(NEXT_LEVEL);
+		}
+//		else {
+//			System.out.println("LevelOne: Kill Count: " + getUser().getNumberOfKills());
+//			System.out.println("LevelOne: Remaining Enemies: " + getCurrentNumberOfEnemies());
+
+
 	}
 
 	private boolean userHasReachedKillTarget() {

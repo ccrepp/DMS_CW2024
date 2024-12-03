@@ -31,14 +31,16 @@ public class LevelSW extends LevelParent {
     }
 
     @Override
-    protected void initialiseFriendlyUnits() {
+    public void initialiseFriendlyUnits() {
         System.out.println("Initializing XWing for LevelSW");
         System.out.println("getUser(): " + getUser());
-        getRoot().getChildren().add(getUser());
+//        getRoot().getChildren().add(getUser());
+        addFriendlyUnit(getUser());
     }
 
+
     @Override
-    protected void spawnEnemyUnits() {
+    public void spawnEnemyUnits() {
         int currentNumberOfEnemies = getCurrentNumberOfEnemies();
         for (int i = 0; i < TOTAL_ENEMIES - currentNumberOfEnemies; i++) {
             if (Math.random() < ENEMY_SPAWN_PROBABILITY) {
@@ -50,7 +52,7 @@ public class LevelSW extends LevelParent {
     }
 
     @Override
-    protected LevelView instantiateLevelView() {
+    public LevelView instantiateLevelView() {
         return new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
     }
 

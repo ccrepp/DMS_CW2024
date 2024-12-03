@@ -3,8 +3,6 @@ package dev.ccr.dmscw2024.controller;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.lang.reflect.Constructor;
-import java.util.Observable;
-import java.util.Observer;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -34,11 +32,14 @@ public class Controller implements PropertyChangeListener {
 	private void goToLevel(String className)  {
 		try{
 			System.out.println("Controller: Loading level: " + className);
-
 			Class<?> myClass = Class.forName(className);
+			System.out.println("Controller: Level Loaded " + myClass.getName());
+
 			Constructor<?> constructor = myClass.getConstructor(double.class, double.class);
+			System.out.println("Controller: Level Constructor Loaded " + constructor.getName());
 
 			LevelParent myLevel = (LevelParent) constructor.newInstance(stage.getHeight(), stage.getWidth());
+			System.out.println("Controller: Level Constructing " + myLevel.getClass().getName());
 
 			myLevel.addPropertyChangeListener(this);
 
