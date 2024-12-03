@@ -6,8 +6,12 @@ import javafx.scene.Scene;
 public interface GameStartEnd {
     Scene initializeScene();
 
+    LevelView instantiateLevelView();
+
+    void checkIfGameOver();
+
     void startGame();
     void endGame();
 
-    LevelView instantiateLevelView();
+
 }

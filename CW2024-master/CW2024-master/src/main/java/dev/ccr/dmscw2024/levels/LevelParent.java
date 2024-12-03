@@ -259,24 +259,19 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	// Game State Updates
 
 	private void updateLevelView() {
-		levelView.removeHearts(user.getHealth());
+		GameState.updateLevelView(levelView, user);
 	}
 
 	private void updateKillCount() {
-		int killsToIncrement = currentNumberOfEnemies - enemyUnits.size();
-		for (int i = 0; i < killsToIncrement; i++)
-		{
-			user.incrementKillCount();
-			System.out.println("LevelParent: Kill Count Incremented, Total Kills: " + user.getNumberOfKills());
-		}
+		GameState.updateKillCount(user, currentNumberOfEnemies, enemyUnits);
 	}
 
 	private boolean enemyHasPenetratedDefenses(ActiveActorDestructible enemy) {
-		return Math.abs(enemy.getTranslateX()) > screenWidth;
+		return GameState.enemyHasPenetratedDefenses(enemy, screenWidth);
 	}
 
 	private void updateNumberOfEnemies() {
-		currentNumberOfEnemies = enemyUnits.size();
+		currentNumberOfEnemies = GameState.updateNumberOfEnemies(enemyUnits);
 	}
 
 	public abstract void checkIfGameOver();
