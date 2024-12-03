@@ -1,4 +1,4 @@
-package dev.ccr.dmscw2024.specials.shield;
+package dev.ccr.dmscw2024.interfaces;
 
 public interface Shield {
     void showShield();

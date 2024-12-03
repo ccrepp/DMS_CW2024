@@ -2,7 +2,7 @@ package dev.ccr.dmscw2024.planes.user;
 
 import dev.ccr.dmscw2024.fundamentals.*;
 import dev.ccr.dmscw2024.planes.FighterPlane;
-import dev.ccr.dmscw2024.planes.Movable;
+import dev.ccr.dmscw2024.interfaces.Movable;
 import dev.ccr.dmscw2024.utility.ProjectileFactory;
 
 public class UserPlane extends FighterPlane implements Movable {
@@ -17,7 +17,7 @@ public class UserPlane extends FighterPlane implements Movable {
 	private static final int PROJECTILE_X_POSITION = 110;
 	private static final int PROJECTILE_X_POSITION_OFFSET = 80;
 	private static final int PROJECTILE_Y_POSITION_OFFSET = 20;
-	private int velocityMultiplier;
+	private int velocityMultiplier = 0;
 	private int numberOfKills;
 
 	private boolean movingUp = false;
@@ -32,7 +32,6 @@ public class UserPlane extends FighterPlane implements Movable {
 
 	public UserPlane(String imageName, int imageHeight, double initialXPos, double initialYPos, int initialHealth) {
 		super(imageName, imageHeight, initialXPos, initialYPos, initialHealth);
-		velocityMultiplier = 0;
 	}
 
 	/**

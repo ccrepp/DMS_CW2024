@@ -1,9 +1,10 @@
 package dev.ccr.dmscw2024.specials.shield;
 
+import dev.ccr.dmscw2024.interfaces.Shield;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class ISDShield extends ImageView implements Shield{
+public class ISDShield extends ImageView implements Shield {
 
     private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/ISDShield.png";
     private static final int SHIELD_SIZE = 350;

@@ -1,5 +1,6 @@
 package dev.ccr.dmscw2024.specials.shield;
 
+import dev.ccr.dmscw2024.interfaces.Shield;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 

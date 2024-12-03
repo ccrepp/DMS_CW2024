@@ -3,7 +3,7 @@ package dev.ccr.dmscw2024.planes.bosses;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 import dev.ccr.dmscw2024.planes.FighterPlane;
-import dev.ccr.dmscw2024.specials.shield.Shield;
+import dev.ccr.dmscw2024.interfaces.Shield;
 
 import java.util.ArrayList;
 import java.util.Collections;

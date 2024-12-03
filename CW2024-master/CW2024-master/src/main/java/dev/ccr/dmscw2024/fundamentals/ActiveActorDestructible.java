@@ -1,6 +1,7 @@
 package dev.ccr.dmscw2024.fundamentals;
 
-import dev.ccr.dmscw2024.levels.Collidable;
+import dev.ccr.dmscw2024.interfaces.Destructible;
+import dev.ccr.dmscw2024.interfaces.Collidable;
 
 public abstract class ActiveActorDestructible extends ActiveActor implements Destructible, Collidable {
 
