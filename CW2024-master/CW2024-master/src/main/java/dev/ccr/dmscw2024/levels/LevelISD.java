@@ -1,6 +1,6 @@
 package dev.ccr.dmscw2024.levels;
 
-import dev.ccr.dmscw2024.planes.PlaneFactory;
+import dev.ccr.dmscw2024.utility.PlaneFactory;
 import dev.ccr.dmscw2024.planes.bosses.ISD;
 import dev.ccr.dmscw2024.specials.shield.ISDShield;
 
@@ -31,7 +31,7 @@ public class LevelISD extends LevelParent {
     }
 
     @Override
-    protected void initializeFriendlyUnits() {
+    protected void initialiseFriendlyUnits() {
         System.out.println("LevelISD: Adding UserPlane to Root");
         getRoot().getChildren().add(getUser());
         System.out.println("LevelISD: UserPlane CREATED");
@@ -43,7 +43,7 @@ public class LevelISD extends LevelParent {
     }
 
     @Override
-    protected void checkIfGameOver() {
+    public void checkIfGameOver() {
         if (userIsDestroyed()) {
             loseGame();
         }
@@ -56,7 +56,7 @@ public class LevelISD extends LevelParent {
     @Override
     protected void spawnEnemyUnits() {
         if (getCurrentNumberOfEnemies() == 0) {
-            addEnemyUnit(isd);
+            addEnemyUnits(isd);
         }
     }
 

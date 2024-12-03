@@ -1,4 +1,4 @@
-package dev.ccr.dmscw2024.planes;
+package dev.ccr.dmscw2024.utility;
 
 import dev.ccr.dmscw2024.planes.user.UserPlane;
 import dev.ccr.dmscw2024.planes.user.XWing;

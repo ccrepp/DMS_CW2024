@@ -1,6 +1,7 @@
 module com.example.demo {
     requires javafx.controls;
     requires javafx.fxml;
+    requires java.desktop;
 
 
 //    opens dev.ccr.dmscw2024 to javafx.fxml;
@@ -14,4 +15,5 @@ module com.example.demo {
     opens dev.ccr.dmscw2024.specials.shield to javafx.fxml;
     opens dev.ccr.dmscw2024.projectile to javafx.fxml;
     opens dev.ccr.dmscw2024.planes to javafx.fxml;
+    opens dev.ccr.dmscw2024.utility to javafx.fxml;
 }

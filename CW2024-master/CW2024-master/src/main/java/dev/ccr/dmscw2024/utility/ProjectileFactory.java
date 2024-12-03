@@ -1,4 +1,6 @@
-package dev.ccr.dmscw2024.projectile;
+package dev.ccr.dmscw2024.utility;
+
+import dev.ccr.dmscw2024.projectile.Projectile;
 
 public class ProjectileFactory {
     public static Projectile createProjectile (String type, double initialXPos, double initialYPos){

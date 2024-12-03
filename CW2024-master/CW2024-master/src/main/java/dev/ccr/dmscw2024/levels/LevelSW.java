@@ -1,6 +1,6 @@
 package dev.ccr.dmscw2024.levels;
 
-import dev.ccr.dmscw2024.planes.PlaneFactory;
+import dev.ccr.dmscw2024.utility.PlaneFactory;
 import dev.ccr.dmscw2024.planes.enemies.TieFighter;
 
 public class LevelSW extends LevelParent {
@@ -22,7 +22,7 @@ public class LevelSW extends LevelParent {
     }
 
     @Override
-    protected void checkIfGameOver() {
+    public void checkIfGameOver() {
         if (userIsDestroyed()) {
             loseGame();
         }
@@ -31,7 +31,7 @@ public class LevelSW extends LevelParent {
     }
 
     @Override
-    protected void initializeFriendlyUnits() {
+    protected void initialiseFriendlyUnits() {
         System.out.println("Initializing XWing for LevelSW");
         System.out.println("getUser(): " + getUser());
         getRoot().getChildren().add(getUser());
@@ -44,7 +44,7 @@ public class LevelSW extends LevelParent {
             if (Math.random() < ENEMY_SPAWN_PROBABILITY) {
                 double newEnemyInitialYPosition = Math.random() * getEnemyMaximumYPosition();
                 TieFighter newEnemy = new TieFighter(getScreenWidth(),newEnemyInitialYPosition);
-                addEnemyUnit(newEnemy);;
+                addEnemyUnits(newEnemy);;
             }
         }
     }

@@ -2,7 +2,7 @@ package dev.ccr.dmscw2024.planes.enemies;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 import dev.ccr.dmscw2024.planes.FighterPlane;
-import dev.ccr.dmscw2024.projectile.ProjectileFactory;
+import dev.ccr.dmscw2024.utility.ProjectileFactory;
 
 public class TieFighter extends FighterPlane {
 

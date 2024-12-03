@@ -1,4 +1,4 @@
-package dev.ccr.dmscw2024.levels;
+package dev.ccr.dmscw2024.utility;
 
 import dev.ccr.dmscw2024.levels.LevelParent;
 

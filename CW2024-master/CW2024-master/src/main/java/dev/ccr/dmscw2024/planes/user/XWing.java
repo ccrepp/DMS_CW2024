@@ -1,7 +1,7 @@
 package dev.ccr.dmscw2024.planes.user;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
-import dev.ccr.dmscw2024.projectile.ProjectileFactory;
+import dev.ccr.dmscw2024.utility.ProjectileFactory;
 
 public class XWing extends UserPlane {
 

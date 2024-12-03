@@ -1,6 +1,6 @@
 package dev.ccr.dmscw2024.levels;
 
-import dev.ccr.dmscw2024.planes.PlaneFactory;
+import dev.ccr.dmscw2024.utility.PlaneFactory;
 import dev.ccr.dmscw2024.planes.bosses.Boss;
 import dev.ccr.dmscw2024.specials.shield.ShieldImage;
 
@@ -30,7 +30,7 @@ public class LevelTwo extends LevelParent {
 	}
 
 	@Override
-	protected void initializeFriendlyUnits() {
+	protected void initialiseFriendlyUnits() {
 		System.out.println("LevelTwo: Adding UserPlane to Root");
 		getRoot().getChildren().add(getUser());
 		System.out.println("LevelTwo: UserPlane CREATED");
@@ -46,7 +46,7 @@ public class LevelTwo extends LevelParent {
 	}
 
 	@Override
-	protected void checkIfGameOver() {
+    public void checkIfGameOver() {
 		if (userIsDestroyed()) {
 			loseGame();
 		}
@@ -58,7 +58,7 @@ public class LevelTwo extends LevelParent {
 	@Override
 	protected void spawnEnemyUnits() {
 		if (getCurrentNumberOfEnemies() == 0) {
-			addEnemyUnit(boss);
+			addEnemyUnits(boss);
 		}
 	}
 

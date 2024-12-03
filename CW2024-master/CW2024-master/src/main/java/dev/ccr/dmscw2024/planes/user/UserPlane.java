@@ -3,7 +3,7 @@ package dev.ccr.dmscw2024.planes.user;
 import dev.ccr.dmscw2024.fundamentals.*;
 import dev.ccr.dmscw2024.planes.FighterPlane;
 import dev.ccr.dmscw2024.planes.Movable;
-import dev.ccr.dmscw2024.projectile.ProjectileFactory;
+import dev.ccr.dmscw2024.utility.ProjectileFactory;
 
 public class UserPlane extends FighterPlane implements Movable {
 

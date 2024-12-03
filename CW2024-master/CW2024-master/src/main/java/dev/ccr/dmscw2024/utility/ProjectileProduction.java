@@ -1,4 +1,6 @@
-package dev.ccr.dmscw2024.projectile;
+package dev.ccr.dmscw2024.utility;
+
+import dev.ccr.dmscw2024.projectile.Projectile;
 
 public class ProjectileProduction extends Projectile {
     private final double velocity;
