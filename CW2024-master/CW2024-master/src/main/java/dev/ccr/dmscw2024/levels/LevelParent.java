@@ -1,24 +1,27 @@
 package dev.ccr.dmscw2024.levels;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 import dev.ccr.dmscw2024.planes.FighterPlane;
-import dev.ccr.dmscw2024.planes.PlaneFactory;
 import dev.ccr.dmscw2024.planes.user.UserPlane;
-import dev.ccr.dmscw2024.planes.user.XWing;
 import dev.ccr.dmscw2024.projectile.ProjectileManager;
+import dev.ccr.dmscw2024.utility.*;
 import javafx.animation.*;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.image.*;
-import javafx.scene.input.*;
 import javafx.util.Duration;
 
 import java.util.function.Supplier;
 
-public abstract class LevelParent extends Observable implements Level {
+public abstract class LevelParent implements Level {
+	// Property Change Support replaced Observers
+	private final PropertyChangeSupport support;
 
 	// Level Configuration Variables
 	private final double screenHeight;
@@ -30,37 +33,45 @@ public abstract class LevelParent extends Observable implements Level {
 	private final double enemyMaximumYPosition;
 	private int currentNumberOfEnemies;
 
-	private final Group root;
+	public final Group root;
 	private final Timeline timeline;
 	private final UserPlane user;
 	private final Scene scene;
-	private final ImageView background;
+	public final ImageView background;
 	
 	private final ProjectileManager projectileManager;
 	private final KeyHandler keyHandler;
 
+//	private final ActorManager actorManager;
+
+//	private final GameLoopManager gameLoopManager;
+
+
 	// Actor Variables
-	private final List<ActiveActorDestructible> friendlyUnits;
-	private final List<ActiveActorDestructible> enemyUnits;
+	public final List<ActiveActorDestructible> friendlyUnits;
+	public final List<ActiveActorDestructible> enemyUnits;
 
 	// Projectile Variables
-	private final List<ActiveActorDestructible> userProjectiles;
-	private final List<ActiveActorDestructible> enemyProjectiles;
+	public final List<ActiveActorDestructible> userProjectiles;
+	public final List<ActiveActorDestructible> enemyProjectiles;
 
 
-	private LevelView levelView;
+	protected final LevelView levelView;
+	//protected final LevelInitialiser levelInitialiser;
+
 
 	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, Supplier<UserPlane> userSupplier) {
-		System.out.println("LevelParent: Constructor START");
+		this.support = new PropertyChangeSupport(this);
+
 		this.root = new Group();
-		System.out.println("LevelParent: Root CREATED");
 		this.scene = new Scene(root, screenWidth, screenHeight);
-		System.out.println("LevelParent: Scene CREATED");
 		this.timeline = new Timeline();
-		System.out.println("LevelParent: Timeline CREATED");
 
 		this.user = userSupplier.get();
-		System.out.println("LevelParent: UserPlane CREATED - " + user.getClass().getSimpleName());
+
+//		this.levelInitialiser = levelInitialiser != null
+//				? levelInitialiser
+//				: createDefaultLevelInitialiser(backgroundImageName, screenHeight, screenWidth);
 
 		this.friendlyUnits = new ArrayList<>();
 		this.enemyUnits = new ArrayList<>();
@@ -68,7 +79,6 @@ public abstract class LevelParent extends Observable implements Level {
 		this.enemyProjectiles = new ArrayList<>();
 
 		this.background = new ImageView(new Image(getClass().getResource(backgroundImageName).toExternalForm()));
-		System.out.println("LevelParent: Background Image CREATED");
 		this.screenHeight = screenHeight;
 		this.screenWidth = screenWidth;
 		this.enemyMaximumYPosition = screenHeight - SCREEN_HEIGHT_ADJUSTMENT;
@@ -78,10 +88,29 @@ public abstract class LevelParent extends Observable implements Level {
 		this.projectileManager = new ProjectileManager(root);
 		this.keyHandler = new KeyHandler(this);
 
+//		this.actorManager = new ActorManager(root);
+
+//		this.gameLoopManager = new GameLoopManager(this);
+
+
+//		initializeScene();
 		initializeTimeline();
 		friendlyUnits.add(user);
 	}
 
+//	private LevelInitialiser createDefaultLevelInitialiser(String backgroundImageName, double screenHeight, double screenWidth) {
+//		return new LevelInitialiser(backgroundImageName, screenHeight, screenWidth, root, instantiateLevelView(), new KeyHandler(this)) {
+//			@Override
+//			protected void initialiseFriendlyUnits(Group root, UserPlane user) {
+//
+//			}
+//
+//			@Override
+//			protected void spawnEnemyUnits(Group root) {
+//
+//			}
+//		};
+//	}
 
 
 	// Level Initialisation Methods
@@ -89,14 +118,15 @@ public abstract class LevelParent extends Observable implements Level {
 	protected abstract LevelView instantiateLevelView();
 
 	public Scene initializeScene() {
+//		levelInitialiser.initialiseScene(levelInitialiser.getRoot(), user);
+//
+//		actorManager.addFriendlyUnit(user);
+//		root.getChildren().add(user);
+
 		setUpBackground();
 		setUpFriendlyUnits();
 		setUpHeartDisplay();
 
-		System.out.println("Scene Graph Contents POST-INITIALIZATION: ");
-		getRoot().getChildren().forEach(node -> {
-			System.out.println(node.getClass().getSimpleName() + " : " + node);
-		});
 		return scene;
 	}
 
@@ -119,7 +149,7 @@ public abstract class LevelParent extends Observable implements Level {
 	}
 
 	private void setUpFriendlyUnits(){
-		initializeFriendlyUnits();
+		initialiseFriendlyUnits();
 	}
 
 	private void setUpHeartDisplay(){
@@ -136,9 +166,13 @@ public abstract class LevelParent extends Observable implements Level {
 
 	// Actor Management
 
-	protected abstract void initializeFriendlyUnits();
+//	public ActorManager getActorManager() {
+//		return actorManager;
+//	}
 
-	protected void addEnemyUnit(ActiveActorDestructible enemy) {
+	protected abstract void initialiseFriendlyUnits();
+
+	protected void addEnemyUnits(ActiveActorDestructible enemy) {
 		enemyUnits.add(enemy);
 		root.getChildren().add(enemy);
 	}
@@ -214,6 +248,7 @@ public abstract class LevelParent extends Observable implements Level {
 	public void startGame() {
 		background.requestFocus();
 		timeline.play();
+//		gameLoopManager.startGame();
 	}
 
 	@Override
@@ -230,6 +265,8 @@ public abstract class LevelParent extends Observable implements Level {
 		enemyUnits.clear();
 		userProjectiles.clear();
 		enemyProjectiles.clear();
+
+//		gameLoopManager.endGame();
 	}
 
 
@@ -254,7 +291,7 @@ public abstract class LevelParent extends Observable implements Level {
 		currentNumberOfEnemies = enemyUnits.size();
 	}
 
-	protected abstract void checkIfGameOver();
+	public abstract void checkIfGameOver();
 
 	protected void winGame() {
 		timeline.stop();
@@ -278,17 +315,26 @@ public abstract class LevelParent extends Observable implements Level {
 
 	private void notifyLevelTransition(String levelName) {
 		System.out.println("Notifying Observers...");
-		setChanged();
-		notifyObservers(levelName);
+		support.firePropertyChange("levelTransition", null, levelName);
 	}
 
 
+
+	// PropertyChangeListener Management
+
+	public void addPropertyChangeListener(PropertyChangeListener listener) {
+		support.addPropertyChangeListener(listener);
+	}
+
+	public void removePropertyChangeListener(PropertyChangeListener listener) {
+		support.removePropertyChangeListener(listener);
+	}
 
 	// Game Loop
 
 	private void updateScene() {
 		projectileManager.updateProjectiles(userProjectiles, enemyProjectiles);
-		
+
 		manageSpawn();
 		manageActors();
 		manageCollisions();
@@ -297,35 +343,39 @@ public abstract class LevelParent extends Observable implements Level {
 		checkIfGameOver();
 	}
 
-	private void manageSpawn() {
+	public void manageSpawn() {
 		spawnEnemyUnits();
 		generateEnemyFire();
 	}
 
-	private void manageActors() {
+	public void manageActors() {
 		updateActors();
 		updateNumberOfEnemies();
 		handleEnemyPenetration();
 		removeAllDestroyedActors();
 	}
 
-	private void manageCollisions() {
+	public void manageCollisions() {
 		handleAllCollisions();
 	}
 
-	private void manageUpdates() {
+	public void manageUpdates() {
 		updateKillCount();
 		updateLevelView();
 	}
 
 	// Getters
 
-	protected UserPlane getUser() {
+	public UserPlane getUser() {
 		return user;
 	}
 
-	protected Group getRoot() {
+	public Group getRoot() {
 		return root;
+	}
+
+	public Scene getScene() {
+		return scene;
 	}
 
 	protected int getCurrentNumberOfEnemies() {
@@ -338,6 +388,10 @@ public abstract class LevelParent extends Observable implements Level {
 
 	public List<ActiveActorDestructible> getEnemyProjectiles() {
 		return enemyProjectiles;
+	}
+
+	protected double getScreenHeight() {
+		return screenHeight;
 	}
 
 	protected double getScreenWidth() {
