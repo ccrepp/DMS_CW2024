@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class LevelISD extends LevelParent {
 
     private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/backgroundsw.jpg";
-    private static final String NEXT_LEVEL = "dev.ccr.dmscw2024.levels.LevelTwo";
+    private static final String NEXT_LEVEL = "dev.ccr.dmscw2024.levels.LevelBoss";
     private static final int PLAYER_INITIAL_HEALTH = 5;
     private final ISD isd;
     private LevelView levelView;

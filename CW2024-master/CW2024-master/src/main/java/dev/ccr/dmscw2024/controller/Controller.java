@@ -13,7 +13,7 @@ import dev.ccr.dmscw2024.levels.LevelParent;
 
 public class Controller implements PropertyChangeListener {
 
-	private static final String LEVEL_ONE_CLASS_NAME = "dev.ccr.dmscw2024.levels.LevelOne";
+	private static final String LEVEL_ONE_CLASS_NAME = "dev.ccr.dmscw2024.levels.Level1";
 	private final Stage stage;
 
 	public Controller(Stage stage) {

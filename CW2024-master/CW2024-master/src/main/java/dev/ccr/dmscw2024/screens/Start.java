@@ -7,6 +7,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import javafx.scene.control.Button;
@@ -16,7 +18,7 @@ import javafx.stage.Stage;
 public class Start {
     private final Stage stage;
     private final Controller controller;
-    private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/backgroundstart.jpg";
+    private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/bgstart.jpg";
 
 
     public Start(Stage stage, Controller controller) {
@@ -25,7 +27,6 @@ public class Start {
     }
 
     public void display() {
-        System.out.println("Start: Image URL: " + getClass().getResource(BACKGROUND_IMAGE_NAME));
 
         // Background Image
         ImageView backgroundImage= new ImageView(new Image(String.valueOf(getClass().getResource(BACKGROUND_IMAGE_NAME))));
@@ -36,12 +37,21 @@ public class Start {
         Text header = new Text("~Sky Battle~");
         header.setStyle("-fx-font-size: 40px; -fx-font-weight: bold");
 
-        // Start Button
+        // VBox Background
+        Rectangle VBoxBackground = new Rectangle(300, 200);
+        VBoxBackground.setFill(Color.rgb(5, 227, 247, 0.5));
+        VBoxBackground.setArcWidth(20);
+        VBoxBackground.setArcHeight(20);
+
+        // VBox with Header AND Button
         VBox layout = getVBox(header);
 
-        StackPane root = new StackPane(backgroundImage, layout);
+        // VBox Layout
+        StackPane VBox = new StackPane(VBoxBackground, layout);
+        VBox.setStyle("-fx-alignment: center");
 
-//        layout.getChildren().addAll(header, startButton);
+        // Overall Layout
+        StackPane root = new StackPane(backgroundImage, VBox);
 
         Scene startScene = new Scene(root, stage.getWidth(), stage.getHeight());
         stage.setScene(startScene);

@@ -6,14 +6,14 @@ import dev.ccr.dmscw2024.specials.shield.ShieldImage;
 
 import javafx.stage.Stage;
 
-public class LevelTwo extends LevelParent {
+public class LevelBoss extends LevelParent {
 
 	private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/background2.jpg";
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 	private final Boss boss;
 	private LevelView levelView;
 
-	public LevelTwo(double screenHeight, double screenWidth, Stage stage) {
+	public LevelBoss(double screenHeight, double screenWidth, Stage stage) {
 		super(
 				BACKGROUND_IMAGE_NAME,
 				"/dev/ccr/dmscw2024/audio/BGM.mp3",
