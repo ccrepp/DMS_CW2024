@@ -4,6 +4,8 @@ import dev.ccr.dmscw2024.utility.PlaneFactory;
 import dev.ccr.dmscw2024.planes.bosses.ISD;
 import dev.ccr.dmscw2024.specials.shield.ISDShield;
 
+import javafx.stage.Stage;
+
 public class LevelISD extends LevelParent {
 
     private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/backgroundsw.jpg";
@@ -12,7 +14,7 @@ public class LevelISD extends LevelParent {
     private final ISD isd;
     private LevelView levelView;
 
-    public LevelISD(double screenHeight, double screenWidth) {
+    public LevelISD(double screenHeight, double screenWidth, Stage stage) {
         super(
                 BACKGROUND_IMAGE_NAME,
                 "/dev/ccr/dmscw2024/audio/SWBossBGM.mp3",
@@ -25,7 +27,8 @@ public class LevelISD extends LevelParent {
                         50.0,
                         screenHeight / 2,
                         5
-                )
+                ),
+                stage
         );
         System.out.println("LevelISD: Base Constructor COMPLETE");
         isd = new ISD();

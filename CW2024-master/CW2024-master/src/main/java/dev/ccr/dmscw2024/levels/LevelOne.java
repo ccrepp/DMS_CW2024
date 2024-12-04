@@ -4,6 +4,8 @@ import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 import dev.ccr.dmscw2024.utility.PlaneFactory;
 import dev.ccr.dmscw2024.planes.enemies.EnemyPlane;
 
+import javafx.stage.Stage;
+
 public class LevelOne extends LevelParent {
 	
 	private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/background1.jpg";
@@ -13,13 +15,14 @@ public class LevelOne extends LevelParent {
 	private static final double ENEMY_SPAWN_PROBABILITY = .20;
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 
-	public LevelOne(double screenHeight, double screenWidth) {
+	public LevelOne(double screenHeight, double screenWidth, Stage stage) {
 		super(
 				BACKGROUND_IMAGE_NAME,
 				"/dev/ccr/dmscw2024/audio/BGM.mp3",
 				screenHeight,
 				screenWidth,
-				() -> PlaneFactory.createDefaultUserPlane(screenHeight)
+				() -> PlaneFactory.createDefaultUserPlane(screenHeight),
+				stage
 		);
 	}
 

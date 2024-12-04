@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.lang.reflect.Constructor;
 
+import dev.ccr.dmscw2024.screens.Start;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -21,12 +22,26 @@ public class Controller implements PropertyChangeListener {
 
 	public void launchGame()   {
 			try {
-				stage.show();
-				goToLevel(LEVEL_ONE_CLASS_NAME);
+				showStartScreen();
 			}
 			catch(Exception e){
 				showErrorAlert("FAILED TO LAUNCH: " + e.getMessage());
 			}
+	}
+
+	public void showStartScreen() {
+		Start startScreen = new Start(stage, this);
+		startScreen.display();
+	}
+
+	public void levelOne() {
+		try {
+			stage.show();
+			goToLevel(LEVEL_ONE_CLASS_NAME);
+		}
+		catch(Exception e){
+			showErrorAlert("FAILED TO LAUNCH: " + e.getMessage());
+		}
 	}
 
 	private void goToLevel(String className)  {
@@ -35,10 +50,10 @@ public class Controller implements PropertyChangeListener {
 			Class<?> myClass = Class.forName(className);
 			System.out.println("Controller: Level Loaded " + myClass.getName());
 
-			Constructor<?> constructor = myClass.getConstructor(double.class, double.class);
+			Constructor<?> constructor = myClass.getConstructor(double.class, double.class, Stage.class);
 			System.out.println("Controller: Level Constructor Loaded " + constructor.getName());
 
-			LevelParent myLevel = (LevelParent) constructor.newInstance(stage.getHeight(), stage.getWidth());
+			LevelParent myLevel = (LevelParent) constructor.newInstance(stage.getHeight(), stage.getWidth(), stage);
 			System.out.println("Controller: Level Constructing " + myLevel.getClass().getName());
 
 			myLevel.addPropertyChangeListener(this);

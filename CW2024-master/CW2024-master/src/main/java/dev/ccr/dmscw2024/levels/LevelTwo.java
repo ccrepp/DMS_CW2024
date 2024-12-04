@@ -4,6 +4,8 @@ import dev.ccr.dmscw2024.utility.PlaneFactory;
 import dev.ccr.dmscw2024.planes.bosses.Boss;
 import dev.ccr.dmscw2024.specials.shield.ShieldImage;
 
+import javafx.stage.Stage;
+
 public class LevelTwo extends LevelParent {
 
 	private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/background2.jpg";
@@ -11,11 +13,10 @@ public class LevelTwo extends LevelParent {
 	private final Boss boss;
 	private LevelView levelView;
 
-	public LevelTwo(double screenHeight, double screenWidth) {
+	public LevelTwo(double screenHeight, double screenWidth, Stage stage) {
 		super(
 				BACKGROUND_IMAGE_NAME,
 				"/dev/ccr/dmscw2024/audio/BGM.mp3",
-
 				screenHeight,
 				screenWidth,
 				() -> PlaneFactory.createCustomUserPlane(
@@ -24,7 +25,8 @@ public class LevelTwo extends LevelParent {
 						50.0,
 						screenHeight / 2,
 						5
-				)
+				),
+				stage
 		);
 		System.out.println("LevelTwo: Base Constructor COMPLETE");
 		boss = new Boss();

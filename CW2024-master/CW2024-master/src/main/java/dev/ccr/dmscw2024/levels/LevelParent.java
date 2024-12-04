@@ -11,10 +11,10 @@ import javafx.scene.image.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.util.function.Supplier;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 import dev.ccr.dmscw2024.interfaces.GameStartEnd;
@@ -44,15 +44,15 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	private final Timeline timeline;
 	private final UserPlane user;
 	private final Scene scene;
+	private final Stage stage;
 	public final ImageView background;
-	private MediaPlayer backgroundMusic;
+	private final MediaPlayer backgroundMusic;
 	
 	private final ProjectileManager projectileManager;
 	private final KeyHandler keyHandler;
 
 	private final ActorManager actorManager;
 
-//	private final GameLoopManager gameLoopManager;
 
 
 	// Actor Variables
@@ -65,10 +65,9 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 
 
 	protected final LevelView levelView;
-	//protected final LevelInitialiser levelInitialiser;
 
-
-	public LevelParent(String backgroundImageName, String backgroundMusicFile, double screenHeight, double screenWidth, Supplier<UserPlane> userSupplier) {
+	public LevelParent(String backgroundImageName, String backgroundMusicFile, double screenHeight, double screenWidth,
+					   Supplier<UserPlane> userSupplier, Stage stage) {
 		this.support = new PropertyChangeSupport(this);
 
 		this.root = new Group();
@@ -79,10 +78,6 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 		if (user == null) {
 			throw new IllegalStateException("User is null!");
 		}
-
-//		this.levelInitialiser = levelInitialiser != null
-//				? levelInitialiser
-//				: createDefaultLevelInitialiser(backgroundImageName, screenHeight, screenWidth);
 
 		this.friendlyUnits = new ArrayList<>();
 		this.enemyUnits = new ArrayList<>();
@@ -101,6 +96,7 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 			throw new IllegalArgumentException("Background music not found: " + backgroundMusicFile);
 		}
 
+		this.stage = stage;
 
 		this.screenHeight = screenHeight;
 		this.screenWidth = screenWidth;
@@ -185,7 +181,6 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	public void fireProjectile() {
 		ActiveActorDestructible projectile = user.fireProjectile();
 		projectileManager.addProjectile(projectile, userProjectiles);
-//		AudioManager.playAudioEffect("/dev/ccr/dmscw2024/audio/XWingFire.mp3");
 	}
 
 	private void generateEnemyFire() {
@@ -194,7 +189,6 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 				ActiveActorDestructible projectile = fighterPlane.fireProjectile();
 				if (projectile != null) {
 					projectileManager.addProjectile(projectile, enemyProjectiles);
-//					AudioManager.playAudioEffect("/dev/ccr/dmscw2024/audio/TieFighterFire.mp3");
 				}
 			}
 		}
@@ -229,6 +223,12 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 		background.requestFocus();
 		timeline.play();
 		backgroundMusic.play();
+	}
+
+	@Override
+	public void stopGame() {
+		timeline.stop();
+		backgroundMusic.stop();
 	}
 
 	@Override
@@ -354,6 +354,10 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 
 	public Scene getScene() {
 		return scene;
+	}
+
+	public Stage getStage() {
+		return stage;
 	}
 
 	protected int getCurrentNumberOfEnemies() {

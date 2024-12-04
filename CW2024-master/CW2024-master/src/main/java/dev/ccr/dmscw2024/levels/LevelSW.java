@@ -3,6 +3,8 @@ package dev.ccr.dmscw2024.levels;
 import dev.ccr.dmscw2024.utility.PlaneFactory;
 import dev.ccr.dmscw2024.planes.enemies.TieFighter;
 
+import javafx.stage.Stage;
+
 public class LevelSW extends LevelParent {
 
     private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/backgroundsw.jpg";
@@ -12,14 +14,15 @@ public class LevelSW extends LevelParent {
     private static final double ENEMY_SPAWN_PROBABILITY = .20;
     private static final int PLAYER_INITIAL_HEALTH = 5;
 
-    public LevelSW(double screenHeight, double screenWidth) {
+    public LevelSW(double screenHeight, double screenWidth, Stage stage) {
         super(
                 BACKGROUND_IMAGE_NAME,
                 "/dev/ccr/dmscw2024/audio/SWBGM.mp3",
 
                 screenHeight,
                 screenWidth,
-                () -> PlaneFactory.createDefaultXWing(screenHeight)
+                () -> PlaneFactory.createDefaultXWing(screenHeight),
+                stage
         );
     }
 
