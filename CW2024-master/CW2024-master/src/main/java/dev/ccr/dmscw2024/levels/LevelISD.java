@@ -15,6 +15,8 @@ public class LevelISD extends LevelParent {
     public LevelISD(double screenHeight, double screenWidth) {
         super(
                 BACKGROUND_IMAGE_NAME,
+                "/dev/ccr/dmscw2024/audio/SWBossBGM.mp3",
+
                 screenHeight,
                 screenWidth,
                 () -> PlaneFactory.createCustomXWing(

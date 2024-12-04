@@ -16,6 +16,7 @@ public class LevelOne extends LevelParent {
 	public LevelOne(double screenHeight, double screenWidth) {
 		super(
 				BACKGROUND_IMAGE_NAME,
+				"/dev/ccr/dmscw2024/audio/BGM.mp3",
 				screenHeight,
 				screenWidth,
 				() -> PlaneFactory.createDefaultUserPlane(screenHeight)

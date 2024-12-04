@@ -7,6 +7,8 @@ public abstract class FighterPlane extends ActiveActorDestructible {
 
 	private int health;
 
+
+
 	/**
 	 * Fighter Plane covers all planes displayed within the game
 	 * @param imageName Image Name
@@ -50,5 +52,4 @@ public abstract class FighterPlane extends ActiveActorDestructible {
 	public int getHealth() {
 		return health;
 	}
-		
 }

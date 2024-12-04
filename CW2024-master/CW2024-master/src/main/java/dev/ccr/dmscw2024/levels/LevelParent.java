@@ -3,6 +3,16 @@ package dev.ccr.dmscw2024.levels;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import javafx.animation.*;
+
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.image.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import javafx.util.Duration;
+import java.util.function.Supplier;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -13,13 +23,8 @@ import dev.ccr.dmscw2024.planes.FighterPlane;
 import dev.ccr.dmscw2024.planes.user.UserPlane;
 import dev.ccr.dmscw2024.projectile.ProjectileManager;
 import dev.ccr.dmscw2024.utility.*;
-import javafx.animation.*;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.image.*;
-import javafx.util.Duration;
 
-import java.util.function.Supplier;
+
 
 public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	// Property Change Support replaced Observers
@@ -40,6 +45,7 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	private final UserPlane user;
 	private final Scene scene;
 	public final ImageView background;
+	private MediaPlayer backgroundMusic;
 	
 	private final ProjectileManager projectileManager;
 	private final KeyHandler keyHandler;
@@ -62,7 +68,7 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	//protected final LevelInitialiser levelInitialiser;
 
 
-	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, Supplier<UserPlane> userSupplier) {
+	public LevelParent(String backgroundImageName, String backgroundMusicFile, double screenHeight, double screenWidth, Supplier<UserPlane> userSupplier) {
 		this.support = new PropertyChangeSupport(this);
 
 		this.root = new Group();
@@ -88,6 +94,14 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 			throw new IllegalArgumentException("Background image not found: " + backgroundImageName);
 		}
 
+		this.backgroundMusic = new MediaPlayer(new Media(getClass().getResource(backgroundMusicFile).toExternalForm()));
+		this.backgroundMusic.setVolume(0.5);
+		this.backgroundMusic.setCycleCount(MediaPlayer.INDEFINITE);
+		if (getClass().getResource(backgroundMusicFile) == null) {
+			throw new IllegalArgumentException("Background music not found: " + backgroundMusicFile);
+		}
+
+
 		this.screenHeight = screenHeight;
 		this.screenWidth = screenWidth;
 		this.enemyMaximumYPosition = screenHeight - SCREEN_HEIGHT_ADJUSTMENT;
@@ -99,27 +113,9 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 
 		this.actorManager = new ActorManager(root, friendlyUnits, enemyUnits);
 
-//		this.gameLoopManager = new GameLoopManager(this);
-
-
-//		initializeScene();
 		initializeTimeline();
 		friendlyUnits.add(user);
 	}
-
-//	private LevelInitialiser createDefaultLevelInitialiser(String backgroundImageName, double screenHeight, double screenWidth) {
-//		return new LevelInitialiser(backgroundImageName, screenHeight, screenWidth, root, instantiateLevelView(), new KeyHandler(this)) {
-//			@Override
-//			protected void initialiseFriendlyUnits(Group root, UserPlane user) {
-//
-//			}
-//
-//			@Override
-//			protected void spawnEnemyUnits(Group root) {
-//
-//			}
-//		};
-//	}
 
 
 	// Level Initialisation Methods
@@ -127,11 +123,6 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	public abstract LevelView instantiateLevelView();
 
 	public Scene initializeScene() {
-//		levelInitialiser.initialiseScene(levelInitialiser.getRoot(), user);
-//
-//		actorManager.addFriendlyUnit(user);
-//		root.getChildren().add(user);
-
 		setUpBackground();
 		setUpFriendlyUnits();
 		setUpHeartDisplay();
@@ -194,13 +185,17 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	public void fireProjectile() {
 		ActiveActorDestructible projectile = user.fireProjectile();
 		projectileManager.addProjectile(projectile, userProjectiles);
+//		AudioManager.playAudioEffect("/dev/ccr/dmscw2024/audio/XWingFire.mp3");
 	}
 
 	private void generateEnemyFire() {
-		for (ActiveActorDestructible enemy:enemyUnits) {
+		for (ActiveActorDestructible enemy : enemyUnits) {
 			if (enemy instanceof FighterPlane fighterPlane) {
 				ActiveActorDestructible projectile = fighterPlane.fireProjectile();
-				projectileManager.addProjectile(projectile, enemyProjectiles);
+				if (projectile != null) {
+					projectileManager.addProjectile(projectile, enemyProjectiles);
+//					AudioManager.playAudioEffect("/dev/ccr/dmscw2024/audio/TieFighterFire.mp3");
+				}
 			}
 		}
 
@@ -233,7 +228,7 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	public void startGame() {
 		background.requestFocus();
 		timeline.play();
-//		gameLoopManager.startGame();
+		backgroundMusic.play();
 	}
 
 	@Override
@@ -251,7 +246,7 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 		userProjectiles.clear();
 		enemyProjectiles.clear();
 
-//		gameLoopManager.endGame();
+		backgroundMusic.stop();
 	}
 
 

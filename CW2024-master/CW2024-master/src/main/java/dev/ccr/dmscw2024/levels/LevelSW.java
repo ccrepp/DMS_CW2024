@@ -15,6 +15,8 @@ public class LevelSW extends LevelParent {
     public LevelSW(double screenHeight, double screenWidth) {
         super(
                 BACKGROUND_IMAGE_NAME,
+                "/dev/ccr/dmscw2024/audio/SWBGM.mp3",
+
                 screenHeight,
                 screenWidth,
                 () -> PlaneFactory.createDefaultXWing(screenHeight)
