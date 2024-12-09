@@ -4,7 +4,10 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.lang.reflect.Constructor;
 
+import dev.ccr.dmscw2024.levels.TPM.TPM3;
 import dev.ccr.dmscw2024.screens.Start;
+import dev.ccr.dmscw2024.screens.StoryMode;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -14,6 +17,7 @@ import dev.ccr.dmscw2024.levels.LevelParent;
 public class Controller implements PropertyChangeListener {
 
 	private static final String LEVEL_ONE_CLASS_NAME = "dev.ccr.dmscw2024.levels.Level1";
+	private static final String TPM_ONE_CLASS_NAME = "dev.ccr.dmscw2024.levels.TPM.TPM1";
 	private final Stage stage;
 
 	public Controller(Stage stage) {
@@ -34,6 +38,11 @@ public class Controller implements PropertyChangeListener {
 		startScreen.display();
 	}
 
+	public void showStoryModeScreen() {
+		StoryMode storyModeScreen = new StoryMode(stage, this);
+		storyModeScreen.display();
+	}
+
 	public void levelOne() {
 		try {
 			stage.show();
@@ -44,29 +53,76 @@ public class Controller implements PropertyChangeListener {
 		}
 	}
 
-	private void goToLevel(String className)  {
+	public void TPM() {
+		try {
+			stage.show();
+			goToLevel(TPM_ONE_CLASS_NAME);
+		}
+		catch(Exception e){
+			showErrorAlert("FAILED TO LAUNCH: " + e.getMessage());
+		}
+	}
+
+	public void TBD() {
+		try {
+			stage.show();
+			goToLevel(TPM_ONE_CLASS_NAME);
+		}
+		catch(Exception e){
+			showErrorAlert("FAILED TO LAUNCH: " + e.getMessage());
+		}
+	}
+
+	public void TBD2() {
+		try {
+			stage.show();
+			goToLevel(TPM_ONE_CLASS_NAME);
+		}
+		catch(Exception e){
+			showErrorAlert("FAILED TO LAUNCH: " + e.getMessage());
+		}
+	}
+
+	private void goToLevel(String levelName)  {
 		try{
-			System.out.println("Controller: Loading level: " + className);
-			Class<?> myClass = Class.forName(className);
-			System.out.println("Controller: Level Loaded " + myClass.getName());
+			System.out.println("Controller: Loading level: " + levelName);
+			Class<?> levelClass = Class.forName(levelName);
+			System.out.println("Controller: Level Loaded " + levelClass.getName());
 
-			Constructor<?> constructor = myClass.getConstructor(double.class, double.class, Stage.class);
-			System.out.println("Controller: Level Constructor Loaded " + constructor.getName());
+			LevelParent level = null;
+			
+			Constructor<?>[] constructors = levelClass.getConstructors();
+			Constructor<?> levelClassConstructor = null;
 
-			LevelParent myLevel = (LevelParent) constructor.newInstance(stage.getHeight(), stage.getWidth(), stage);
-			System.out.println("Controller: Level Constructing " + myLevel.getClass().getName());
+			for (Constructor<?> constructor : constructors) {
+				if (constructor.getParameterCount() == 4) {
+					levelClassConstructor = constructor;
+					level = (LevelParent) levelClassConstructor.newInstance(stage.getHeight(), stage.getWidth(), stage, this);
+					System.out.println("Controller: Level Constructor Loaded " + levelClassConstructor.getName());
+					break;
+				}
+				else if (constructor.getParameterCount() == 3) {
+					levelClassConstructor = constructor;
+					level = (LevelParent) levelClassConstructor.newInstance(stage.getHeight(), stage.getWidth(), stage);
+					System.out.println("Controller: Level Constructor Loaded " + levelClassConstructor.getName());
+					break;
+				}
+			}
+			
+			if (levelClassConstructor == null) {
+				throw new Exception("No suitable constructor found for level: " + levelName);
+			}
 
-			myLevel.addPropertyChangeListener(this);
+			level.addPropertyChangeListener(this);
+			Scene levelScene = level.initializeScene();
+			stage.setScene(levelScene);
+			level.startGame();
 
-			Scene scene = myLevel.initializeScene();
-
-			stage.setScene(scene);
-			myLevel.startGame();
 
 			System.out.println("Game Started");
 
 		} catch(Exception e){
-			showErrorAlert("FAILED TO LOAD LEVEL: " + className + "\t" + e.getMessage());
+			showErrorAlert("FAILED TO LOAD LEVEL: " + levelName + "\t" + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -85,7 +141,7 @@ public class Controller implements PropertyChangeListener {
 	}
 
 	private void showErrorAlert(String message){
-		javafx.application.Platform.runLater(() -> {
+		Platform.runLater(() -> {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ERROR");
 			alert.setHeaderText("AN ERROR OCCURRED");

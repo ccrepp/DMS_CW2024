@@ -18,4 +18,5 @@ module com.example.demo {
     opens dev.ccr.dmscw2024.planes to javafx.fxml;
     opens dev.ccr.dmscw2024.utility to javafx.fxml;
     opens dev.ccr.dmscw2024.interfaces to javafx.fxml;
+    opens dev.ccr.dmscw2024.levels.TPM to javafx.fxml;
 }

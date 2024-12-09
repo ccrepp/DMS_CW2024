@@ -38,7 +38,7 @@ public class Start {
         header.setStyle("-fx-font-size: 40px; -fx-font-weight: bold");
 
         // VBox Background
-        Rectangle VBoxBackground = new Rectangle(300, 200);
+        Rectangle VBoxBackground = new Rectangle(300, 400);
         VBoxBackground.setFill(Color.rgb(5, 227, 247, 0.5));
         VBoxBackground.setArcWidth(20);
         VBoxBackground.setArcHeight(20);
@@ -59,25 +59,35 @@ public class Start {
     }
 
     private VBox getVBox(Text header) {
+        // Start Button
         Button startButton = new Button("Start Game");
-        startButton.setStyle(
-                "-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 10 20 10 20; " +
-                        "-fx-background-color: #007bff; -fx-text-fill: white; -fx-background-radius: 10;"
-        );
-        startButton.setOnMouseEntered(e -> startButton.setStyle(
-                "-fx-font-size: 30px; -fx-font-weight: bold; -fx-padding: 10 20 10 20; " +
-                        "-fx-background-color: #0056b3; -fx-text-fill: white; -fx-background-radius: 20;" +
-                "-fx-cursor: pointer;"
-        ));
-        startButton.setOnMouseExited(e -> startButton.setStyle(
-                "-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 10 20 10 20; " +
-                        "-fx-background-color: #007bff; -fx-text-fill: white; -fx-background-radius: 10;"
-        ));
+        styleButton(startButton, "#007bff", "#0056b3");
         startButton.setOnAction(e -> controller.levelOne());
 
+        // Story Mode Button
+        Button storyModeButton = new Button("Story Mode");
+        styleButton(storyModeButton, "#fff340", "#999120");
+        storyModeButton.setOnAction(e -> controller.showStoryModeScreen());
+
         // Layout
-        VBox layout = new VBox(20, header, startButton);
+        VBox layout = new VBox(20, header, startButton, storyModeButton);
         layout.setStyle("-fx-alignment: center; -fx-padding: 50");
         return layout;
+    }
+
+    private void styleButton(Button button, String defaultColour, String hoverColour) {
+        button.setStyle(
+                "-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 10 20 10 20; " +
+                        "-fx-background-color: " + defaultColour + ";-fx-text-fill: black; -fx-background-radius: 20;"
+        );
+        button.setOnMouseEntered(e -> button.setStyle(
+                "-fx-font-size: 30px; -fx-font-weight: bold; -fx-padding: 10 20 10 20; " +
+                        "-fx-background-color: " + hoverColour + ";-fx-text-fill: black; -fx-background-radius: 20;" +
+                        "-fx-cursor: pointer;"
+        ));
+        button.setOnMouseExited(e -> button.setStyle(
+                "-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 10 20 10 20; " +
+                        "-fx-background-color: " + defaultColour + ";-fx-text-fill: black; -fx-background-radius: 10;"
+        ));
     }
 }

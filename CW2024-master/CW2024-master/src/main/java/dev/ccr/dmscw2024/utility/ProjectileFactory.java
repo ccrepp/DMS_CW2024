@@ -29,6 +29,22 @@ public class ProjectileFactory {
                     new ProjectileProduction("/dev/ccr/dmscw2024/images/redlaser.png",
                             50, initialXPos, initialYPos, -5,
                             "/dev/ccr/dmscw2024/audio/ISDFire.mp3", 0.4);
+            case "N1SF" ->
+                    new ProjectileProduction("/dev/ccr/dmscw2024/images/greenlaser.png",
+                            15, initialXPos, initialYPos, 15,
+                            "/dev/ccr/dmscw2024/audio/XWingFire.mp3", 0.25);
+            case "AAT" ->
+                    new ProjectileProduction("/dev/ccr/dmscw2024/images/redlaser.png",
+                            30, initialXPos, initialYPos, -10,
+                            "/dev/ccr/dmscw2024/audio/AATFire.mp3", 0.2);
+            case "VultureDroid" ->
+                    new ProjectileProduction("/dev/ccr/dmscw2024/images/redlaser.png",
+                            15, initialXPos, initialYPos, -10,
+                            "/dev/ccr/dmscw2024/audio/TieFighterFire.mp3", 0.2);
+            case "TFS" ->
+                    new ProjectileProduction("/dev/ccr/dmscw2024/images/redlaser.png",
+                            40, initialXPos, initialYPos, -5,
+                            "/dev/ccr/dmscw2024/audio/ISDFire.mp3", 0.4);
             default -> throw new IllegalArgumentException("Unsupported Projectile type: " + type);
         };
     }

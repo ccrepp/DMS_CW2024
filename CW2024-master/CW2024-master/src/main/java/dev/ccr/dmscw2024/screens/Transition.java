@@ -62,7 +62,11 @@ public class Transition {
     }
 
     private void proceed() {
+        System.out.println("Proceed called!");
         if (onContinue != null) {
+            stage.getScene().setOnKeyPressed(null);
+            stage.getScene().setOnMouseClicked(null);
+
             onContinue.run();
         }
     }

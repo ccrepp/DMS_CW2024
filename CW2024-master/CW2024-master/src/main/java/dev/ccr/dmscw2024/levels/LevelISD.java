@@ -1,5 +1,6 @@
 package dev.ccr.dmscw2024.levels;
 
+import dev.ccr.dmscw2024.screens.Transition;
 import dev.ccr.dmscw2024.utility.PlaneFactory;
 import dev.ccr.dmscw2024.planes.bosses.ISD;
 import dev.ccr.dmscw2024.specials.shield.ISDShield;
@@ -54,8 +55,7 @@ public class LevelISD extends LevelParent {
             loseGame();
         }
         else if (isd.isDestroyed()) {
-            goToNextLevel(NEXT_LEVEL);
-            //winGame();
+            ISDScreenTransition();
         }
     }
 
@@ -70,5 +70,19 @@ public class LevelISD extends LevelParent {
     public LevelView instantiateLevelView() {
         levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
         return levelView;
+    }
+
+    private void ISDScreenTransition() {
+        System.out.println("TPMWinScreenTransition");
+        Transition transition = new Transition(
+                getStage(),
+                "/dev/ccr/dmscw2024/images/hyperspace.jpg",
+                "WOAH! \n Where to now, I'm ready!",
+                () -> {
+                    System.out.println("back to normal...");
+                    goToNextLevel(NEXT_LEVEL);
+                }
+        );
+        transition.display();
     }
 }
