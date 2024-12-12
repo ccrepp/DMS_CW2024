@@ -110,6 +110,9 @@ _TieFighterProjectile_
 - _Movable_
 - _Shield_
 
+### 6.3 - Addition-More Branch New Classes
+**6.3.1** - 
+
 ## 7. Modified Java Classes
 ### 7.1 - Plane Classes
 **7.1.1** - _Boss_
@@ -154,3 +157,8 @@ _TieFighterProjectile_
 - added and deleted many classes
 - repackaged all java files
 - further details all within modified and new classes
+
+### 9.4 - Merged Fourth Branch (addition-more) on 13/12/2024
+- addition of sounds to game
+- addition of screens
+- further addition of Star Wars levels and resources
