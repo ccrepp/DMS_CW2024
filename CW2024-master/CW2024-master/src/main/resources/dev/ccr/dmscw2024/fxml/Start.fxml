@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.Button?>
+
+
+<StackPane xmlns:fx="http://javafx.com/javafx"
+           fx:controller="dev.ccr.dmscw2024.screens.start.StartController">
+
+    <ImageView fx:id="backgroundImage"
+                      fitWidth="800" fitHeight="600"/>
+
+    <StackPane>
+        <Rectangle width="300" height="400"
+                   arcWidth="20" arcHeight="20"
+                   fill="rgba(5, 227, 247, 0.5" />
+        <VBox alignment="CENTER" spacing="20" style="-fx-padding: 50;">
+            <Text text="~Sky Battle~" style="-fx-font-size: 40px; -fx-font-weight: bold;"/>
+
+            <Button text="Start Game" fx:id="startButton"/>
+            <Button text="Story Mode" fx:id="storyModeButton"/>
+        </VBox>
+    </StackPane>
+</StackPane>

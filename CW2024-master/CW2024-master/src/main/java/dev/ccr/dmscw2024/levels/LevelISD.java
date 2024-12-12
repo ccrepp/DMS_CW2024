@@ -3,13 +3,13 @@ package dev.ccr.dmscw2024.levels;
 import dev.ccr.dmscw2024.screens.Transition;
 import dev.ccr.dmscw2024.utility.PlaneFactory;
 import dev.ccr.dmscw2024.planes.bosses.ISD;
-import dev.ccr.dmscw2024.specials.shield.ISDShield;
+import dev.ccr.dmscw2024.specials.shield.SWShield;
 
 import javafx.stage.Stage;
 
 public class LevelISD extends LevelParent {
 
-    private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/backgroundsw.jpg";
+    private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/SW/backgroundsw.jpg";
     private static final String NEXT_LEVEL = "dev.ccr.dmscw2024.levels.LevelBoss";
     private static final int PLAYER_INITIAL_HEALTH = 5;
     private final ISD isd;
@@ -18,12 +18,12 @@ public class LevelISD extends LevelParent {
     public LevelISD(double screenHeight, double screenWidth, Stage stage) {
         super(
                 BACKGROUND_IMAGE_NAME,
-                "/dev/ccr/dmscw2024/audio/SWBossBGM.mp3",
+                "/dev/ccr/dmscw2024/audio/bgm/SWBossBGM.mp3",
 
                 screenHeight,
                 screenWidth,
                 () -> PlaneFactory.createCustomXWing(
-                        "/dev/ccr/dmscw2024/images/xwing.png",
+                        "/dev/ccr/dmscw2024/images/SW/xwing.png",
                         50,
                         50.0,
                         screenHeight / 2,
@@ -44,7 +44,7 @@ public class LevelISD extends LevelParent {
         System.out.println("LevelISD: UserPlane CREATED");
 
         System.out.println("LevelISD: Adding ISD Shield to Root");
-        getRoot().getChildren().add((ISDShield) isd.getShield());
+        getRoot().getChildren().add((SWShield) isd.getShield());
         System.out.println("LevelISD: ISD Shield CREATED");
 
     }
@@ -76,7 +76,7 @@ public class LevelISD extends LevelParent {
         System.out.println("TPMWinScreenTransition");
         Transition transition = new Transition(
                 getStage(),
-                "/dev/ccr/dmscw2024/images/hyperspace.jpg",
+                "/dev/ccr/dmscw2024/images/SW/hyperspace.jpg",
                 "WOAH! \n Where to now, I'm ready!",
                 () -> {
                     System.out.println("back to normal...");

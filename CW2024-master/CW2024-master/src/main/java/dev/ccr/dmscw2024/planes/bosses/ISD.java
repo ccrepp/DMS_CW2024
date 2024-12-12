@@ -2,11 +2,11 @@ package dev.ccr.dmscw2024.planes.bosses;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 import dev.ccr.dmscw2024.utility.ProjectileFactory;
-import dev.ccr.dmscw2024.specials.shield.ISDShield;
+import dev.ccr.dmscw2024.specials.shield.SWShield;
 
 public class ISD extends BaseBoss {
 
-    private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/ISD.png";
+    private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/SW/ISD.png";
     private static final double INITIAL_X_POSITION = 900.0;
     private static final double INITIAL_Y_POSITION = 300;
     private static final double PROJECTILE_Y_POSITION_OFFSET = 75.0;
@@ -23,12 +23,12 @@ public class ISD extends BaseBoss {
 
     public ISD() {
         super (
-                "/dev/ccr/dmscw2024/images/ISD.png",
+                "/dev/ccr/dmscw2024/images/SW/ISD.png",
                 IMAGE_HEIGHT,
                 INITIAL_X_POSITION,
                 INITIAL_Y_POSITION,
                 HEALTH,
-                new ISDShield(900.0, 300.0)
+                new SWShield(900.0, 300.0)
         );
     }
 

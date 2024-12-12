@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class TPM2 extends LevelParent {
 
-	private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/tfsbg.jpg";
+	private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/TPM/tfsbg.jpg";
 	private static final String NEXT_LEVEL = "dev.ccr.dmscw2024.levels.TPM.TPM3";
 	private static final int TOTAL_ENEMIES = 5;
 	private static final int KILLS_TO_ADVANCE = 15;
@@ -20,7 +20,7 @@ public class TPM2 extends LevelParent {
 	public TPM2(double screenHeight, double screenWidth, Stage stage) {
 		super(
 				BACKGROUND_IMAGE_NAME,
-				"/dev/ccr/dmscw2024/audio/SWBGM.mp3",
+                "/dev/ccr/dmscw2024/audio/bgm/SWBGM.mp3",
 				screenHeight,
 				screenWidth,
 				() -> PlaneFactory.createDefaultN1SF(screenHeight),
@@ -69,7 +69,7 @@ public class TPM2 extends LevelParent {
 	private void showTransitionScreen() {
 		Transition transition = new Transition(
 				getStage(),
-				"/dev/ccr/dmscw2024/images/spacebg.jpg",
+				"/dev/ccr/dmscw2024/images/SW/spacebg.jpg",
 				"we're closing in on the ship! \n take it down!",
 				() -> goToNextLevel(NEXT_LEVEL)
 		);

@@ -4,8 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.lang.reflect.Constructor;
 
-import dev.ccr.dmscw2024.levels.TPM.TPM3;
-import dev.ccr.dmscw2024.screens.Start;
+import dev.ccr.dmscw2024.screens.start.Start;
 import dev.ccr.dmscw2024.screens.StoryMode;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -18,6 +17,10 @@ public class Controller implements PropertyChangeListener {
 
 	private static final String LEVEL_ONE_CLASS_NAME = "dev.ccr.dmscw2024.levels.Level1";
 	private static final String TPM_ONE_CLASS_NAME = "dev.ccr.dmscw2024.levels.TPM.TPM1";
+	private static final String AOTCdroid_ONE_CLASS_NAME = "dev.ccr.dmscw2024.levels.AOTCdroid.AOTCd1";
+	private static final String AOTCclone_ONE_CLASS_NAME = "dev.ccr.dmscw2024.levels.AOTCclone.AOTCc1";
+
+
 	private final Stage stage;
 
 	public Controller(Stage stage) {
@@ -63,20 +66,20 @@ public class Controller implements PropertyChangeListener {
 		}
 	}
 
-	public void TBD() {
+	public void AOTCdroid() {
 		try {
 			stage.show();
-			goToLevel(TPM_ONE_CLASS_NAME);
+			goToLevel(AOTCdroid_ONE_CLASS_NAME);
 		}
 		catch(Exception e){
 			showErrorAlert("FAILED TO LAUNCH: " + e.getMessage());
 		}
 	}
 
-	public void TBD2() {
+	public void AOTCclone() {
 		try {
 			stage.show();
-			goToLevel(TPM_ONE_CLASS_NAME);
+			goToLevel(AOTCclone_ONE_CLASS_NAME);
 		}
 		catch(Exception e){
 			showErrorAlert("FAILED TO LAUNCH: " + e.getMessage());

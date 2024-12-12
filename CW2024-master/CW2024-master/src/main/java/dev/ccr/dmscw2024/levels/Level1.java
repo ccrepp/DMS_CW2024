@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public class Level1 extends LevelParent {
 	
-	private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/background1.jpg";
+	private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/default/background1.jpg";
 	private static final String NEXT_LEVEL = "dev.ccr.dmscw2024.levels.Level2";
 	private static final int TOTAL_ENEMIES = 5;
 	private static final int KILLS_TO_ADVANCE = 10;
@@ -18,7 +18,7 @@ public class Level1 extends LevelParent {
 	public Level1(double screenHeight, double screenWidth, Stage stage) {
 		super(
 				BACKGROUND_IMAGE_NAME,
-				"/dev/ccr/dmscw2024/audio/BGM.mp3",
+                "/dev/ccr/dmscw2024/audio/bgm/BGM.mp3",
 				screenHeight,
 				screenWidth,
 				() -> PlaneFactory.createDefaultUserPlane(screenHeight),

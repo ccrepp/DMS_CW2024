@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public class LevelSW1 extends LevelParent {
 
-    private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/backgroundsw.jpg";
+    private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/SW/backgroundsw.jpg";
     private static final String NEXT_LEVEL = "dev.ccr.dmscw2024.levels.LevelSW2";
     private static final int TOTAL_ENEMIES = 5;
     private static final int KILLS_TO_ADVANCE = 10;
@@ -17,7 +17,7 @@ public class LevelSW1 extends LevelParent {
     public LevelSW1(double screenHeight, double screenWidth, Stage stage) {
         super(
                 BACKGROUND_IMAGE_NAME,
-                "/dev/ccr/dmscw2024/audio/SWBGM.mp3",
+                "/dev/ccr/dmscw2024/audio/bgm/SWBGM.mp3",
 
                 screenHeight,
                 screenWidth,

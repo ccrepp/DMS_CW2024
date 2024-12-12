@@ -24,7 +24,7 @@ public class Win {
 
     public void display() {
         // Background Image
-        ImageView backgroundImage = new ImageView(new Image(String.valueOf(getClass().getResource("/dev/ccr/dmscw2024/images/hyperspace.jpg"))));
+        ImageView backgroundImage = new ImageView(new Image(String.valueOf(getClass().getResource("/dev/ccr/dmscw2024/images/SW/hyperspace.jpg"))));
         backgroundImage.setFitHeight(stage.getHeight());
         backgroundImage.setFitWidth(stage.getWidth());
 

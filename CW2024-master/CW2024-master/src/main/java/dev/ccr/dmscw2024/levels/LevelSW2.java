@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public class LevelSW2 extends LevelParent {
 
-    private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/backgroundsw.jpg";
+    private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/SW/backgroundsw.jpg";
     private static final String NEXT_LEVEL = "dev.ccr.dmscw2024.levels.LevelISD";
     private static final int TOTAL_ENEMIES = 7;
     private static final int KILLS_TO_ADVANCE = 15;
@@ -17,7 +17,7 @@ public class LevelSW2 extends LevelParent {
     public LevelSW2(double screenHeight, double screenWidth, Stage stage) {
         super(
                 BACKGROUND_IMAGE_NAME,
-                "/dev/ccr/dmscw2024/audio/SWBGM.mp3",
+                "/dev/ccr/dmscw2024/audio/bgm/SWBGM.mp3",
 
                 screenHeight,
                 screenWidth,
@@ -67,7 +67,7 @@ public class LevelSW2 extends LevelParent {
     private void showTransitionScreen() {
         Transition transition = new Transition(
                 getStage(),
-                "/dev/ccr/dmscw2024/images/ISDtransition.jpg",
+                "/dev/ccr/dmscw2024/images/SW/ISDtransition.jpg",
                 "those things are huge! \n WAIT, one of them is coming at me!",
                 () -> goToNextLevel(NEXT_LEVEL)
         );

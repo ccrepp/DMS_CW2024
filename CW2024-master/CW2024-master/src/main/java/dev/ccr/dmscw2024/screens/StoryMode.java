@@ -2,7 +2,6 @@ package dev.ccr.dmscw2024.screens;
 
 import dev.ccr.dmscw2024.controller.Controller;
 
-import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -17,7 +16,7 @@ import javafx.stage.Stage;
 public class StoryMode {
     private final Stage stage;
     private final Controller controller;
-    private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/hyperspace.jpg";
+    private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/SW/hyperspace.jpg";
 
     public StoryMode(Stage stage, Controller controller) {
         this.stage = stage;
@@ -62,13 +61,13 @@ public class StoryMode {
         styleButton(TPMButton, "#ffc107", "#e0a800");
         TPMButton.setOnAction(e -> TPMTransition());
 
-        Button branch2Button = new Button("TBD");
-        styleButton(branch2Button, "#007bff", "#0056b3");
-        branch2Button.setOnAction(e -> controller.TBD());
+        Button branch2Button = new Button("Attack of the Droids");
+        styleButton(branch2Button, "#dc3545", "#c82333");
+        branch2Button.setOnAction(e -> AOTCdroidTransition());
 
-        Button branch3Button = new Button("TBD");
-        styleButton(branch3Button, "#dc3545", "#c82333");
-        branch3Button.setOnAction(e -> controller.TBD2());
+        Button branch3Button = new Button("Attack of the Clones");
+        styleButton(branch3Button, "#007bff", "#0056b3");
+        branch3Button.setOnAction(e -> AOTCcloneTransition());
 
         // Layout
         VBox layout = new VBox(20, header, TPMButton, branch2Button, branch3Button);
@@ -95,29 +94,30 @@ public class StoryMode {
     private void TPMTransition() {
         Transition transition = new Transition(
                 stage,
-                "/dev/ccr/dmscw2024/images/naboo.png",
+                "/dev/ccr/dmscw2024/images/TPM/naboo.png",
                 "an invasion of Naboo has begun! \n get in your ship and fight back!",
                 controller::TPM
         );
         transition.display();
     }
 
-    private void TBDTransition() {
+    private void AOTCdroidTransition() {
         Transition transition = new Transition(
                 stage,
-                "/dev/ccr/dmscw2024/images/naboo.png",
-                "intro line \n call to action line",
-                controller::TBD
+                "/dev/ccr/dmscw2024/images/AOTC/bg/kaminoencounter.jpeg",
+                "now that you've seen the army we've amassed,\n" +
+                        "I won't let you go back alive!",
+                controller::AOTCdroid
         );
         transition.display();
     }
 
-    private void TBD2Transition() {
+    private void AOTCcloneTransition() {
         Transition transition = new Transition(
                 stage,
-                "/dev/ccr/dmscw2024/images/naboo.png",
-                "intro line \n call to action line",
-                controller::TBD2
+                "/dev/ccr/dmscw2024/images/AOTC/bg/CloneArrival.jpg",
+                "the Clone army has arrived!",
+                controller::AOTCclone
         );
         transition.display();
     }

@@ -6,7 +6,7 @@ import dev.ccr.dmscw2024.specials.shield.ShieldImage;
 
 public class Boss extends BaseBoss {
 
-	private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/bossplane.png";
+	private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/default/bossplane.png";
 	private static final double INITIAL_X_POSITION = 1000.0;
 	private static final double INITIAL_Y_POSITION = 400;
 	private static final double PROJECTILE_Y_POSITION_OFFSET = 75.0;
@@ -23,7 +23,7 @@ public class Boss extends BaseBoss {
 
 	public Boss() {
 		super (
-				"/dev/ccr/dmscw2024/images/bossplane.png",
+                "/dev/ccr/dmscw2024/images/default/bossplane.png",
 				IMAGE_HEIGHT,
 				INITIAL_X_POSITION,
 				INITIAL_Y_POSITION,

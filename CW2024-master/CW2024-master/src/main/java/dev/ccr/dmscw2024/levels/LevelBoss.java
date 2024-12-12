@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 public class LevelBoss extends LevelParent {
 
-	private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/background2.jpg";
+	private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/default/background2.jpg";
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 	private final Boss boss;
 	private final Controller controller;
@@ -20,11 +20,11 @@ public class LevelBoss extends LevelParent {
 	public LevelBoss(double screenHeight, double screenWidth, Stage stage, Controller controller) {
 		super(
 				BACKGROUND_IMAGE_NAME,
-				"/dev/ccr/dmscw2024/audio/BGM.mp3",
+                "/dev/ccr/dmscw2024/audio/bgm/BGM.mp3",
 				screenHeight,
 				screenWidth,
 				() -> PlaneFactory.createCustomUserPlane(
-                        "/dev/ccr/dmscw2024/images/userplane.png",
+						"/dev/ccr/dmscw2024/images/default/userplane.png",
 						150,
 						50.0,
 						screenHeight / 2,
@@ -83,7 +83,7 @@ public class LevelBoss extends LevelParent {
 		System.out.println("BossWinScreenTransition");
 		Transition transition = new Transition(
 				getStage(),
-				"/dev/ccr/dmscw2024/images/bgstart.jpg",
+				"/dev/ccr/dmscw2024/images/background/bgstart.jpg",
 				"YOU WIN!",
 				() -> {
 					System.out.println("WinScreen");
