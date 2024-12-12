@@ -1,6 +1,7 @@
 package dev.ccr.dmscw2024.utility;
 
 import dev.ccr.dmscw2024.levels.LevelParent;
+import dev.ccr.dmscw2024.screens.Pause;
 
 import javafx.scene.input.*;
 
@@ -27,6 +28,10 @@ public class KeyHandler {
         }
         if (kc == KeyCode.SPACE) {
             levelParent.fireProjectile();
+        }
+        if (kc == KeyCode.P || kc == KeyCode.ESCAPE) {
+            Pause pauseScreen = new Pause(levelParent.getStage(), levelParent);
+            pauseScreen.display();
         }
 
     }

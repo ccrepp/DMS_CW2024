@@ -6,7 +6,7 @@ import dev.ccr.dmscw2024.utility.ProjectileFactory;
 
 public class TieFighter extends FighterPlane {
 
-    private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/tiefighter.png";
+    private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/SW/tiefighter.png";
     private static final int IMAGE_HEIGHT = 150;
     private static final int HORIZONTAL_VELOCITY = -6;
     private static final double PROJECTILE_X_POSITION_OFFSET = -100.0;

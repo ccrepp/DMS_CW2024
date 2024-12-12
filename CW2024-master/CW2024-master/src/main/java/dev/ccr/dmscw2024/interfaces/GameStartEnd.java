@@ -11,6 +11,7 @@ public interface GameStartEnd {
     void checkIfGameOver();
 
     void startGame();
+    void stopGame();
     void endGame();
 
 

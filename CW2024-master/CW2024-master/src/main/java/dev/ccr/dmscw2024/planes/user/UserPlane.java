@@ -7,7 +7,7 @@ import dev.ccr.dmscw2024.utility.ProjectileFactory;
 
 public class UserPlane extends FighterPlane implements Movable {
 
-	private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/userplane.png";
+	private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/default/userplane.png";
 	private static final double Y_UPPER_BOUND = -40;
 	private static final double Y_LOWER_BOUND = 600.0;
 	private static final double INITIAL_X_POSITION = 5.0;

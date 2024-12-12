@@ -3,8 +3,20 @@ package dev.ccr.dmscw2024.levels;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import dev.ccr.dmscw2024.controller.Controller;
+import dev.ccr.dmscw2024.screens.Lose;
+import javafx.animation.*;
+
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.image.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import java.util.function.Supplier;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 import dev.ccr.dmscw2024.interfaces.GameStartEnd;
@@ -13,13 +25,8 @@ import dev.ccr.dmscw2024.planes.FighterPlane;
 import dev.ccr.dmscw2024.planes.user.UserPlane;
 import dev.ccr.dmscw2024.projectile.ProjectileManager;
 import dev.ccr.dmscw2024.utility.*;
-import javafx.animation.*;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.image.*;
-import javafx.util.Duration;
 
-import java.util.function.Supplier;
+
 
 public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	// Property Change Support replaced Observers
@@ -39,14 +46,15 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	private final Timeline timeline;
 	private final UserPlane user;
 	private final Scene scene;
+	private final Stage stage;
 	public final ImageView background;
+	private final MediaPlayer backgroundMusic;
 	
 	private final ProjectileManager projectileManager;
 	private final KeyHandler keyHandler;
 
 	private final ActorManager actorManager;
 
-//	private final GameLoopManager gameLoopManager;
 
 
 	// Actor Variables
@@ -59,10 +67,10 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 
 
 	protected final LevelView levelView;
-	//protected final LevelInitialiser levelInitialiser;
+	private Controller controller;
 
-
-	public LevelParent(String backgroundImageName, double screenHeight, double screenWidth, Supplier<UserPlane> userSupplier) {
+	public LevelParent(String backgroundImageName, String backgroundMusicFile, double screenHeight, double screenWidth,
+					   Supplier<UserPlane> userSupplier, Stage stage) {
 		this.support = new PropertyChangeSupport(this);
 
 		this.root = new Group();
@@ -74,10 +82,6 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 			throw new IllegalStateException("User is null!");
 		}
 
-//		this.levelInitialiser = levelInitialiser != null
-//				? levelInitialiser
-//				: createDefaultLevelInitialiser(backgroundImageName, screenHeight, screenWidth);
-
 		this.friendlyUnits = new ArrayList<>();
 		this.enemyUnits = new ArrayList<>();
 		this.userProjectiles = new ArrayList<>();
@@ -87,6 +91,15 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 		if (getClass().getResource(backgroundImageName) == null) {
 			throw new IllegalArgumentException("Background image not found: " + backgroundImageName);
 		}
+
+		this.backgroundMusic = new MediaPlayer(new Media(getClass().getResource(backgroundMusicFile).toExternalForm()));
+		this.backgroundMusic.setVolume(0.5);
+		this.backgroundMusic.setCycleCount(MediaPlayer.INDEFINITE);
+		if (getClass().getResource(backgroundMusicFile) == null) {
+			throw new IllegalArgumentException("Background music not found: " + backgroundMusicFile);
+		}
+
+		this.stage = stage;
 
 		this.screenHeight = screenHeight;
 		this.screenWidth = screenWidth;
@@ -99,27 +112,9 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 
 		this.actorManager = new ActorManager(root, friendlyUnits, enemyUnits);
 
-//		this.gameLoopManager = new GameLoopManager(this);
-
-
-//		initializeScene();
 		initializeTimeline();
 		friendlyUnits.add(user);
 	}
-
-//	private LevelInitialiser createDefaultLevelInitialiser(String backgroundImageName, double screenHeight, double screenWidth) {
-//		return new LevelInitialiser(backgroundImageName, screenHeight, screenWidth, root, instantiateLevelView(), new KeyHandler(this)) {
-//			@Override
-//			protected void initialiseFriendlyUnits(Group root, UserPlane user) {
-//
-//			}
-//
-//			@Override
-//			protected void spawnEnemyUnits(Group root) {
-//
-//			}
-//		};
-//	}
 
 
 	// Level Initialisation Methods
@@ -127,11 +122,6 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	public abstract LevelView instantiateLevelView();
 
 	public Scene initializeScene() {
-//		levelInitialiser.initialiseScene(levelInitialiser.getRoot(), user);
-//
-//		actorManager.addFriendlyUnit(user);
-//		root.getChildren().add(user);
-
 		setUpBackground();
 		setUpFriendlyUnits();
 		setUpHeartDisplay();
@@ -197,10 +187,12 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	}
 
 	private void generateEnemyFire() {
-		for (ActiveActorDestructible enemy:enemyUnits) {
+		for (ActiveActorDestructible enemy : enemyUnits) {
 			if (enemy instanceof FighterPlane fighterPlane) {
 				ActiveActorDestructible projectile = fighterPlane.fireProjectile();
-				projectileManager.addProjectile(projectile, enemyProjectiles);
+				if (projectile != null) {
+					projectileManager.addProjectile(projectile, enemyProjectiles);
+				}
 			}
 		}
 
@@ -233,7 +225,13 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	public void startGame() {
 		background.requestFocus();
 		timeline.play();
-//		gameLoopManager.startGame();
+		backgroundMusic.play();
+	}
+
+	@Override
+	public void stopGame() {
+		timeline.stop();
+		backgroundMusic.stop();
 	}
 
 	@Override
@@ -251,7 +249,7 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 		userProjectiles.clear();
 		enemyProjectiles.clear();
 
-//		gameLoopManager.endGame();
+		backgroundMusic.stop();
 	}
 
 
@@ -284,6 +282,13 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	protected void loseGame() {
 		timeline.stop();
 		levelView.showGameOverImage();
+		LoseScreen();
+	}
+
+	private void LoseScreen() {
+		System.out.println("LoseScreen!");
+        Lose lose = new Lose(getStage(), null);
+		lose.display();
 	}
 
 
@@ -359,6 +364,10 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 
 	public Scene getScene() {
 		return scene;
+	}
+
+	public Stage getStage() {
+		return stage;
 	}
 
 	protected int getCurrentNumberOfEnemies() {

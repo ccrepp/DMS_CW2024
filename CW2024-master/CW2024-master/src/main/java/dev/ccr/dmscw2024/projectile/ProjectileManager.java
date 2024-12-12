@@ -2,6 +2,8 @@ package dev.ccr.dmscw2024.projectile;
 
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 
+import dev.ccr.dmscw2024.utility.AudioManager;
+import dev.ccr.dmscw2024.utility.ProjectileProduction;
 import javafx.scene.Group;
 
 import java.util.*;
@@ -20,6 +22,14 @@ public class ProjectileManager {
         if (projectile != null) {
             root.getChildren().add(projectile);
             projectileList.add(projectile);
+
+            if (projectile instanceof  ProjectileProduction projectileProduction) {
+                String projectileAudioFile = projectileProduction.getProjectileAudioFile();
+                double volume = projectileProduction.getVolume();
+                if (projectileAudioFile != null) {
+                    AudioManager.playAudioEffect(projectileAudioFile, volume);
+                }
+            }
         }
     }
 
