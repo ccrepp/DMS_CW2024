@@ -3,6 +3,8 @@ package dev.ccr.dmscw2024.levels;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import dev.ccr.dmscw2024.controller.Controller;
+import dev.ccr.dmscw2024.screens.Lose;
 import javafx.animation.*;
 
 import javafx.scene.Group;
@@ -65,6 +67,7 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 
 
 	protected final LevelView levelView;
+	private Controller controller;
 
 	public LevelParent(String backgroundImageName, String backgroundMusicFile, double screenHeight, double screenWidth,
 					   Supplier<UserPlane> userSupplier, Stage stage) {
@@ -279,6 +282,13 @@ public abstract class LevelParent implements GameStartEnd, InitialiseActors {
 	protected void loseGame() {
 		timeline.stop();
 		levelView.showGameOverImage();
+		LoseScreen();
+	}
+
+	private void LoseScreen() {
+		System.out.println("LoseScreen!");
+        Lose lose = new Lose(getStage(), null);
+		lose.display();
 	}
 
 
