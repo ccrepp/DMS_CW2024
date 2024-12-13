@@ -13,15 +13,26 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Win - game win screen
+ */
 public class Win {
     private final Stage stage;
     private final Controller controller;
 
+    /**
+     * Win constructor
+     * @param stage primary stage on which screen is displayed
+     * @param controller controller responsible for game flow management
+     */
     public Win(Stage stage, Controller controller) {
         this.stage = stage;
         this.controller = controller;
     }
 
+    /**
+     * displays Win Screen
+     */
     public void display() {
         // Background Image
         ImageView backgroundImage = new ImageView(new Image(String.valueOf(getClass().getResource("/dev/ccr/dmscw2024/images/SW/hyperspace.jpg"))));

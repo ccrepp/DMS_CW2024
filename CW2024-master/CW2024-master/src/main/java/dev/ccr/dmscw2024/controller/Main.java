@@ -2,9 +2,8 @@ package dev.ccr.dmscw2024.controller;
 
 import java.lang.reflect.InvocationTargetException;
 
-import dev.ccr.dmscw2024.screens.start.Start;
+import dev.ccr.dmscw2024.screens.Start;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class Main extends Application {

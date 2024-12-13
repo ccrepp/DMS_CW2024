@@ -5,6 +5,9 @@ import dev.ccr.dmscw2024.planes.user.N1SF;
 import dev.ccr.dmscw2024.planes.user.UserPlane;
 import dev.ccr.dmscw2024.planes.user.XWing;
 
+/**
+ * Plane Factory - a factory for (user-controlled) plane production
+ */
 public class PlaneFactory {
 
     public static UserPlane createDefaultUserPlane(double screenHeight) {

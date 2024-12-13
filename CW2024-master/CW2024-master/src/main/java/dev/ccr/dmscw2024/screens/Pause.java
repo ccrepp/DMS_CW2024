@@ -9,15 +9,26 @@ import javafx.scene.control.Button;
 
 import javafx.stage.Stage;
 
+/**
+ * Pause - game's pause screen
+ */
 public class Pause {
     private final Stage stage;
     private final LevelParent levelParent;
 
+    /**
+     * Start constructor
+     * @param stage primary stage on which screen is displayed
+     * @param levelParent parent level instance responsible for game flow management
+     */
     public Pause(Stage stage, LevelParent levelParent) {
         this.stage = stage;
         this.levelParent = levelParent;
     }
 
+    /**
+     * displays pause screen, stopping game and allowing for resuming or exit
+     */
     public void display() {
         levelParent.stopGame();
 

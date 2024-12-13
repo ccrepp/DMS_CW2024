@@ -5,13 +5,24 @@ import dev.ccr.dmscw2024.screens.Pause;
 
 import javafx.scene.input.*;
 
+/**
+ * Key Handler - handles key inputs of user
+ */
 public class KeyHandler {
     private final LevelParent levelParent;
 
+    /**
+     * KeyHandler constructor
+     * @param levelParent current level's parent object
+     */
     public KeyHandler(LevelParent levelParent) {
         this.levelParent = levelParent;
     }
 
+    /**
+     * handles key events, mapping keys to actions
+     * @param e represent key inputs
+     */
     public void handleKeyPress(KeyEvent e) {
         KeyCode kc = e.getCode();
         if (kc == KeyCode.UP || kc == KeyCode.W) {
@@ -36,6 +47,10 @@ public class KeyHandler {
 
     }
 
+    /**
+     * handles key release events, stopping actions
+     * @param e represent key release
+     */
     public void handleKeyRelease(KeyEvent e) {
         KeyCode kc = e.getCode();
         if (kc == KeyCode.UP || kc == KeyCode.W || kc == KeyCode.DOWN || kc == KeyCode.S) {

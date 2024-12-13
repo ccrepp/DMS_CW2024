@@ -1,6 +1,5 @@
 package dev.ccr.dmscw2024.screens;
 
-import dev.ccr.dmscw2024.controller.Controller;
 import dev.ccr.dmscw2024.controller.Main;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,15 +12,23 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Lose - game lose screen
+ */
 public class Lose {
     private final Stage stage;
-    private final Controller controller;
 
-    public Lose(Stage stage, Controller controller) {
+    /**
+     * Lose constructor
+     * @param stage primary stage on which screen is displayed
+     */
+    public Lose(Stage stage) {
         this.stage = stage;
-        this.controller = controller;
     }
 
+    /**
+     * displays lose screen
+     */
     public void display() {
         // Background Image
         ImageView backgroundImage = new ImageView(new Image(String.valueOf(getClass().getResource("/dev/ccr/dmscw2024/images/default/youlose.jpg"))));

@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Base Boss abstract class - to be utilised in the creation of every boss enemy in game
+ */
 public abstract class BaseBoss extends FighterPlane {
 
     private final List<Integer> movePattern;
@@ -18,6 +21,15 @@ public abstract class BaseBoss extends FighterPlane {
     private int framesWithShieldActivated;
     protected final Shield shield;
 
+    /**
+     * BaseBoss constructor
+     * @param imageName file name of image to be used
+     * @param imageHeight height of image
+     * @param initialX initial X-axis position
+     * @param initialY initial Y-axis position
+     * @param health initial health
+     * @param shield shield to be used
+     */
     public BaseBoss(String imageName, int imageHeight, double initialX, double initialY, int health, Shield shield) {
         super(imageName, imageHeight, initialX, initialY, health);
         movePattern = new ArrayList<>();
@@ -29,6 +41,9 @@ public abstract class BaseBoss extends FighterPlane {
         initializeMovePattern();
     }
 
+    /**
+     * updates boss unit
+     */
     @Override
     public void updateActor() {
         updatePosition();
@@ -37,13 +52,14 @@ public abstract class BaseBoss extends FighterPlane {
 
     /* Movement Logic */
 
+    /**
+     * updates boss unit's positioning <br/>
+     * updates shield to position dynamically
+     */
     @Override
     public void updatePosition() {
         double initialTranslateY = getTranslateY();
         moveVertically(getNextMove());
-
-        double currentX = getLayoutX() + getTranslateX();
-        double currentY = getLayoutY() + getTranslateY();
 
         double currentPosition = getLayoutY() + getTranslateY();
         if (currentPosition < getYPUB() || currentPosition > getYPLB()) {
@@ -53,6 +69,9 @@ public abstract class BaseBoss extends FighterPlane {
         shield.setPosition(getShieldXOffset(),getShieldYOffset());
     }
 
+    /**
+     * initialises movement pattern to be followed by boss unit
+     */
     private void initializeMovePattern() {
         for (int i = 0; i < getMFPC(); i++) {
             movePattern.add(getVV());
@@ -62,6 +81,10 @@ public abstract class BaseBoss extends FighterPlane {
         Collections.shuffle(movePattern);
     }
 
+    /**
+     * calculates next move to be taken by boss
+     * @return move to be taken
+     */
     private int getNextMove() {
         int currentMove = movePattern.get(indexOfCurrentMove);
         consecutiveMovesInSameDirection++;
@@ -86,6 +109,10 @@ public abstract class BaseBoss extends FighterPlane {
 
     /* Projectile Logic */
 
+    /**
+     * fires projectile from boss unit
+     * @return projectile fired by boss unit, but if none, return {@code null}
+     */
     @Override
     public ActiveActorDestructible fireProjectile() {
         return shouldFireProjectile() ? createProjectile() : null;
@@ -96,10 +123,18 @@ public abstract class BaseBoss extends FighterPlane {
 
     /* Shield Logic */
 
+    /**
+     * retrieves shield to be used by boss unit
+     * @return shield
+     */
     public Shield getShield() {
         return shield;
     }
 
+    /**
+     * updates shield's state <br/>
+     * utilises shield probability for activation
+     */
     private void updateShield() {
         if (isShielded) {
             framesWithShieldActivated++;
@@ -112,17 +147,26 @@ public abstract class BaseBoss extends FighterPlane {
         }
     }
 
+    /**
+     * activates shield, displaying shield visually, negate boss taken damage
+     */
     private void activateShield() {
         isShielded = true;
         shield.showShield();
     }
 
+    /**
+     * deactivates shield, no more shield visual, boss can take damage
+     */
     private void deactivateShield() {
         isShielded = false;
         shield.hideShield();
         framesWithShieldActivated = 0;
     }
 
+    /**
+     * when shielded, boss cannot take damage
+     */
     @Override
     public void takeDamage() {
         if (!isShielded) {

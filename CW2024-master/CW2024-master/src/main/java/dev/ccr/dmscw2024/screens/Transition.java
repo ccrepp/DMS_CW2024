@@ -1,6 +1,5 @@
 package dev.ccr.dmscw2024.screens;
 
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -11,47 +10,34 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+/**
+ * Transition - game transition screen
+ */
 public class Transition {
     private final Stage stage;
     private final String backgroundImagePath;
     private final String transitionMessage;
     private final Runnable onContinue;
 
-//    private final StackPane layout;
-//    private final Text messageText;
-
     private Scene currentScene;
 
+    /**
+     * Transition constructor
+     * @param stage primary stage that transition is displayed on
+     * @param backgroundImagePath path to background image for transition
+     * @param transitionMessage message to be displayed on trainsiton screen
+     * @param onContinue executes {@link Runnable} when user {@code proceed}
+     */
     public Transition(Stage stage, String backgroundImagePath, String transitionMessage, Runnable onContinue) {
         this.stage = stage;
         this.backgroundImagePath = backgroundImagePath;
         this.transitionMessage = transitionMessage;
         this.onContinue = onContinue;
-
-//        this.layout = new StackPane();
-//        layout.setStyle("-fx-alignment: center;");
-//        layout.setAlignment(Pos.CENTER);
-//
-//        this.currentScene = new Scene(layout, stage.getWidth(), stage.getHeight());
-//        currentScene.setOnKeyPressed(this::handleInput);
-//        currentScene.setOnMouseClicked(this::handleInput);
-//
-//        this.messageText = new Text(); // instantiate but don't set content yet
-//        this.messageText.setStyle("-fx-font-size: 36px; -fx-font-weight: bold; -fx-fill: white;");
-//
-//        Rectangle messageBackground = new Rectangle(800, 200);
-//        messageBackground.setFill(Color.rgb(5, 227, 247, 0.5));
-//        messageBackground.setArcWidth(20);
-//        messageBackground.setArcHeight(20);
-//
-//        StackPane messageLayout = new StackPane(messageBackground, messageText);
-//        messageLayout.setAlignment(Pos.CENTER); // set alignment on message pane
-//        messageLayout.setStyle("-fx-alignment: center;");
-//
-//        layout.getChildren().add(messageLayout);
-//        stage.setScene(currentScene);
     }
 
+    /**
+     * displays transition screen
+     */
     public void display() {
 //      Background Image
         ImageView backgroundImage = new ImageView(new Image(String.valueOf(getClass().getResource(backgroundImagePath))));
@@ -77,44 +63,32 @@ public class Transition {
         layout.setStyle("-fx-alignment: center;");
 
         // Scene
-//        Scene scene = new Scene(layout, stage.getWidth(), stage.getHeight());
-//        stage.setScene(scene);
-//        stage.show();
-
-//        if (currentScene == null) {
-            currentScene = new Scene(layout, stage.getWidth(), stage.getHeight());
-            currentScene.setOnKeyPressed(this::handleInput);
-            currentScene.setOnMouseClicked(e -> proceed());
-//        }
+        currentScene = new Scene(layout, stage.getWidth(), stage.getHeight());
+        currentScene.setOnKeyPressed(this::handleInput);
+        currentScene.setOnMouseClicked(e -> proceed());
 
         stage.setScene(currentScene);
         stage.show();
 
-//        // Input Handling
-//        scene.setOnKeyPressed(this::handleInput);
-//        scene.setOnMouseClicked(e -> proceed());
     }
 
+    /**
+     * handles any and every key input by user
+     * @param e any form of key input
+     */
     private void handleInput(KeyEvent e) {
         proceed();
     }
 
-    private void handleInput(javafx.scene.input.MouseEvent e) {
-        proceed();
-    }
-
+    /**
+     * proceeds when called, clearing key input and mouse clicks
+     */
     private void proceed() {
-        System.out.println("Proceed called!");
-
         if (onContinue != null) {
-//            Scene scene = stage.getScene();
             if (currentScene != null) {
                 currentScene.setOnKeyPressed(null);
                 currentScene.setOnMouseClicked(null);
             }
-//            stage.getScene().setOnKeyPressed(null);
-//            stage.getScene().setOnMouseClicked(null);
-
             onContinue.run();
         }
     }

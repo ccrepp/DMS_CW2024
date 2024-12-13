@@ -10,6 +10,9 @@ import dev.ccr.dmscw2024.specials.shield.SWShield;
 import dev.ccr.dmscw2024.utility.PlaneFactory;
 import javafx.stage.Stage;
 
+/**
+ * TPM 3
+ */
 public class TPM3 extends LevelParent {
 
     private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/SW/spacebg.jpg";
@@ -18,11 +21,17 @@ public class TPM3 extends LevelParent {
     private final Controller controller;
     private LevelView levelView;
 
+    /**
+     * TPM3 Constructor
+     * @param screenHeight Game Screen Height
+     * @param screenWidth Game Screen Width
+     * @param stage Game JavaFX stage
+     * @param controller Game controller
+     */
     public TPM3(double screenHeight, double screenWidth, Stage stage, Controller controller) {
         super(
                 BACKGROUND_IMAGE_NAME,
                 "/dev/ccr/dmscw2024/audio/bgm/SWBossBGM.mp3",
-
                 screenHeight,
                 screenWidth,
                 () -> PlaneFactory.createCustomN1SF(
@@ -34,24 +43,46 @@ public class TPM3 extends LevelParent {
                 ),
                 stage
         );
-        System.out.println("TPM3: Base Constructor COMPLETE");
         tfs = new TFS();
-        System.out.println("TPM3: Boss CREATED");
         this.controller = controller;
     }
 
+    /**
+     * Create and Return {@link LevelView} for TPM3
+     * @return {@link LevelView} for TPM3
+     */
     @Override
-    public void initialiseFriendlyUnits() {
-        System.out.println("TPM3: Adding UserPlane to Root");
-        addFriendlyUnit(getUser());
-        System.out.println("TPM3: UserPlane CREATED");
-
-        System.out.println("TPM3: Adding ISD Shield to Root");
-        getRoot().getChildren().add((SWShield) tfs.getShield());
-        System.out.println("TPM3: ISD Shield CREATED");
-
+    public LevelView instantiateLevelView() {
+        return levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
     }
 
+    /**
+     * Initialises user-controlled plane and shield for TPM3 : <br/>
+     * N1SF & SWShield
+     */
+    @Override
+    public void initialiseFriendlyUnits() {
+        addFriendlyUnit(getUser());
+        getRoot().getChildren().add((SWShield) tfs.getShield());
+    }
+
+    /**
+     * Spawn sole TFS enemy unit for TPM3
+     */
+    @Override
+    public void spawnEnemyUnits() {
+        if (getCurrentNumberOfEnemies() == 0) {
+            addEnemyUnits(tfs);
+        }
+    }
+
+    /**
+     * Checks if TPM3 is over if either
+     * <ul>
+     *     <li>user-controlled plane is destroyed, results in LOSS</li>
+     *     <li>user has killed TFS, results in Transition Screen</li>
+     * </ul>
+     */
     @Override
     public void checkIfGameOver() {
         if (userIsDestroyed()) {
@@ -63,35 +94,26 @@ public class TPM3 extends LevelParent {
         }
     }
 
-    @Override
-    public void spawnEnemyUnits() {
-        if (getCurrentNumberOfEnemies() == 0) {
-            addEnemyUnits(tfs);
-        }
-    }
-
-    @Override
-    public LevelView instantiateLevelView() {
-        levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
-        return levelView;
-    }
-
+    /**
+     * Handles TPM Win Screen transition after TFS is defeated <br/>
+     * Proceeds to Win Screen after
+     */
     private void TPMWinScreenTransition() {
-        System.out.println("TPMWinScreenTransition");
         Transition transition = new Transition(
                 getStage(),
                 "/dev/ccr/dmscw2024/images/TPM/naboo.png",
                 "Naboo's invasion has been stopped! \n WE WIN!",
                 () -> {
-                    System.out.println("WinScreen");
                     WinScreen();
                 }
         );
         transition.display();
     }
 
+    /**
+     * Displays Win Screen after TPM3 completion
+     */
     private void WinScreen() {
-        System.out.println("WinScreen!");
         Win win = new Win(getStage(), controller);
         win.display();
     }

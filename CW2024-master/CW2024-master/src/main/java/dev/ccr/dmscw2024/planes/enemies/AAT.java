@@ -4,6 +4,9 @@ import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 import dev.ccr.dmscw2024.planes.FighterPlane;
 import dev.ccr.dmscw2024.utility.ProjectileFactory;
 
+/**
+ * ATT - representing enemy unit
+ */
 public class AAT extends FighterPlane {
 
     private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/TPM/AAT.png";
@@ -14,15 +17,27 @@ public class AAT extends FighterPlane {
     private static final int INITIAL_HEALTH = 1;
     private static final double FIRE_RATE = .01;
 
+    /**
+     * ATT constructor
+     * @param initialXPos initial X-axis position
+     * @param initialYPos initial Y-axis position
+     */
     public AAT(double initialXPos, double initialYPos) {
         super(IMAGE_NAME, IMAGE_HEIGHT, initialXPos, initialYPos, INITIAL_HEALTH);
     }
 
+    /**
+     * updates position of ATT via horizontal movement based on {@link #HORIZONTAL_VELOCITY}
+     */
     @Override
     public void updatePosition() {
         moveHorizontally(HORIZONTAL_VELOCITY);
     }
 
+    /**
+     * fires projectile from ATT
+     * @return ATT projectile if to be fired
+     */
     @Override
     public ActiveActorDestructible fireProjectile() {
         if (Math.random() < FIRE_RATE) {
@@ -33,6 +48,9 @@ public class AAT extends FighterPlane {
         return null;
     }
 
+    /**
+     * updates ATT positioning
+     */
     @Override
     public void updateActor() {
         updatePosition();

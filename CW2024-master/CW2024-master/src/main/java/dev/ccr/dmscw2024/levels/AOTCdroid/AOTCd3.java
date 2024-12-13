@@ -10,6 +10,9 @@ import dev.ccr.dmscw2024.specials.shield.Anakin;
 import dev.ccr.dmscw2024.utility.PlaneFactory;
 import javafx.stage.Stage;
 
+/**
+ * AOTC d(roid) 3
+ */
 public class AOTCd3 extends LevelParent {
 
     private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/AOTC/bg/GeonosisArena.jpg";
@@ -18,6 +21,13 @@ public class AOTCd3 extends LevelParent {
     private LevelView levelView;
     private Controller controller;
 
+    /**
+     * AOTCd3 Constructor
+     * @param screenHeight Game Screen Height
+     * @param screenWidth Game Screen Width
+     * @param stage Game JavaFX stage
+     * @param controller Game controller
+     */
     public AOTCd3(double screenHeight, double screenWidth, Stage stage, Controller controller) {
         super(
                 BACKGROUND_IMAGE_NAME,
@@ -31,25 +41,29 @@ public class AOTCd3 extends LevelParent {
         this.controller = controller;
     }
 
+    /**
+     * Create and Return {@link LevelView} for AOTCd3
+     * @return {@link LevelView} for AOTCd3
+     */
+    @Override
+    public LevelView instantiateLevelView() {
+        return levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
+    }
+
+    /**
+     * Initialises user-controlled plane and shield for AOTCd3 : <br/>
+     * B1Droid & Anakin
+     */
     @Override
     public void initialiseFriendlyUnits() {
         addFriendlyUnit(getUser());
-
         getRoot().getChildren().add((Anakin) Padme.getShield());
 
     }
 
-    @Override
-    public void checkIfGameOver() {
-        if (userIsDestroyed()) {
-            loseGame();
-        }
-        else if (Padme.isDestroyed()) {
-            winGame();
-            AOTCScreenTransition();
-        }
-    }
-
+    /**
+     * Spawn sole Padme enemy unit for AOTCd3
+     */
     @Override
     public void spawnEnemyUnits() {
         if (getCurrentNumberOfEnemies() == 0) {
@@ -57,13 +71,29 @@ public class AOTCd3 extends LevelParent {
         }
     }
 
+    /**
+     * Checks if AOTCd2 is over if either
+     * <ul>
+     *     <li>user-controlled plane is destroyed, results in LOSS</li>
+     *     <li>user has killed Padme, results in Transition Screen</li>
+     * </ul>
+     */
     @Override
-    public LevelView instantiateLevelView() {
-        levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
-        return levelView;
+    public void checkIfGameOver() {
+        if (userIsDestroyed()) {
+            loseGame();
+        }
+        else if (Padme.isDestroyed()) {
+            winGame();
+            AOTCd3ScreenTransition();
+        }
     }
 
-    private void AOTCScreenTransition() {
+    /**
+     * Handles AOTCd3 Win Screen transition after Padme is defeated <br/>
+     * Proceeds to Win Screen after
+     */
+    private void AOTCd3ScreenTransition() {
         Transition transition = new Transition(
                 getStage(),
                 "/dev/ccr/dmscw2024/images/AOTC/bg/geonosisbg.jpeg",
@@ -74,8 +104,10 @@ public class AOTCd3 extends LevelParent {
 
     }
 
+    /**
+     * Displays Win Screen after AOTCd3 completion
+     */
     private void WinScreen() {
-        System.out.println("WinScreen!");
         Win win = new Win(getStage(), controller);
         win.display();
     }

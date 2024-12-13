@@ -3,18 +3,19 @@ package dev.ccr.dmscw2024.planes;
 import dev.ccr.dmscw2024.fundamentals.ActiveActorDestructible;
 import javafx.scene.image.Image;
 
+/**
+ * Fighter Plane - the abstract class that all ActiveActors (planes) in the game extend
+ */
 public abstract class FighterPlane extends ActiveActorDestructible {
 
 	private int health;
-
-
 
 	/**
 	 * Fighter Plane covers all planes displayed within the game
 	 * @param imageName Image Name
 	 * @param imageHeight Image Height
-	 * @param initialXPos Initial x-axis position
-	 * @param initialYPos Initial y-axis position
+	 * @param initialXPos Initial X-axis position
+	 * @param initialYPos Initial Y-axis position
 	 * @param health Health
 	 */
 	public FighterPlane(String imageName, int imageHeight, double initialXPos, double initialYPos, int health) {
@@ -28,7 +29,11 @@ public abstract class FighterPlane extends ActiveActorDestructible {
 	}
 
 	public abstract ActiveActorDestructible fireProjectile();
-	
+
+	/**
+	 * decreases health when taking damage <br/>
+	 * if health reaches 0, plane is destroyed
+	 */
 	@Override
 	public void takeDamage() {
 		health--;

@@ -1,4 +1,4 @@
-package dev.ccr.dmscw2024.screens.start;
+package dev.ccr.dmscw2024.screens;
 
 import dev.ccr.dmscw2024.controller.Controller;
 
@@ -13,41 +13,29 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+/**
+ * Start - game's start screen
+ */
 public class Start {
     private final Stage stage;
     private final Controller controller;
     private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/background/bgstart.jpg";
 
 
+    /**
+     * Start constructor
+     * @param stage primary stage on which screen is displayed
+     * @param controller controller responsible for game flow management
+     */
     public Start(Stage stage, Controller controller) {
         this.stage = stage;
         this.controller = controller;
     }
 
+    /**
+     * displays Start screen via layout, buttons and background
+     */
     public void display() {
-
-//        try {
-//            URL fxmlURL = getClass().getResource("/dev/ccr/dmscw2024/fxml/Start.fxml");
-//            if (fxmlURL == null) {
-//                throw new IllegalStateException("FXML file NOT FOUND!");
-//            }
-//
-//            FXMLLoader loader = new FXMLLoader(fxmlURL);
-//            Parent root = loader.load();
-//
-//            StartController startController = loader.getController();
-//            startController.initialise(stage, controller);
-//
-//            return new Scene(root);
-//            Scene scene = new Scene(root, stage.getWidth(), stage.getHeight());
-//            stage.setScene(scene);
-//            stage.show();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//    }
-//}
 
         // Background Image
         ImageView backgroundImage= new ImageView(new Image(String.valueOf(getClass().getResource(BACKGROUND_IMAGE_NAME))));
@@ -79,6 +67,11 @@ public class Start {
         stage.show();
     }
 
+    /**
+     * creates VBox layout containing header and buttons
+     * @param header header text for screen
+     * @return VBox layout for Start screen
+     */
     private VBox getVBox(Text header) {
         // Start Button
         Button startButton = new Button("Start Game");
@@ -96,6 +89,12 @@ public class Start {
         return layout;
     }
 
+    /**
+     * styles button
+     * @param button button to be styled
+     * @param defaultColour default colour
+     * @param hoverColour on-hover colour
+     */
     private void styleButton(Button button, String defaultColour, String hoverColour) {
         button.setStyle(
                 "-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 10 20 10 20; " +

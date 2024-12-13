@@ -6,6 +6,9 @@ import dev.ccr.dmscw2024.planes.enemies.EnemyPlane;
 
 import javafx.stage.Stage;
 
+/**
+ * Level 1
+ */
 public class Level1 extends LevelParent {
 	
 	private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/default/background1.jpg";
@@ -15,6 +18,12 @@ public class Level1 extends LevelParent {
 	private static final double ENEMY_SPAWN_PROBABILITY = .20;
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 
+	/**
+	 *  Level 1 Constructor
+	 * @param screenHeight Game Screen Height
+	 * @param screenWidth Game Screen Width
+	 * @param stage Game JavaFX stage
+	 */
 	public Level1(double screenHeight, double screenWidth, Stage stage) {
 		super(
 				BACKGROUND_IMAGE_NAME,
@@ -26,22 +35,30 @@ public class Level1 extends LevelParent {
 		);
 	}
 
+	/**
+	 * Create and Return {@link LevelView} for Level 1
+	 * @return {@link LevelView} for Level 1
+	 */
 	@Override
 	public LevelView instantiateLevelView() {
 		return new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
 	}
 
+	/**
+	 * Initialises user-controlled plane for Level 1 : <br/>
+	 * UserPlane
+	 */
 	@Override
 	public void initialiseFriendlyUnits() {
-		System.out.println("Initialising UserPlane for Level1");
 		addFriendlyUnit(getUser());
 
     }
 
-	private ActiveActorDestructible createUserPlane() {
-		return PlaneFactory.createDefaultUserPlane(getScreenHeight());
-	}
-
+	/**
+	 * Spawns EnemyPlanes for Level 1 <br/>
+	 * uses probability-based spawning <br/>
+	 * ensures total number of enemies on screen does NOT exceed {@code TOTAL_ENEMIES}
+	 */
 	@Override
 	public void spawnEnemyUnits() {
 		int currentNumberOfEnemies = getCurrentNumberOfEnemies();
@@ -54,17 +71,27 @@ public class Level1 extends LevelParent {
 		}
 	}
 
+	/**
+	 * Checks if Level 1 is over if either
+	 * <ul>
+	 *     <li>user-controlled plane is destroyed, results in LOSS</li>
+	 *     <li>user has reached required kill-count to advance, results in level progression</li>
+	 * </ul>
+	 */
 	@Override
     public void checkIfGameOver() {
 		if (userIsDestroyed()) {
-			System.out.println("Level1: BEAT BY LEVEL - User is dead");
 			loseGame();
 		} else if (userHasReachedKillTarget()) {
-			System.out.println("Level1: LEVEL BEAT - User has reached kill target");
 			goToNextLevel(NEXT_LEVEL);
 		}
 	}
 
+	/**
+	 * Checks if user has reached required kill-count for advancement
+	 * @return {@code true} if number of kills is greater than or equal to {@code KILLS_TO_ADVANCE},
+	 * {@code false} otherwise
+	 */
 	private boolean userHasReachedKillTarget() {
 		return getUser().getNumberOfKills() >= KILLS_TO_ADVANCE;
 	}

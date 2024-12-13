@@ -2,7 +2,17 @@ package dev.ccr.dmscw2024.utility;
 
 import dev.ccr.dmscw2024.projectile.Projectile;
 
+/**
+ * Projectile Factory - factory creating projectiles
+ */
 public class ProjectileFactory {
+    /**
+     * creates projectiles based on provided type and position
+     * @param type type of projectile
+     * @param initialXPos initial x-axis position
+     * @param initialYPos initial y-axis position
+     * @return projectile to be created
+     */
     public static Projectile createProjectile (String type, double initialXPos, double initialYPos){
         return switch (type) {
             case "User" ->

@@ -7,6 +7,9 @@ import dev.ccr.dmscw2024.specials.shield.SWShield;
 
 import javafx.stage.Stage;
 
+/**
+ * Level ISD
+ */
 public class LevelISD extends LevelParent {
 
     private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/SW/backgroundsw.jpg";
@@ -15,11 +18,16 @@ public class LevelISD extends LevelParent {
     private final ISD isd;
     private LevelView levelView;
 
+    /**
+     * Level ISD Constructor
+     * @param screenHeight Game Screen Height
+     * @param screenWidth Game Screen Width
+     * @param stage Game JavaFX stage
+     */
     public LevelISD(double screenHeight, double screenWidth, Stage stage) {
         super(
                 BACKGROUND_IMAGE_NAME,
                 "/dev/ccr/dmscw2024/audio/bgm/SWBossBGM.mp3",
-
                 screenHeight,
                 screenWidth,
                 () -> PlaneFactory.createCustomXWing(
@@ -31,24 +39,46 @@ public class LevelISD extends LevelParent {
                 ),
                 stage
         );
-        System.out.println("LevelISD: Base Constructor COMPLETE");
         isd = new ISD();
-        System.out.println("LevelISD: Boss CREATED");
     }
 
+    /**
+     * Create and Return {@link LevelView} for Level ISD
+     * @return {@link LevelView} for Level ISD
+     */
+    @Override
+    public LevelView instantiateLevelView() {
+        return levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
+    }
+
+    /**
+     * Initialises user-controlled plane and shield for Level ISD : <br/>
+     * XWing & SWShield
+     */
     @Override
     public void initialiseFriendlyUnits() {
-        System.out.println("LevelISD: Adding UserPlane to Root");
-//        getRoot().getChildren().add(getUser());
         addFriendlyUnit(getUser());
-        System.out.println("LevelISD: UserPlane CREATED");
-
-        System.out.println("LevelISD: Adding ISD Shield to Root");
         getRoot().getChildren().add((SWShield) isd.getShield());
-        System.out.println("LevelISD: ISD Shield CREATED");
 
     }
 
+    /**
+     * Spawn sole ISD enemy unit for Level ISD
+     */
+    @Override
+    public void spawnEnemyUnits() {
+        if (getCurrentNumberOfEnemies() == 0) {
+            addEnemyUnits(isd);
+        }
+    }
+
+    /**
+     * Checks if Level ISD is over if either
+     * <ul>
+     *     <li>user-controlled plane is destroyed, results in LOSS</li>
+     *     <li>user has killed ISD, results in Transition Screen</li>
+     * </ul>
+     */
     @Override
     public void checkIfGameOver() {
         if (userIsDestroyed()) {
@@ -59,19 +89,10 @@ public class LevelISD extends LevelParent {
         }
     }
 
-    @Override
-    public void spawnEnemyUnits() {
-        if (getCurrentNumberOfEnemies() == 0) {
-            addEnemyUnits(isd);
-        }
-    }
-
-    @Override
-    public LevelView instantiateLevelView() {
-        levelView = new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
-        return levelView;
-    }
-
+    /**
+     * Handles ISD transition after ISD is defeated <br/>
+     * Proceeds to next level after
+     */
     private void ISDScreenTransition() {
         System.out.println("TPMWinScreenTransition");
         Transition transition = new Transition(

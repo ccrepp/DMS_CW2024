@@ -4,17 +4,22 @@ import dev.ccr.dmscw2024.interfaces.Shield;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+/**
+ * Shield Image - shield's properties and behaviour
+ */
 public class ShieldImage extends ImageView implements Shield {
 	
 	private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/default/shield.png";
 	private static final int SHIELD_SIZE = 200;
-	
-	public ShieldImage(double xPosition, double yPosition) {
 
+	/**
+	 * ShieldImage constructor
+	 * @param xPosition initial x-axis position
+	 * @param yPosition initial y-axis position
+	 */
+	public ShieldImage(double xPosition, double yPosition) {
 		try{
-			System.out.println("ShieldImage: Loading ShieldImage");
 			this.setImage(new Image(getClass().getResource("/dev/ccr/dmscw2024/images/default/shield.png").toExternalForm()));
-			System.out.println("ShieldImage: ShieldImage LOADED");
 		} catch (Exception e){
 			System.out.println("ShieldImage: ShieldImage Loading FAILED" + e.getMessage());
 			throw e;
@@ -24,33 +29,32 @@ public class ShieldImage extends ImageView implements Shield {
 		setFitWidth(SHIELD_SIZE);
 		setPosition(xPosition, yPosition);
 		setVisible(false);
-
-		/*
-		this.setLayoutX(xPosition);
-		this.setLayoutY(yPosition);
-		//this.setImage(new Image(IMAGE_NAME));
-
-		this.setVisible(false);
-		this.setFitHeight(SHIELD_SIZE);
-		this.setFitWidth(SHIELD_SIZE);
-
-		 */
 	}
 
+	/**
+	 * shows shield by enabling visibility
+	 */
 	@Override
 	public void showShield() {
 		this.setVisible(true);
 	}
-	
+
+	/**
+	 * hides shield by disabling visibility
+	 */
 	@Override
 	public void hideShield() {
 		this.setVisible(false);
 	}
 
+	/**
+	 * sets position of shield accordingly
+	 * @param x x-axis coordinate
+	 * @param y y-axis coordinate
+	 */
 	@Override
 	public void setPosition(double x, double y) {
 		setLayoutX(x);
 		setLayoutY(y);
 	}
-
 }

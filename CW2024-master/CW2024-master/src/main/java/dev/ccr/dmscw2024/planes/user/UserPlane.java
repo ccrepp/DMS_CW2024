@@ -5,6 +5,9 @@ import dev.ccr.dmscw2024.planes.FighterPlane;
 import dev.ccr.dmscw2024.interfaces.Movable;
 import dev.ccr.dmscw2024.utility.ProjectileFactory;
 
+/**
+ * Default User-Controlled Plane
+ */
 public class UserPlane extends FighterPlane implements Movable {
 
 	private static final String IMAGE_NAME = "/dev/ccr/dmscw2024/images/default/userplane.png";
@@ -30,12 +33,21 @@ public class UserPlane extends FighterPlane implements Movable {
 	private int horizontalVelocityMultiplier = 0;
 	private static final int HORIZONTAL_VELOCITY = 8;
 
+	/**
+	 * UserPlane constructor
+	 * @param imageName file name of image
+	 * @param imageHeight image height
+	 * @param initialXPos initial X-axis positioning
+	 * @param initialYPos initial Y-axis positioning
+	 * @param initialHealth initial player health
+	 */
 	public UserPlane(String imageName, int imageHeight, double initialXPos, double initialYPos, int initialHealth) {
 		super(imageName, imageHeight, initialXPos, initialYPos, initialHealth);
 	}
 
 	/**
-	 * position updating method
+	 * position updating method <br/>
+	 * {@code isMoving} for vertical movement, {@code isMovingHorizontally} for horizontal movement
 	 */
 	@Override
 	public void updatePosition() {
@@ -59,7 +71,11 @@ public class UserPlane extends FighterPlane implements Movable {
 	public void updateActor() {
 		updatePosition();
 	}
-	
+
+	/**
+	 * firing of user projectiles
+	 * @return user projectiles
+	 */
 	@Override
 	public ActiveActorDestructible fireProjectile() {
 		double projectile_X_Position = getProjectileXPosition(PROJECTILE_X_POSITION_OFFSET);
@@ -67,10 +83,18 @@ public class UserPlane extends FighterPlane implements Movable {
         return ProjectileFactory.createProjectile("User", projectile_X_Position, projectile_Y_Position);
 	}
 
+	/**
+	 * for vertical movement
+	 * @return vertical movement
+	 */
 	private boolean isMoving() {
 		return velocityMultiplier != 0;
 	}
 
+	/**
+	 * for horizontal movement
+	 * @return horizontal movement
+	 */
 	private boolean isMovingHorizontally() {
 		return horizontalVelocityMultiplier != 0;
 	}
@@ -78,7 +102,6 @@ public class UserPlane extends FighterPlane implements Movable {
 	/**
 	 * allows for horizontal movement along x-axis
 	 * @param deltaX x-axis positioning variable
-	 *
 	 */
 	public void moveHorizontally (double deltaX) {
 		double newTranslateX = getTranslateX() + deltaX;
@@ -88,46 +111,71 @@ public class UserPlane extends FighterPlane implements Movable {
 		}
 	}
 
+	/**
+	 * moves up
+	 */
 	public void moveUp() {
 		movingUp = true;
 		movingDown = false;
 		velocityMultiplier = -1;
 	}
 
+	/**
+	 * moves down
+	 */
 	public void moveDown() {
 		movingUp = false;
 		movingDown = true;
 		velocityMultiplier = 1;
 	}
 
+	/**
+	 * moves left
+	 */
 	public void moveLeft() {
 		movingLeft = true;
 		movingRight = false;
 		horizontalVelocityMultiplier = -1;
 	}
 
+	/**
+	 * moves right
+	 */
 	public void moveRight() {
 		movingLeft = false;
 		movingRight = true;
 		horizontalVelocityMultiplier = 1;
 	}
 
+	/**
+	 * stops vertical movement
+	 */
 	public void stopVertically() {
 		movingUp = false;
 		movingDown = false;
 		velocityMultiplier = 0;
 	}
 
+	/**
+	 * stops horizontal movement
+	 */
 	public void stopHorizontal() {
 		movingLeft = false;
 		movingRight = false;
 		horizontalVelocityMultiplier = 0;
 	}
 
+	/**
+	 * returns number of kills
+	 * @return number of kills
+	 */
 	public int getNumberOfKills() {
 		return numberOfKills;
 	}
 
+	/**
+	 * for each kill, the kill count is incremented
+	 */
 	public void incrementKillCount() {
 		numberOfKills++;
 	}

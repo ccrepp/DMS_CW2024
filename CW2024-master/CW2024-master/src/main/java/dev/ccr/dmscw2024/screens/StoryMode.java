@@ -13,16 +13,27 @@ import javafx.scene.text.Text;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+/**
+ * Story Mode - story mode gameplay start screen
+ */
 public class StoryMode {
     private final Stage stage;
     private final Controller controller;
     private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/SW/hyperspace.jpg";
 
+    /**
+     * StoryMode constructor
+     * @param stage primary stage on which screen is displayed
+     * @param controller controller responsible for game flow management
+     */
     public StoryMode(Stage stage, Controller controller) {
         this.stage = stage;
         this.controller = controller;
     }
 
+    /**
+     * displays StoryMode screen with options of which branch to play
+     */
     public void display() {
 
         // Background Image
@@ -55,6 +66,11 @@ public class StoryMode {
         stage.show();
     }
 
+    /**
+     * creates VBox layout containing header and buttons
+     * @param header header text for screen
+     * @return VBox layout for Start screen
+     */
     private VBox getVBox(Text header) {
         // Branch Buttons
         Button TPMButton = new Button("The Phantom Menace");
@@ -75,6 +91,12 @@ public class StoryMode {
         return layout;
     }
 
+    /**
+     * styles button
+     * @param button button to be styled
+     * @param normalColor default colour
+     * @param hoverColor on-hover colour
+     */
     private void styleButton(Button button, String normalColor, String hoverColor) {
         button.setStyle(
                 "-fx-font-size: 24px; -fx-font-weight: bold; -fx-padding: 10 20 10 20; " +

@@ -4,7 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.lang.reflect.Constructor;
 
-import dev.ccr.dmscw2024.screens.start.Start;
+import dev.ccr.dmscw2024.screens.Start;
 import dev.ccr.dmscw2024.screens.StoryMode;
 import javafx.application.Platform;
 import javafx.scene.Scene;

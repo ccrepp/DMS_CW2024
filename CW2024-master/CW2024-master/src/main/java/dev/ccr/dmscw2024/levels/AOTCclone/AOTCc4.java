@@ -10,6 +10,9 @@ import dev.ccr.dmscw2024.screens.Win;
 import dev.ccr.dmscw2024.utility.PlaneFactory;
 import javafx.stage.Stage;
 
+/**
+ * AOTC c(lone) 4
+ */
 public class AOTCc4 extends LevelParent {
 
 	private static final String BACKGROUND_IMAGE_NAME = "/dev/ccr/dmscw2024/images/AOTC/bg/Battle_of_Geonosis.jpg";
@@ -19,6 +22,13 @@ public class AOTCc4 extends LevelParent {
 	private static final int PLAYER_INITIAL_HEALTH = 5;
 	private final Controller controller;
 
+	/**
+	 * AOTCc2 Constructor
+	 * @param screenHeight Game Screen Height
+	 * @param screenWidth Game Screen Width
+	 * @param stage Game JavaFX stage
+	 * @param controller Game controller
+	 */
 	public AOTCc4(double screenHeight, double screenWidth, Stage stage, Controller controller) {
 		super(
 				BACKGROUND_IMAGE_NAME,
@@ -31,16 +41,29 @@ public class AOTCc4 extends LevelParent {
 		this.controller = controller;
 	}
 
+	/**
+	 * Create and Return {@link LevelView} for AOTCc4
+	 * @return {@link LevelView} for AOTCc4
+	 */
 	@Override
 	public LevelView instantiateLevelView() {
 		return new LevelView(getRoot(), PLAYER_INITIAL_HEALTH);
 	}
 
+	/**
+	 * Initialises user-controlled plane for AOTCc4 : <br/>
+	 * RepublicGunship
+	 */
 	@Override
 	public void initialiseFriendlyUnits() {
 		addFriendlyUnit(getUser());
     }
 
+	/**
+	 * Spawns HomingSpiderDroids for AOTCc4 <br/>
+	 * uses probability-based spawning <br/>
+	 * ensures total number of enemies on screen does NOT exceed {@code TOTAL_ENEMIES}
+	 */
 	@Override
 	public void spawnEnemyUnits() {
 		int currentNumberOfEnemies = getCurrentNumberOfEnemies();
@@ -53,21 +76,37 @@ public class AOTCc4 extends LevelParent {
 		}
 	}
 
+	/**
+	 * Checks if AOTCc4 is over if either
+	 * <ul>
+	 *     <li>user-controlled plane is destroyed, results in LOSS</li>
+	 *     <li>user has reached required kill-count to advance, results in Transition Screen</li>
+	 * </ul>
+	 */
 	@Override
     public void checkIfGameOver() {
 		if (userIsDestroyed()) {
 			loseGame();
 		} else if (userHasReachedKillTarget()) {
 			winGame();
-			AOTCScreenTransition();
+			AOTCc4ScreenTransition();
 		}
 	}
 
+	/**
+	 * Checks if user has reached required kill-count for advancement
+	 * @return {@code true} if number of kills is greater than or equal to {@code KILLS_TO_ADVANCE},
+	 * {@code false} otherwise
+	 */
 	private boolean userHasReachedKillTarget() {
 		return getUser().getNumberOfKills() >= KILLS_TO_ADVANCE;
 	}
 
-	private void AOTCScreenTransition() {
+	/**
+	 * Handles AOTCc4 Win Screen transition after kill-count is reached <br/>
+	 * Proceeds to Win Screen after
+	 */
+	private void AOTCc4ScreenTransition() {
 		Transition transition = new Transition(
 				getStage(),
 				"/dev/ccr/dmscw2024/images/AOTC/bg/ClonesWin.jpg",
@@ -77,8 +116,10 @@ public class AOTCc4 extends LevelParent {
 		transition.display();
 	}
 
+	/**
+	 * Displays Win Screen after AOTCc4 completion
+	 */
 	private void WinScreen() {
-		System.out.println("WinScreen!");
 		Win win = new Win(getStage(), controller);
 		win.display();
 	}
