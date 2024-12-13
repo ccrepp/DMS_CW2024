@@ -1,11 +1,13 @@
 module com.example.demo {
+    requires javafx.base;
     requires javafx.controls;
     requires javafx.fxml;
     requires java.desktop;
     requires javafx.media;
+    requires javafx.graphics;
+    requires javafx.swt;
 
 
-//    opens dev.ccr.dmscw2024 to javafx.fxml;
     exports dev.ccr.dmscw2024.controller;
     opens dev.ccr.dmscw2024.levels to javafx.fxml;
     opens dev.ccr.dmscw2024.planes.enemies to javafx.fxml;
